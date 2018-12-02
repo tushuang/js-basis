@@ -1,0 +1,20 @@
+<script type="text/html" id="zhinenglist">
+    <% for(var i=0;i<8;i++)  {%>
+<li class="goodcommon">
+    <a href="../../page/goodsinfo.html">
+        <div class="zhinenggood" style="background:url(<%=list[i].goods_img%>)center 20px no-repeat;background-size: 100px 100px;">
+            <div class="zhinenggood-title">
+                <%=list[i].goods_name%>
+            </div>
+            <div class="zhinenggood-info">
+                AI人脸解锁，小巧全面屏，高性能处
+            </div>
+            <div class="zhinengprice">
+                <span><%=list[i].goods_tg_price  %></span>
+                <s><%=list[i].goods_price  %></s>
+            </div>
+        </div>
+    </a>
+</li>
+<% } %>
+</script>

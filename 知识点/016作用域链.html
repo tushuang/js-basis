@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			scopeM1 = {  //看做函数m1 的作用域对象
+				m2 : f()
+			}
+			scopeM2 = {
+				parent: scopeM1
+			}
+			 "use strict";
+			function m1(){
+				function m2 (){
+					console.log(this);
+				}
+				m2();
+				console.log(this);
+			}
+			m1();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

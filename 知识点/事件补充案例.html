@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        * {    margin: 0;padding: 0;}
+        html,body {    width: 100%;height: 100%;}
+        #box { width: 100%; height: 100%; overflow: hidden; }
+        .ball { width: 100%; height: 500px; }
+        #scroll {
+            width: 6px; height: 96%;
+            position: fixed; top: 2%; right: 5px;
+            border-radius: 3px; background-color: rgba(235, 233, 233, 0.5);
+            z-index: 9998; opacity: 0;
+        }
+        #scrollBar {
+            position: absolute; z-index: 9999;
+            width: 6px; height: 20px;
+            border-radius: 3px;
+            left: 0; top: 0; background-color: #383838;
+        }
+    </style>
+	<script src="comment.js"></script>
+</head>
+<body style="overflow:hidden;">
+    <div id="box">
+        <div id="content">
+            <p class="ball" style="background-color:lightpink;"></p>
+            <p class="ball" style="background-color:skyblue;"></p>
+            <p class="ball" style="background-color:honeydew;"></p>
+            <p class="ball" style="background-color:azure;"></p>
+            <p class="ball" style="background-color:lavenderblush;"></p>
+            <p class="ball" style="background-color:pink;"></p>
+        </div>
+    </div>
+    <div id="scroll">
+        <div id="scrollBar"></div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+	// precent = obox.offsetHeight/window.innerHeight
+	var context = document.getElementById("content"); //获取页面
+	var obox = document.getElementById("box");
+	var scroll_right = document.getElementById("scroll");  //获取右边滚轮条
+	var scroll_bar = document.getElementById("scrollBar");  
+	var count=0;
+	var con_dis = context.offsetHeight;
+	
+	window.onresize = function(){
+		update();
+	}
+	function update(){
+		//滚动条bar的高度 应该和页面的比例对应
+		//滚动条bar的高度/整个滚动条的高度 = 页面可视区的高度/整个盒子的高度
+		scroll_bar.style.height = scroll_right.offsetHeight*window.innerHeight/context.offsetHeight + "px";
+	}
+	update();
+	window.addEventListener("mousewheel",function(e){   //非火狐
+		var e = e||event;
+		scroll_right.style.opacity = 1;  //触发滚轮事件时 滑动条出现
+		if (e.wheelDelta) {  //第一步：先判断浏览器IE，谷歌滑轮事件               
+			if (e.wheelDelta > 0) { //当滑轮向上滚动时  
+				count--;
+				obox.scrollTop -= count*20;  //大盒子滚轮的距离
+			}  
+			if (e.wheelDelta < 0) { //当滑轮向下滚动时  
+				++count;
+				obox.scrollTop += count*20; //大盒子滚轮的距离
+			}  
+			var percent = (obox.scrollTop*(scroll_right.offsetHeight-scroll_bar.offsetHeight))/(con_dis - document.body.offsetHeight); // 盒子滚动的距离/总高度
+			//scroll_bar.style.top =  Math.max(0,Math.min(scroll_right.offsetHeight - scroll_bar.offsetHeight,percent)) + "px";
+			scroll_bar.style.top = percent + "px";
+		}
+	});
+	
+	
+	//火狐
+	window.addEventListener("DOMMouseScroll",function(e){
+		var e = e || event;
+		scroll_right.style.opacity = 1;  //触发滚轮事件时 滑动条出现
+		if(e.detail>0){ //向下滑动
+			++count;
+			obox.scrollTop += count*20; //大盒子滚轮的距离
+		}
+		if(e.detail<0){ //向上滑动
+			count--;
+			obox.scrollTop -= count*20;  //大盒子滚轮的距离
+		}
+		//滑动的距离/(盒子的总高度- 可视区的高度) = 滚动的高度/(整个滚动条的高度-滚轮本身的高度)
+		var percent = (obox.scrollTop*(scroll_right.offsetHeight-scroll_bar.offsetHeight))/(con_dis - document.body.offsetHeight); // 盒子滚动的距离/总高度
+		scroll_bar.style.top =  Math.max(0,Math.min(scroll_right.offsetHeight - scroll_bar.offsetHeight,percent)) + "px";
+	})
+	//鼠标拖拽事件
+	draggable(scroll_bar,scroll_right,"",function(){
+		obox.scrollTop = (parseInt(scroll_bar.style.top) * (con_dis - document.body.offsetHeight))/parseInt( getStyle(scroll_right).height);
+	});
+	
+	
+	
+/*    var content = document.getElementById("content");
+    var box = document.getElementById("box");
+    var scroll = document.getElementById("scroll");
+    var scrollBar = document.getElementById("scrollBar");
+    var Step = {
+        value : 0,
+        size : 20,
+        maxVal : Math.ceil((content.offsetHeight-document.body.offsetHeight)/20),
+        getCurrentVal:function(){
+            return this.value;
+        },
+        next:function(){
+            if(this.value==this.maxVal) return;
+            this.value++;
+        },
+        pre:function(){
+            if(this.value==0) return;
+            this.value--;
+        },
+        getDistance:function(){
+			//console.log(this.getCurrentVal());
+            return this.getCurrentVal()*this.size;
+        },
+        update:function(){
+            this.maxVal = Math.ceil((content.offsetHeight-document.body.offsetHeight)/this.size);
+        }
+    }
+    window.addEventListener("resize",function(){
+        Step.update();
+    });
+    box.addEventListener("DOMMouseScroll",scrollfunc);
+    box.addEventListener("mousewheel", scrollfunc);
+    function scrollfunc(e){
+        if(e.type=="mousewheel"){ //非FF
+            e.wheelDelta<0?Step.next():Step.pre();
+        } else { //FF
+            e.detail>0?Step.next():Step.pre();
+        }
+        document.title = Step.getCurrentVal();
+        box.scrollTop = Math.min(Step.getDistance(),content.offsetHeight-document.body.offsetHeight);
+        //计算滚动比例
+        var percent = box.scrollTop/(content.offsetHeight-document.body.offsetHeight);
+        //显示滚动条
+        scroll.style.opacity = 100;
+        //计算滚动条的位置
+        scrollBar.style.top = (scroll.offsetHeight-scrollBar.offsetHeight)*percent + "px";
+    }*/
+	
+</script>

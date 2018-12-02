@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			//replace 的终极用法
+			var str = "2018&08$08";
+		//	console.log(str.replace(/\D/g,"-"));  //2018-08-08
+			var num=0;
+			var str = str.replace(/\D/g,function(matched,index,str){
+				console.log(matched,index,str);  //匹配的数  下标  字符串
+				if(num==0){
+					num++;
+					return "-";
+				}
+				if(num == 1){
+					num++;
+					return "=";
+				}
+			})
+			
+		    console.log(str);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

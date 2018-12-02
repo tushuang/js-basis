@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聊天室</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button id="btn">提交</button>
+
+    <div id="content">
+
+    </div>
+    <script>
+        var client = new WebSocket("ws:10.9.189.112:9001");
+        var button = document.getElementById("btn");
+        var input = document.getElementById("input");
+        var content = document.getElementById("content");
+        client.onmessage = function (e) {
+            console.log(e);
+            var p = document.createElement("p");
+            p.innerText = e.data;
+            content.insertBefore( p,  content.childNodes[0] ) ;
+        }
+        button.onclick = function () {
+            client.send(input.value);
+        }
+    </script>
+</body>
+
+</html>

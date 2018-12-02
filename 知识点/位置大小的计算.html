@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JavaScript简易日历</title>
+		<style type="text/css">
+			#abc{
+				width:100px;
+				height:100px;
+				position:absolute;
+				left:20px;
+				top:190px;
+				background:pink;
+				padding:20px;
+				border:1px black solid;
+			}
+			#nei{
+				margin-right:20px;
+				margin-top:30px;
+				width:20px;
+				height:20px;
+				background:black;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="abc">
+			<div id="nei">
+			</div>
+		<div>
+		<script type="text/javascript">
+			//计算元素在页面的绝对位置
+			var box = document.getElementById("nei");
+	/*		function getPagePosition(target){
+				var sumLeft = target.offsetLeft;
+				var sumTop = target.offsetTop;
+				while(target.offsetParent != null){
+					sumLeft += target.offsetParent.offsetLeft;
+					sumTop += target.offsetParent.offsetTop;
+					
+					target = target.offsetParent;
+				}
+				return {
+					pagesX:sumLeft,
+					pagesY:sumTop
+				};
+			}*/
+			function getPagePosition(target){
+				var left = target.offsetLeft;
+				var top = target.offsetTop;
+				while(!(target.offsetParent==null)){
+					left += target.offsetParent.offsetLeft;
+					top += target.offsetParent.offsetTop;
+					target = target.offsetParent;
+				}
+				return {
+					pageX:left,
+					pageY:top
+				};
+			}
+	/*		function getPagePosition(target){
+				if(target == null) 
+				return {
+					pagesX:0,
+					pagesY:0
+				};
+				return {
+					pagesX : target.offsetLeft + getPagePosition(target.offsetParent).pagesX,
+					pagesY : target.offsetTop  + getPagePosition(target.offsetParent).pagesY
+				};
+			}
+			*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		/*	function getPagePosition(target){
+				if(target.offsetParent == null)
+					return {
+						pageX : 0,
+						pageY :0
+					};
+				var parentP = getPagePosition(target.offsetParent);
+				return {
+					pageX : target.offsetLeft + parentP.pageX,
+					pageY : target.offsetTop + parentP.pageY
+				};
+			}
+			var obj = getPagePosition(box);*/
+			
+			/*function getPagePosition(target){
+				if(target.offsetParent == null)
+				return {
+					pageX :0,
+					pageY :0
+				};
+				var parentPosition = getPagePosition(target.offsetParent);
+				return {
+					pageX : target.offsetLeft + parentPosition.pageX,
+					pageY : target.offsetTop + parentPosition.pageY
+				}
+			}*/
+		</script>
+	</body>
+</html>

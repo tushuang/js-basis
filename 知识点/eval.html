@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <meta charset="UTF-8">
+          <title></title>
+     </head>
+     <body>
+        <textarea rows="10" cols="60" id="code">
+        </textarea>
+        <br>
+        <button id="exec">执行</button>
+     </body>
+</html>
+<script type="text/javascript">
+    var btn = window.document.getElementById("exec");
+    btn.onclick = function(){
+        var code = document.getElementById("code").value;
+        var b = eval("2+5");
+		console.log(b);
+    }
+	var the_unevaled_answer = "2 + 3";
+	var the_evaled_answer = eval("2 + 3");
+	alert(the_evaled_answer);
+</script>

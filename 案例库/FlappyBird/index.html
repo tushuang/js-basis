@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="../comment.js"></script>
+	</head>
+	<style type="text/css">
+		* {
+			padding: 0; margin: 0;
+		}
+		.main {
+			border: solid 1px black;
+			width: 600px; height: 512px;
+			background: url(img/bg_day.png) 0px 0;
+			margin: 20px auto;
+			position: relative;
+			
+			overflow: hidden;
+		}
+		.bird {
+			width: 37px; height: 27px;
+			background: url(img/bird0_0.png) no-repeat center;
+			position: absolute;
+			left: 50px; top: 200px;
+		}
+		.gameover {
+			width: 204px; height: 54px;
+			background: url(img/text_game_over.png);
+			margin: auto;
+			left: 0; top: 0; right: 0; bottom: 0;
+			position: absolute;
+			display: none;
+		}
+		.title {
+			width: 178px; height: 48px;
+			background: url(img/title.png);
+			margin: auto;
+			left: 0; top: 0; right: 0; bottom: 0;
+			position: absolute;
+		}
+		.bluebird {
+			display: block;
+			margin: 70px auto;
+		}
+		.start {
+			display: block;
+			position: absolute;
+			left: 240px; top:300px;
+			cursor: pointer;
+		}
+		.pipe{
+			position: absolute;
+			right: -52px;
+			width: 52px;
+			height: 320px;
+		}
+		.up{
+			background: url(img/pipe_down.png);
+		}
+		.down{
+			background: url(img/pipe_up.png);
+			bottom: 0;
+		}
+	</style>
+	<body>
+		<div class="main">
+			<div class="bird" style="display: none;"></div>
+			
+			<div class="gameover">
+				
+			</div>
+			
+			<div class="title">
+				
+			</div>
+			<img class="bluebird" src="img/bird1_0.png"/>
+			
+			<img class="start" src="img/button_play.png"/>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		
+		function Controller (val){
+			switch(val){
+				case "key":  //返回的是一个对象
+					YellowBird.run();
+			}
+		}
+		
+		var pipeImgup = "up";
+		var pipeImgdown = "down";
+		var temp_up = [];
+		var temp_down = [];
+		var flag = false;
+		//分清楚对象有几个 
+		//管子 蓝鸟 黄鸟 game本身
+		function Pipe(type){  //管子
+			this.ele = document.createElement("div");
+			this.init = function(_height){  //创建不同类型的管道  _height 代表已占用高度
+				switch(type){
+					case pipeImgup:{
+						this.ele.className = "pipe up";
+						this.ele.style.top = _height-320 + "px";
+						_height = this.ele.offsetTop;
+						temp_up.push(this.ele);
+					}break;
+					case pipeImgdown:{
+						this.ele.className = "pipe down";
+						this.ele.style.bottom = _height - 320 + "px";
+						temp_down.push(this.ele);
+					} 
+				}
+				Game.apend(this.ele);
+				return this;
+			};
+			this.back = function (){
+				var x =0;
+				this.t = setInterval(function(){
+					this.ele.style.right = -52 + x + "px";
+					x++;
+					if(this.ele.offsetLeft <= -52){
+						this.stop();
+						this.destroy();
+					}
+					if(flag) this.stop();
+				}.bind(this),30);
+			};
+			this.stop = function(){
+				clearInterval(this.t);
+			};
+			this.top = function(){
+				return  pos = {
+					x:this.ele.offsetLeft,
+					y:this.ele.offsetTop
+				}
+			}
+			this.destroy = function(){
+				this.ele.remove();
+			}
+		}
+		//蓝鸟  不用批量生产 所以不用构造函数
+		var BlueBird = {
+			ele : document.getElementsByClassName("bluebird")[0],  //获得元素
+			position : function (pos){    //位置
+				this.ele.style.marginTop = pos + "px";
+				return this.ele.style.marginTop;
+			},
+			fly : function(){  //做上下的运动 运动速度是正弦函数,
+				var x=0;
+				var t = setInterval(function(){ 
+					this.position(70 - Math.sin(Math.PI/180*x)*50);   //使鸟在70上下来回动 由于浏览器于y轴反向 所以减
+					this.wing(x%3);
+					x+=4;
+				}.bind(this),30);
+				this.stop = function(){    //清除定时器
+					clearInterval(t);
+				}
+			},
+			wing : function(num){  //图片的切换
+				this.ele.src = "img/bird1_"+num+ ".png"
+			},
+			disappear : function(){
+				this.stop();
+				this.ele.remove();
+			}
+		};
+		//黄鸟 
+		var YellowBird = {
+			ele : document.getElementsByClassName("bird")[0],
+			speed : 3,
+			appear : function(){
+				this.ele.style.display = "block";
+			},
+			top : function(val){
+				if(val) this.ele.style.top = val + "px";
+				return this.ele.offsetTop;
+			},
+			fall : function(){
+				setInterval(function(){
+					this.top(this.top()+(this.speed+=1));
+					var y = this.ele.offsetTop;  //检测小鸟的高度有没有超出屏幕
+					if(y > 500 || y<0){
+						Game.end();   
+					}
+				}.bind(this),50);
+				this.rise();
+			},
+			run : function(){  
+				//给键盘加上事件监听
+				
+				document.addEventListener("keydown",function(e){
+					if(e.keyCode == 32) {
+						this.speed -=5;
+						this.crash(); //运动时检测有没有碰撞事件
+					} 
+					this.wing(Math.abs(this.speed%3));
+				}.bind(this));
+			},
+			//添加键盘空格按下事件 spacebar keyCode = 32
+			rise : function(){   //便于之后代码的修改和扩充
+				Controller("key");
+			},
+			wing : function(num){
+				this.ele.style.backgroundImage = "url(img/bird0_"+num+".png)";
+			},
+			//添加碰撞检测事件
+			crash : function(e){
+				//得到黄鸟的坐标 
+				var x = this.ele.offsetLeft;
+				var y = this.ele.offsetTop;
+				//从头部取出元素 temp_down.shift();
+				for(var i in temp_down){
+					var _heightdown = temp_down[i].offsetTop - this.ele.offsetHeight;
+					var _widthdown= temp_down[i].offsetLeft - this.ele.offsetWidth;
+					if(x > _widthdown && y>_heightdown){	
+							Game.end();
+					}if(temp_down[i].offsetLeft <= -10){
+						temp_down.shift();
+					}
+					console.log(temp_down[i].offsetLeft);
+				}
+				for(var i in temp_up){
+					var _heightup =320+ temp_up[i].offsetTop;
+					var _widthup = temp_up[i].offsetLeft - this.ele.offsetWidth;
+					if( y < _heightup && x>_widthup){
+							Game.end();
+					}if(temp_up[i].offsetLeft <= -10 ){ //temp_up[i].offsetLeft <0
+						temp_up.shift();
+					}
+				}
+				var y = this.ele.offsetTop;  //检测小鸟的高度有没有超出屏幕
+				if(y > 500 || y<0){
+					Game.end();   
+				}
+			},
+			die : function(){
+				//点击事件失效
+				delete this.run;
+				delete this.rise;
+				
+			}
+		};
+		
+		//game
+		var Game = {
+			startBtn : document.getElementsByClassName("start")[0],
+			title1 : document.getElementsByClassName("title")[0],
+			gameover : document.getElementsByClassName("gameover")[0],
+			background : {  
+				img : document.getElementsByClassName("main")[0],
+				move : function (){
+					var x = 0;
+					this.timer = setInterval(function(){
+						Game.background.img.style.backgroundPositionX = x-- + "px";  //改变的是是图片的定位
+						this.moveStop();
+					}.bind(this),30)
+				},
+				moveStop : function(){
+					if(flag) clearInterval(this.timer);
+				},
+				change : function(){
+					Game.background.img.style.background = "url(img/land.png) repeat-x 0 400px";
+				}
+			},
+			init : function(){   //游戏开始时初始化的工作,
+				BlueBird.fly();  //刚开始时 蓝色小鸟就开始飞
+				//背景图在move
+				this.background.move();
+				//按下开始按钮 游戏开始  背景图要动 蓝色小鸟,title,startBtn都要消失
+				this.startBtn.addEventListener("click",function(){
+					BlueBird.disappear();
+					this.title1.style.display = "none";
+					this.startBtn.style.display = "none";
+					//this.background.change();
+					YellowBird.appear();
+					this.start();
+				}.bind(this))
+			},
+			apend : function(that){   //加一个添加元素的方法
+				this.background.img.appendChild(that);
+			},
+			createPipe:function(){  //创建管道  规定时间创造一个
+				new Pipe(pipeImgup).init(randInt(100,231)).back();
+				new Pipe(pipeImgdown).init(randInt(100,231)).back();
+				//YellowBird.crash();  //每隔一段时间检测 是否有碰撞事件
+				setTimeout(arguments.callee,randInt(4000,8500)); //每隔一段时间调用自身  也可以写成Game.createPipe
+			},
+			start : function(){
+				//按下开始按钮 游戏开始  背景图要动 蓝色小鸟,title,startBtn都要消失
+				YellowBird.fall();
+				//创建管道
+				this.createPipe();
+			},
+			end : function(){
+				//显示game over 鸟和管道消失
+				this.gameover.style.display = "block";
+				//YellowBird.ele.style.display = "none";
+				flag = true;
+				YellowBird.die();
+				new Pipe().stop();
+			}
+		};
+		
+		Game.init();
+		
+	</script>
+</html>

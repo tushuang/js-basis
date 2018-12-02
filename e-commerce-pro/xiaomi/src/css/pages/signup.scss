@@ -1,0 +1,238 @@
+@import "../mixins/mixins";
+
+.container {
+    width: 100%;
+    height: 638px;
+    background: #F9F9F9;
+}
+
+.layout {
+    height: 548px;
+    width: 854px;
+    margin: auto;
+    background: white;
+
+    .logo {
+        height: 48px;
+        width: 100%;
+        margin-bottom: 40px;
+
+        a {
+            display: block;
+            width: 49px;
+            height: 48px;
+            margin: auto;
+            background: url("https://account.xiaomi.com/static/res/28f08d0/account-static/respassport/acc-2014/img/milogo.png");
+        }
+    }
+
+    .title-item {
+        width: 100%;
+        height: 45px;
+        margin-bottom: 40px;
+
+        h4 {
+            width: 100%;
+            height: 45px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: normal;
+        }
+    }
+
+    .signup-body {
+        width: 332px;
+        height: 246px;
+        margin: auto;
+
+        .countrytitle {
+            color: #333333;
+            height: 30px;
+            width: 332px;
+            line-height: 30px;
+            padding-top:1px;
+        }
+
+        .country {
+            width: 330px;
+            height: 40px;
+            font-size: 14px;
+            border: solid #E8E8E8 1px;
+            cursor: pointer;
+
+            .inputselect {
+                width: 274px;
+                height: 40px;
+                float: left;
+                line-height: 40px;
+                padding-left: 15px;
+                color: #555555;
+                input{
+                    margin-top: 1px;
+                    width: 290px;
+                    height: 36px;
+                    outline: none;
+                    border: none;
+                }
+            }
+
+        }
+        .countryinfo {
+            color: #666666;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+        }
+    }
+}
+
+.phone {
+    width: 332px;
+    height: auto;
+    margin: auto;
+
+    .phonetitle {
+        color: #333333;
+        height: 40px;
+        width: 332px;
+        line-height: 40px;
+    }
+
+    .phonebox {
+        width: 332px;
+        height: 40px;
+        margin-bottom: 15px;
+        border: solid 1px #E8E8E8;
+
+        .phonebegin {
+            float: left;
+            width: 58px;
+            padding: 0 8px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-right: #E8E8E8 solid 1px;
+
+            span {
+                color: #666666;
+                float: left;
+            }
+
+            i {
+                display: block;
+                float: left;
+                width: 30px;
+                height: 40px;
+                background: url(../../../img/xia.png) center center no-repeat;
+            }
+        }
+
+        .inputnum {
+            float: left;
+            width: 255px;
+            height: 100%;
+            input{
+                outline: none;
+                border: none;
+                margin-top: 2px;
+                margin-left: 15px;
+                height: 36px;
+                width: 230px;
+            }
+        }
+    }
+    .alertphone{
+        width: 200px;
+        height: 30px;
+        line-height: 30px;
+        color: #FF6700;
+        font-size: 14px;
+        display: none;
+    }
+}
+
+.signupbtn {
+    margin: auto;
+    margin-top: 20px;
+    width: 330px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    color: white;
+    background: #FF6700;
+    cursor: pointer;
+}
+
+
+.agreement {
+    width: 397px;
+    height: 39px;
+    margin: auto;
+    font-size: 14px;
+    margin-top: 80px;
+    line-height: 39px;
+
+    .ckecksbox {
+        float: left;
+        margin-top: 10px;
+        height: 16px;
+        width: 16px;
+        border: solid 1px #9d9d9d;
+        border-radius: 50%;
+
+        .checks {
+            line-height: 18px;
+            height: 18px;
+            width: 18px;
+            color: #FF6700;
+        }
+    }
+
+    .agreementinfo {
+        float: left;
+        color: #9d9d9d;
+
+        a {
+            font-weight: bold;
+            color: #666;
+        }
+    }
+}
+
+.footer {
+    margin-top:25px; 
+    width: 786px;
+    height: 90px;
+    margin: auto;
+    text-align: center;
+
+    ul {
+        width: 250px;
+        height: 40px;
+        margin: auto;
+        line-height: 40px;
+        position: relative;
+        text-align: center;
+        li {
+            color: #9d9d9d;
+            font-size: 14px;
+            float: left;
+            cursor: pointer;
+            &:hover{
+                color:black;
+            }
+        }
+        li.haveline{
+            position: relative;
+            margin-right: 20px;
+           &:after{
+               @include afterline(#9d9d9d,14px,14px,-10px);
+           }
+            
+        }
+    }
+    span.bottom{
+        clear: both;
+        color: #9d9d9d;
+    }
+}

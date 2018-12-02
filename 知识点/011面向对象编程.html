@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />  
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			var tutu = new Person("tutu",18);
+			console.log(tutu);
+			
+			//PersonMessages.prototype = new Person();
+			function PersonMessages (name,age,address){
+				//继承Person  本质都是改变了Person 中this的指向
+				//Person.call(this,name,age);   //方法.call(对象，参数)
+				
+				//继承的另一种写法
+				this.parent = Person;   //给this添加 一个属性 为Person
+				this.parent(name,age);    //调用这个属性 相当于调用Person这个函数 而且这时Person的this 指向了调用的这个this
+				
+				//继承的第三种写法
+				//var newFn = Person.bind(this);  //使Person中this的指向指向 当前的this
+				//newFn(name,age);                        //调用一次 相当于直接 改变了this;
+				
+				
+				
+				this.address = address;
+			}
+			
+			var tutu = new PersonMessages("tutu",18,"beijing");
+			console.log(tutu);
+			
+			var obj = {
+				id : "xinxin"
+			}
+			
+			var a = (function f(){
+				console.log(this);
+			}).bind(obj)
+			
+			//obj.f(); 这样写会报错 因为obj没有f 这个属性 
+			//函数调用通常会有一个对象 没写是window
+			
+			//f.call(obj);  //使用call方法 obj不必有f这个属性  直接改变obj 的指向
+			
+			a();   //bind会生成一个新的函数 本质不是函数的调用
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0; padding: 0;
+		}
+		html,body {
+			height: 100%; overflow: hidden;
+		}
+		#box {
+			position: absolute;
+			left:0; top:0;
+			width: 30px; height: 30px; background: darkcyan;
+			border-radius: 50%;
+		}
+		.line {
+			position: absolute;
+			left:0; right: 0; top: 300px;
+			height: 1px; background: black;
+		}
+		.dot {
+			position: absolute;
+			width: 200px; height: 200px; 
+			left: 200px; top: 200px; border: 1px solid black;
+			border-radius: 50%; 
+		}
+	</style>
+</head>
+<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	window.onload = function(){
+		var box = document.getElementById("box");
+		//正弦函数  y=sinx;
+		/*  
+		var degree = 0;
+		setInterval(function(){
+			var y = Math.sin(Math.PI/180 * degree) * 200;
+			
+			box.style.left = degree +"px";
+			box.style.top = -y + 300 +"px";
+			
+			degree+=5;   //相当于x轴
+		}, 30)
+		*/
+	 
+		//圆周运动  x^2 + y^2 = r^2
+		
+		var degree = 0;
+		var radius = 100;  
+		
+		setInterval(function(){
+			var x = radius * Math.cos(Math.PI/180 * degree);
+			var y = radius * Math.sin(Math.PI/180 * degree);
+			box.style.left = x - box.offsetWidth/2 + 300 +"px";
+			box.style.top = y - box.offsetHeight/2 + 300 +"px";
+			
+		//	box.style.width  = box.style.height = box.offsetTop/2 + 30 + "px";
+			
+			degree += 5;  
+		}, 30);
+	 
+	}
+	
+</script>
+
+<body>
+	<div id="box">
+		
+	</div>
+	<div class="line"></div>
+	<div class="dot"></div>
+</body>
+
+</html>

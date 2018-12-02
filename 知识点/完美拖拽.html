@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>完美拖拽</title>
+	<style type="text/css">
+		html,body{overflow:hidden;}
+		body,div,h2,p{margin:0;padding:0;}
+		body{color:#fff;background:#000;font:12px/2 Arial;}
+		p{padding:0 10px;margin-top:10px;}
+		span{color:#ff0;padding-left:5px;}
+		#box{position:absolute;width:300px;height:150px;background:#333;border:2px solid #ccc;top:50%;left:50%;margin:-75px 0 0 -150px;}
+		#box h2{height:25px;cursor:move;background:#222;border-bottom:2px solid #ccc;text-align:right;padding:0 10px;}
+		#box h2 a{color:#fff;font:12px/25px Arial;text-decoration:none;outline:none;}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var pos;
+		var obox = document.getElementById("box");
+		var drag = document.getElementsByTagName("h2")[0];
+		var backPos = [];  //创建一个空数组 放方框的路径
+		var review = drag.children[0];
+		function move(e){
+			var e = e||event;
+			//移动时 算出方框的left和top值
+			obox.style.left =Math.max(0,Math.min(window.innerWidth-obox.offsetWidth, e.clientX - pos.x ))+ "px";
+			obox.style.top = Math.max(0,Math.min(window.innerHeight-obox.offsetHeight, e.clientY - pos.y ))+ "px";
+			var num = {
+				_left:obox.style.left,
+				_top:obox.style.top
+			};
+			backPos.push(num);
+		}
+		drag.addEventListener("mousedown",function(e){
+			//鼠标按下时 记录坐标
+			var e=e||event;
+			pos = {
+				x:e.offsetX,
+				y:e.offsetY
+			};
+			document.addEventListener("mousemove",move);
+		});
+		document.addEventListener("mouseup", function(){
+			//鼠标松开时 清除move函数
+			document.removeEventListener("mousemove", move)  
+
+		});
+		//按下a标签时 回放轨迹
+		review.addEventListener("click",function(){
+			var timer = setInterval(function(){
+				//每取出一个数 删除
+			var num = backPos.pop();
+			if(!num){  //如果没有数可取 则关闭定时器
+				clearInterval(timer);
+				return;
+			}
+			obox.style.left = num._left;
+			obox.style.top = num._top;
+			//backPos.unshift(num); unshift 从头部增加
+			},5);
+		})
+	}
+	</script>
+</head>
+<body>
+<div id="box" style="margin-left: 0px; margin-top: 0px; left: 533px; top: 231px;">
+    <h2><a href="javascript:;">点击回放拖动轨迹</a></h2>
+    <p><strong>Drag:</strong><span class="isdrag">false</span></p>
+    <p><strong>offsetTop:</strong><span class="posx">231</span></p>
+    <p><strong>offsetLeft:</strong><span class="posy">533</span></p>
+</div>
+	
+
+</body></html>

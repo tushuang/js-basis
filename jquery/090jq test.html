@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src="jquery-1.9.0.js"></script>
+	</head>
+	<body>
+
+	</body>
+	<script>
+		// 	jQuery.extend({
+		// 		foo: function() {
+		// 			alert('This is a test. This is only a test.');
+		// 		},
+		// 		bar: function(param) {
+		// 			alert('This function takes a parameter, which is "' + param + '".');
+		// 		}
+		// 	});
+		// 	$.foo();
+
+// 		function HashMap() {
+// 			/** Map 大小 **/
+// 			var size = 0;
+// 			/** 对象 **/
+// 			var entry = new Object();
+// 			/** 存 **/
+// 			this.put = function(key, value) {
+// 				if (!this.containsKey(key)) {
+// 					size++;
+// 				}
+// 				entry[key] = value;
+// 			}
+// 			/** 取 **/
+// 			this.get = function(key) {
+// 				return this.containsKey(key) ? entry[key] : null;
+// 			}
+// 			/** 删除 **/
+// 			this.remove = function(key) {
+// 				if (this.containsKey(key) && (delete entry[key])) {
+// 					size--;
+// 				}
+// 			}
+// 			/** 是否包含 Key **/
+// 			this.containsKey = function(key) {
+// 				return (key in entry);
+// 			}
+// 			/** 是否包含 Value **/
+// 			this.containsValue = function(value) {
+// 				for (var prop in entry) {
+// 					if (entry[prop] == value) {
+// 						return true;
+// 					}
+// 				}
+// 				return false;
+// 			}
+// 			/** 所有 Value **/
+// 			this.values = function() {
+// 				var values = new Array();
+// 				for (var prop in entry) {
+// 					values.push(entry[prop]);
+// 				}
+// 				return values;
+// 			}
+// 			/** 所有 Key **/
+// 			this.keys = function() {
+// 				var keys = new Array();
+// 				for (var prop in entry) {
+// 					keys.push(prop);
+// 				}
+// 				return keys;
+// 
+// 			}
+// 			/** Map Size **/
+// 			this.size = function() {
+// 				return size;
+// 			}
+// 			/* 清空 */
+// 			this.clear = function() {
+// 				size = 0;
+// 				entry = new Object();
+// 			}
+// 		}
+// 		var map = new HashMap();
+// 		map.put("a","123");
+// 		map.put("b","456");
+// 		console.log(map.keys());
+// 		var a = map.get("a");
+// 		console.log(a);
+		
+		
+		function Foo(){
+			getName = function () { alert (1); };
+			return this;
+		}
+		var obj = new Foo();
+		console.log(obj.getName());
+
+	</script>
+</html>

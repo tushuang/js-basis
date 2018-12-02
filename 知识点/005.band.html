@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>band</title>
+		<style>
+		</style>
+		<script>
+			var obj = {
+				prin : function(){
+					console.log(this);
+				}//.bind(document)   //使用bind可以任意改变函数this的指向
+			};
+			test = obj.prin;
+			obj.prin();
+			//document.tex1t = test;
+			//document.tex1t();  //正确
+			//test();
+			//document.test();  //错误
+			//test();  //变为window调用
+			var fn = bind(obj.prin,document);
+			console.log(fn());
+			
+		/*	var arr = {};
+			arr.onclick = function(){
+				setTimeout(function(){
+					console.log(this);
+				}, 500);
+			}
+			var fn1 = bind(setTimeout,document);
+			fn1();*/
+			//编写bind函数 20k
+			function bind(fn,target){  //fn是要绑定的函数 target是指定的对象
+				//需要保持fn的指向永远不变 于是返回一个指定了对象的函数 
+				target._cbk_bind_target = fn;  //相当于给target加了一个方法
+				return function(){
+					target._cbk_bind_target();
+				}
+			}
+			
+		/*	function bind(fn,target){  //fn是要绑定的函数 target是指定的对象
+				//需要保持fn的指向永远不变 于是返回一个指定了对象的函数 
+				//target._cbk_bind_target = fn;  //相当于给target加了一个方法
+				return function(){
+					target.fn();  //不能直接这样写表示的  target.fn() not a function
+				}
+			}*/
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

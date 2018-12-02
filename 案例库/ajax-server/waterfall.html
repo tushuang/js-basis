@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background: #f3f2f3;
+			}
+			#main {
+				border: 1px solid red;
+				width: 1225px;
+				margin: 0 auto;
+			}
+			.list {
+				width: 245px;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="main">
+			<div class="list">
+			</div>
+			<div class="list"></div>
+			<div class="list"></div>
+			<div class="list"></div>
+			<div class="list"></div>
+		</div>
+		<input type="button" name="" id="butt" value="加载图片" onclick="init();" />
+		<script type="text/javascript">
+		/*	var all = Array.from( document.getElementById("main").children);  //获取所有的class
+			console.log(all);
+			for(var i=0;i<all.length;i++){
+				all[i].currentHeight = 0;
+			}
+			var btn = document.getElementById("butt");
+			btn.onclick = function(){
+				var req = new XMLHttpRequest();
+				req.open("GET","http://10.9.189.112:9090/waterfall",true);
+				req.onload = function(){
+					//将从接口得到的数据转成数组
+					var list = JSON.parse(req.responseText);
+					list.forEach((item,index)=>{
+						var oimg = document.createElement("img"); //每次遍历时创建一个新的img标签
+						var minIndex = minHeightIndex();
+						oimg.src = list[index].src;  //把属性值src 赋给oimg的链接
+						all[minIndex].appendChild(oimg);  //具体把img标签插入哪 要找到最小的div高度
+						all[minIndex].currentHeight = all[minIndex].currentHeight + parseInt(item.height);
+						//每次改变了高度就要重新加上它改变的高度  手动更新高度
+					})
+				}
+				req.send();
+			}
+			
+			function minHeightIndex(){
+				var minHeight = all[0].currentHeight;
+				var minIndex = 0;
+				all.forEach((item,index) =>{
+					if(item.currentHeight < minHeight){  
+						minHeight = item;
+						minIndex = index;
+					}
+				})
+				return minIndex;
+			}*/
+			
+			var all = Array.from( document.getElementById("main").children);  //获取所有的class
+				var btn = document.getElementById("butt");
+				btn.onclick = function(){
+					var req = new XMLHttpRequest();
+					req.open("GET","http://10.9.189.112:9090/waterfall",true);
+					req.onload = function(){
+						//将从接口得到的数据转成数组
+						var list = JSON.parse(req.responseText);
+						list.forEach((item,index)=>{
+							var oimg = document.createElement("img"); //每次遍历时创建一个新的img标签
+							minHeightIndex();
+							oimg.src = list[index].src;  //把属性值src 赋给oimg的链接
+							all[0].appendChild(oimg);  //具体把img标签插入哪 要找到最小的div高度
+							//排序完成后 才向浏览器请求到图片
+						})
+					}
+					req.send();
+				}
+				
+				function minHeightIndex(){
+					all.sort((x,y)=>{ //sort直接改变原来的数组
+						return x.offsetHeight - y.offsetHeight;
+					})
+				}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		/*	var containers =  Array.prototype.slice.call(document.getElementById("main").children);
+			containers.forEach(function(item){
+				item.currentHeight = 0;
+			})
+
+			function init(){
+				var req = new XMLHttpRequest();
+				req.open("get", "http://10.9.189.112:9090/waterfall", true);
+				req.onload = function(){
+					console.log("onload")
+					//把获取到的json格式的字符串转换成对象
+					var list = JSON.parse( req.responseText );
+					console.log(list)
+					list.forEach(item => {
+						var oImg = document.createElement("img");
+						oImg.src = item.src;
+						//求出最短的那一列
+						var index = getMinHeightDivIndex();
+						containers[index].appendChild(oImg);
+						console.log(containers[index].currentHeight + parseInt(item.height))
+						containers[index].currentHeight = containers[index].currentHeight + parseInt(item.height);
+					});
+				}
+				req.send();
+				
+			}
+
+			function getMinHeightDivIndex(){
+				var _minheight = containers[0].currentHeight;
+				var _minIndex = 0;
+				containers.forEach( (item,index)=>{
+					if(item.currentHeight<_minheight) {
+						_minheight = item.currentHeight;
+						_minIndex = index;
+					}
+				})
+				return _minIndex;
+			}
+			*/
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-Vendor: XMind Ltd.
+Fragment-Host: org.xmind.ui.help
+Bundle-Version: 3.5.1.201411201906
+Bundle-Name: XMind Help Slovenian Language Support
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.xmind.ui.help.nl_sl;singleton:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+
+

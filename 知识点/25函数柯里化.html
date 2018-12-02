@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //函数的软加载
+    function addEvent(ele,eventName,fn,isCapture){
+        //为了避免每次判断需要用哪一个函数 先记录下浏览器 在第二次调用时 直接覆盖该函数
+        if(window.VBArray){
+            ele.attachEvent("on"+eventName,fn);
+            addEvent = function(ele,eventName,fn ){
+                ele.attachEvent("on"+eventName,fn);
+            }
+        }else{
+            ele.addEventListener(eventName,fn,isCapture);
+            addEvent = function(ele,eventName,fn,isCapture){
+                ele.addEventListener(eventName,fn,isCapture);
+            }
+        }
+    }
+</script>
+</html>

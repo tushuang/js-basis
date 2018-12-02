@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            width: 400px;
+            height: 200px;
+            border: 1px solid red;
+            position: relative;
+            margin: 20px auto;
+            background: black;
+        }
+        
+        .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .ball:nth-of-type(1) {
+            background: red;
+            left: 350px;
+            top: 50px;
+        }
+        
+        .ball:nth-of-type(2) {
+            background: blue;
+            left: 175px;
+            top: 75px;
+        }
+        
+        .ball:nth-of-type(3) {
+            background: green;
+            left: 0;
+            top: 50px;
+        }
+        
+        .ball:nth-of-type(4) {
+            background: pink;
+            left: 175px;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+    </div>
+</body>
+<script>
+    var box = document.getElementById('box'); 
+    var ball = box.getElementsByTagName('div');
+	
+	for(var i=0;i<ball.length;i++){
+		ball[i].deg = i*90; //改变弧度来控制球的距离 每个球的距离正好是90度
+		///(function(i){
+			setInterval(function(){
+				ball[this].style.width = ball[this].style.height = ball[this].offsetTop/2 + 40 +"px";
+				var x = Math.cos(Math.PI*ball[this].deg/180)*200;
+				var y = Math.sin(Math.PI*ball[this].deg/180)*100;
+				ball[this].style.left = x-ball[this].offsetWidth/2+185+"px";
+				ball[this].style.top = y-ball[this].offsetHeight/2+120+"px";
+				ball[this].deg += 2;
+			}.bind(i),20)
+		//})(i);
+	}
+
+
+
+
+  /*  for (var i = 0; i < ball.length; i++) {
+        ball[i].deg = i * 90;
+		console.log(ball[i].deg);
+        ball[i].move = function () {
+            var self = this;
+            self.timer = setInterval(function () {
+                self.deg += 2;
+                var x = Math.cos(self.deg * Math.PI / 180) * ((box.clientWidth - self.offsetWidth) / 2);
+                var y = Math.sin(self.deg * Math.PI / 180) * ((box.clientHeight - self.offsetHeight) / 2);
+                var w = Math.sin(self.deg * Math.PI / 180) * 25;
+
+                self.style.left = (x + 175) + 'px';
+                self.style.top = (y + 75) + 'px';
+				self.style.width = self.style.height = w + 75 + "px";
+                
+            }, 20);
+        }
+        ball[i].move()
+    }*/
+</script>
+
+</html>

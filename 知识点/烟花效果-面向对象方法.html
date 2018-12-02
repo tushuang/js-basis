@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>放烟花效果（面向对象版）</title>
+		<style type="text/css">
+		html,body{overflow:hidden;}
+		body,div,p{margin:0;padding:0;}
+		body{background:#000;font:12px/1.5 arial;color:#7A7A7A;}
+		a{text-decoration:none;outline:none;}
+		#tips,#copyright{position:absolute;width:100%;height:50px;text-align:center;background:#171717;border:2px solid #484848;}
+		#tips{top:0;border-width:0 0 2px;}
+		#tips a{font:14px/30px arial;color:#FFF;background:#F06;display:inline-block;margin:10px 5px 0;padding:0 15px;border-radius:15px;}
+		#tips a.active{background:#FE0000;}
+		#copyright{bottom:0;line-height:50px;border-width:2px 0 0;}
+		#copyright a{color:#FFF;background:#7A7A7A;padding:2px 5px;border-radius:10px;}
+		#copyright a:hover{background:#F90;}
+		p{position:absolute;top:55px;width:100%;text-align:center;}
+		.fire {
+			width: 3px;
+			height: 50px;
+			background: white;
+			position: absolute;
+		} 
+		.spark {
+			position:absolute;
+			width: 6px;
+			height: 6px;
+		}
+		</style>
+<!--<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/animate.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="comment.js"></script>
+<script type="text/javascript">
+	document.onclick = function(e){
+		var e = e||event;
+		var pos = {
+			x:e.offsetX,
+			y:e.offsetY
+		};
+		new Fire(pos).init().launch();
+	}
+	//分清楚对象
+	function Fire(coodr){
+		this.ele = document.createElement("div");
+		//初始化
+		this.init = function(){
+			this.initStyle();
+			this.initPos();
+			document.body.appendChild(this.ele);
+			return this;
+		}
+		this.initStyle = function(){
+			this.ele.className = "fire";
+		}
+		this.initPos = function(){
+			this.ele.style.left = coodr.x +"px";
+			this.ele.style.top = window.innerHeight + "px";
+		}
+		//往上发射
+		this.launch = function (){
+			animate(this.ele,{top:coodr.y,height:3},"",function(){
+				this.exploed();
+			}.bind(this))
+		}
+		//爆炸
+		this.exploed = function(){
+			for(var i=0;i<randInt(30,80);i++){
+				new Spark(coodr).init().parabola();
+			}
+			this.destroy();
+		}
+		//销毁
+		this.destroy = function(){
+			this.ele.remove();
+		}
+	}
+	
+	function Spark(coodr){
+		this.ele = document.createElement("div");
+		
+		//初始化
+		this.init = function(){
+			this.initStyle();
+			this.initPos();
+			document.body.appendChild(this.ele);
+			return this;
+		}
+		this.initStyle = function(){
+			this.ele.className = "spark";
+			this.ele.style.background = randColor();
+			//初始化速度
+			this.ele.speedX = randInt(-20,20);
+			this.ele.speedY = randInt(-30,10);
+		}
+		this.initPos = function(){
+			this.ele.style.left = coodr.x +"px";
+			this.ele.style.top = coodr.y + "px";
+		}
+		//做曲线运动
+		this.parabola = function(){
+			this.timer = setInterval(function(){
+				this.ele.style.left = this.ele.speedX + this.ele.offsetLeft + "px";
+				this.ele.style.top = this.ele.speedY + this.ele.offsetTop + "px";
+				this.ele.speedY++;//模拟重力加速度
+				if(this.ele.offsetTop > window.innerHeight){
+					clearInterval(this.timer);
+					this.destroy();  //要把销毁放在定时器后 因为定时器是异步函数
+				}
+			}.bind(this),50)
+			
+		}
+		//销毁
+		this.destroy = function (){
+			this.ele.remove();
+		}
+	}
+	
+	
+	
+/*	document.onclick = function(e){
+		var e = e||event;
+		var Pos = {
+			x:e.offsetX,
+			y:e.offsetY
+		}
+		new Fire(Pos).init();
+	}
+	//使用面向对象来写 分成两个对象 
+	
+	function Fire(coodr){   //往上发射对象
+		//创建div
+		this.ele = document.createElement("div");
+		//添加初始化功能
+		this.init = function(){
+			this.initStyle();   //初始化样式
+			this.initPos();     //初始化位置
+			document.body.appendChild(this.ele);   
+			//return this;
+			this.launch();
+		}
+		this.initStyle = function(){  
+			this.ele.className = "fire";
+		}
+		this.initPos = function(){
+			this.ele.style.left = coodr.x + "px";
+			this.ele.style.top = window.innerHeight + "px";
+		}
+		//往上运动
+		this.launch = function(){
+			
+			animate(this.ele,{top:coodr.y,height:3},"",function(){  
+				this.explode();
+			}.bind(this))
+		}
+		//爆炸
+		this.explode = function(){
+			for(var i=0;i<randInt(30,70);i++){
+				//生成许多spark
+				new Spark(coodr).init().parabola();
+			}
+			this.destroy();
+		}
+		//发射完后销毁
+		this.destroy = function(){
+			this.ele.remove();
+		}
+	}
+	function Spark(coodr){  //爆炸后生成的小碎片
+		//也需要初始化 生成div
+	//	this.frag = document.createDocumentFragment(); // 创建缓冲区
+		this.ele = document.createElement("div");
+		this.init = function(){
+			this.initStyle();
+			this.initPos();
+			document.body.appendChild(this.ele);
+			return this;
+		}
+		this.initStyle = function(){
+			this.ele.className = "spark";
+			this.ele.style.background = randColor();
+			//初始化速度
+			this.ele.speedX = randInt(-20,20);
+			this.ele.speedY = randInt(-30,10);
+		}
+		this.initPos = function(){
+			this.ele.style.left = coodr.x + "px";
+			this.ele.style.top = coodr.y + "px";
+		}
+		//做抛物线运动
+		//发射完后销毁
+		this.destroy = function(){
+			this.ele.remove();
+		}
+	}
+	//做抛物线运动
+	Spark.prototype.parabola = function(){
+		this.timer = setInterval(function(){
+			this.ele.style.left = this.ele.offsetLeft + this.ele.speedX+ "px";
+			this.ele.style.top = this.ele.offsetTop + this.ele.speedY + "px";
+			this.ele.speedY++;
+			if(this.ele.offsetTop > window.innerHeight){
+				clearInterval(this.timer);
+				this.destroy();
+			}
+		}.bind(this),50);
+	}*/
+</script>
+</head>
+<body>
+<div id="tips"><a id="manual" href="javascript:;" class="active">手动放烟花</a><a id="auto" href="javascript:;" class="">自动放烟花</a><a id="stop" href="javascript:;" class="">停止放烟花</a></div>
+<p>由于浏览器渲染能力有限, 当浏览器为IE或选择自动放烟花时, 随机生成的烟花碎片范围自动调整至20-30</p>
+<div id="copyright">建议使用Firefox, Chrome浏览器预览效果. </div>
+
+</body></html>

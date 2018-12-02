@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0; margin: 0;
+    }
+    .container {
+        width: 150px; height: 35px;
+        margin: 200px auto;
+		background: #EEEEEE;
+		border-radius:5px ;
+		color:darkorange;
+		line-height: 35px;
+		text-align: center;
+		opacity: 0;
+    }
+   
+</style>
+<body>
+    <div class="container">
+		这是一个弹出框
+	</div>
+</body>
+
+<script src="../js/framework.js"></script>
+<script>
+	
+	//一个类只能有一个实例
+	function Alert(str){
+		if( !Alert.instance){   //如果有这个属性 直接返回
+			Alert.instance = {    //没有就创建一个
+				ele : document.getElementsByClassName("container")[0],
+				show : function(){  //没有在原形里  确保单例不会在系统中的其他代码内被实例化
+					$(".container[0]").animate({opacity:100},"");
+				},
+				hide(){ //没有在原形里
+					$(".container[0]").animate({opacity:0},"");
+				}
+			}
+		}
+		return Alert.instance;
+	}
+	var a = new Alert("ni");
+	//var b = new Alert("hao");
+	
+	//console.log(a == b);
+</script>
+
+</html>

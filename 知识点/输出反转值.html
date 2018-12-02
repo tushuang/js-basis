@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    //输出一个有符号的整数，输出该数的反转值
+   /* function inversion(str){
+        var numstr="";
+        var str = str+"";
+        if(str[0] == "-"){
+            var symbol = str[0];
+            str = str.substring(1,str.length);
+        }
+        for(var i=str.length-1; i>=0;i--){
+            numstr+= str[i];
+        }
+        numstr = parseInt(numstr);
+        numstr = symbol?(symbol+numstr):numstr+"";
+        return numstr;
+    }
+    var num ="12300";
+    console.log(inversion(num));*/
+
+    function inversion(num){
+       var num = num.toString().split("").reverse();
+       if(num[num.length-1] == "-"){
+          num.pop();
+          return -Number(num.join(""));
+       }else{
+           return Number(num.join(""));
+       }
+    }
+    </script>
+</head>
+<body>
+</body>
+</html>

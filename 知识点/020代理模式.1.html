@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+</body>
+
+<script src="../js/framework.js"></script>
+<script>
+    //代理模式
+   var obj = {
+        ele: 10,
+        f1(){
+            console.log("这是f1");
+        },
+        f2(){
+            console.log("这是f2");
+        },
+        test(){
+            console.log("这是test");
+        }
+    };
+
+    function Proxy(target,options){  //接受一个要代理对象和一个设置了代理方法的对象
+        var temp = {};
+        for(let attr in target){    //限制attr的作用域
+            if(typeof target[attr] == "function"){
+                temp[attr] = function(){
+                    options[attr]?options[attr]():"";
+                    target[attr]();
+                }
+            }else{
+                Object.defineProperty(temp,attr,{
+                    get(){
+                        return target[attr];
+                    },
+                    set(val){
+                        target[attr] = val;
+                    }
+                })
+            }
+        }
+        return temp;
+    }
+    var px = new Proxy(obj,{
+        test(){
+            console.log("这是test的代理方法");
+        }
+    });
+    px.f1();
+    px.f2();
+    px.test();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*function Proxy(target,options){  
+        //传入代理函数 实现动态代理  把要代理的对象传进来  传入的options是代理事件对原来事件的处理
+        //遍历对象的属性 放入一个空对象中
+        var temp = {};
+        for(var attr in target){
+            temp[attr] = target[attr];
+        }
+        console.log("123");
+        //给要代理的事件 增加其他方法
+        for(var attr in options){
+            temp[attr] = function(){     //调用每一个temp的方法
+                //先调用代理方法
+                options[attr]();       //有代理方法便先调用代理方法
+                //再调用函数自身的方法
+                target[attr]();
+            }
+        }
+      //  return temp;   //把target返回  调用的其实还是target内部的方法 但给需要代理的方法做了处理
+    }
+*/
+
+ /*   function Proxy(target,options){
+        var temp = {};
+        for(let attr in target){
+           // temp[attr] = target[attr];
+            if(typeof target[attr] == "function"){  //如果属性是一个方法的话  给他设置一个方法
+                temp[attr] = function(){
+                    options[attr]?options[attr]():"";
+                    target[attr]();
+                }
+            }else{   //不是函数的话 给他重新定义一个属性
+                Object.defineProperty(temp,attr,{  //定义属性  不能写target 会溢出 
+                    get(){
+                        return target[attr];
+                    },
+                    set(val){
+                        target[attr] = val;
+                    }
+                })
+            }
+        }
+
+        return temp;
+    }
+
+    var px = new Proxy(obj,{
+        test : function(){
+            console.log("这是obj.test的代理方法");
+        }
+    });
+    px.f1();
+    px.f2();
+    px.test();*/
+
+</script>
+
+</html>

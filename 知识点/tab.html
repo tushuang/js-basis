@@ -1,0 +1,188 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>选项卡布局</title>
+<style type="text/css">
+* { padding: 0; margin: 0; }
+li { list-style: none; }
+img { border: none; }
+body { margin-top: 50px; font-size: 12px; background: #f0fcff; }
+
+#tab { width: 490px; margin: 0 auto; position: relative; background: url(images/tab_bg.gif) repeat-y -490px 0; }
+#tab .adorn1 { position: absolute; top: 0; left: 0; width: 490px; height: 6px; overflow: hidden; background: url(images/tab_bg.gif) no-repeat; z-index: 1; }
+#tab .adorn2 { width: 490px; height: 6px; overflow: hidden; background: url(images/tab_bg.gif) no-repeat -980px 0; z-index: 1; }
+
+#tab .nav { position: relative; z-index: 2; }
+#tab .nav ul { width: 484px; height: 44px; border-left: 1px solid #d4d4d4; background: url(images/nav_bg.gif) repeat-x 0 -44px; }
+#tab .nav li { float: left; height: 44px; line-height: 44px; font-family: arial;border-right: 1px solid #d4d4d4; }
+#tab .nav li a { float: left; height: 44px; text-decoration: none; color: #999; padding: 0 20px; }
+#tab .nav li a:hover { background: url(images/nav_bg.gif) repeat-x 0 0; }
+#tab .nav .active { background: url(images/nav_bg.gif) repeat-x 0 -88px; }
+#tab .nav .active a { background: url(images/ico.gif) no-repeat center bottom; color: #333; font-weight: bold; }
+#tab .nav .active a:hover { background: url(images/ico.gif) no-repeat center bottom; }
+
+#tab .more { font-family: "宋体"; position: absolute; top: 16px; right: 20px; color: #999; text-decoration: none; }
+#tab .more:hover { text-decoration: underline; font-weight: bold; right: 18px; }
+
+#tab .content { position: relative; z-index: 2; width: 484px; overflow: hidden; margin-left: 1px; }
+#tab .box { width: 444px; padding: 20px; overflow: hidden; display: none; }
+#tab .pic { padding: 7px 0 0 7px; width: 189px; height: 115px; background: url(images/pic_bg.jpg) no-repeat; float: left; }
+#tab .pic_list { float: right; width: 232px; padding-left: 16px; display: inline-block; }
+#tab .pic_list li { width: 232px; float: left; font-family: arial; line-height: 18px; margin-bottom: 4px; }
+#tab .pic_list h2 { width: 232px; font-size: 12px; height: 18px; background: url(images/line.gif) repeat-x 0 8px; }
+#tab .pic_list h2 a { height: 18px; text-decoration: none; color: #333; font-weight: bold; background: #fff; padding-right: 5px; float: left; }
+#tab .pic_list h2 a:hover { text-decoration: underline; color:#D31A05; }
+#tab .pic_list h2 span { height: 18px; color: #999; float: right; background: #fff; padding-left: 5px; }
+#tab .pic_list p { color: #999; word-spacing: 10px; }
+</style>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+/*	window.onload = function(){
+		var navs = document.getElementById("navUL").children;
+		var contents = document.getElementsByClassName("content")[0].children;
+		for(var i=0; i<navs.length; i++){
+			navs[i].index = i;
+			navs[i].onclick = function(){
+				
+			
+				for(var k=0; k<contents.length; k++){
+					navs[k].className = "";
+					contents[k].style.display = "none";
+				}
+				this.className = "active";
+				contents[this.index].style.display = "block";
+			}
+		}
+	}*/
+	
+	onload = function(){
+		var oul = document.getElementById("navUL");
+		var oli = oul.getElementsByTagName("li");
+		var content = document.getElementsByClassName("box");
+		console.log(content);
+		for(var i=0;i<oli.length;i++){
+			oli[i].index = i ;    //给li加上index属性 便于取到content box
+			//content[i].index = i;
+			console.log(oli[i].index);
+			oli[i].onclick = function(){
+				for(var j=0;j<content.length;j++){
+					oli[j].className = " ";
+					content[j].style.display = "none";
+				}
+				content[this.index].style.display = "block";
+				this.className = "active";
+			}
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+<div id="tab">
+   
+    <div class="nav large default">
+        <ul id="navUL">
+            <li class="active"><a href="#">千锋课堂</a></li>
+            <li><a href="#">HTML5课程</a></li>
+            <li><a href="#">JavaScript开发课程</a></li>
+        </ul>
+        <a class="more" href="http://www.baidu.com">>>更多</a>
+    </div>
+    <div class="content">
+        <div class="box" style="display:block;">
+            <div class="pic"><a href="#"><img src="images/1.jpg" /></a></div>
+            <ul class="pic_list">
+                <li>
+                    <h2>
+                        <a href="#">HTML5开课典礼仪式</a>
+                        <span>moon</span>
+                    </h2>
+                    <p>点击：223  2015.3.22</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">课程常见问题合集</a>
+                        <span>tab</span>
+                    </h2>
+                    <p>点击：122  2015.7.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">JS课程结课标准</a>
+                        <span>JS</span>
+                    </h2>
+                    <p>点击：345  2015.3.30</p>
+                </li>
+            </ul>
+        </div>
+        <div class="box">
+            <div class="pic"><a href="#"><img src="images/2.jpg"  /></a></div>
+            <ul class="pic_list">
+                <li>
+                    <h2>
+                        <a href="#">千锋——JS视频教程</a>
+                        <span>JS</span>
+                    </h2>
+                    <p>点击：1123  2015.4.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">JS特效集合</a>
+                        <span>jj</span>
+                    </h2>
+                    <p>点击：2223  2015.4.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">JS疑难杂症</a>
+                        <span>KK</span>
+                    </h2>
+                    <p>点击：22112  2015.4.1</p>
+                </li>
+            </ul>
+        </div>
+        <div class="box">
+            <div class="pic"><a href="#"><img src="images/3.jpg"  /></a></div>
+            <ul class="pic_list">
+                <li>
+                    <h2>
+                        <a href="#">千锋课堂-课程列表</a>
+                        <span>lely</span>
+                    </h2>
+                    <p>点击：923  2015.4.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">精通JavaScript开发课程</a>
+                        <span>lely</span>
+                    </h2>
+                    <p>点击：2223  2015.4.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">HTML5高级开发课程</a>
+                        <span>lely</span>
+                    </h2>
+                    <p>点击：2223  2015.4.1</p>
+                </li>
+                <li>
+                    <h2>
+                        <a href="#">零基础网页制作精品课程</a>
+                        <span>Len</span>
+                    </h2>
+                    <p>点击：4223  2015.4.1</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="adorn1"></div>
+    <div class="adorn2"></div>
+    
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<script type="text/html" id="partslist">
+<% for(var i=0;i<8;i++)  {%>
+    <a href="../../page/goodsinfo.html">
+<li class="goodcommon">
+    <div class="partsgood" style="background:url(<%=list[i].image%>)center 40px no-repeat;background-size: 100px 100px;">
+        <div class="partsgood-title">
+            <%=list[i].name%>
+        </div>
+        <div class="partsprice">
+            <span>
+                <%=list[i].price%>元</span>
+            <p>
+                <%=list[i].comments%>人评价</p>
+        </div>
+    </div>
+</li>
+<a>
+<% } %>
+</script>

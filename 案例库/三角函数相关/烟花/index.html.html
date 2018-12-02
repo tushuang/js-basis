@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>烟花</title>
+        <script src="js/animation.js" charset="utf-8"></script>
+        <style media="screen">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            #box{
+                width:800px;
+                height:600px;
+                position: relative;
+                margin: 100px auto;
+                background:#000000;
+                border:2px solid red;
+                overflow: hidden;
+            }
+            .ball{
+                width: 4px;
+                height: 4px;
+				bottom: 0;
+                border-radius: 50%;
+                position: absolute;
+            }
+        </style>
+		<script src="../../comment.js"></script>
+    </head>
+    <body>
+        <div id="box"></div>
+    </body>
+    <script type="text/javascript"> 
+		var box = document.getElementById("box");
+		box.addEventListener("click",function(e){
+			var e = e||event;
+			var pos = {
+				x:e.offsetX,
+				y:e.offsetY
+			}; 
+			var bottom = box.offsetHeight -e.offsetY-8;
+			var odiv = createEle(1)[0];
+			odiv.style.left = pos.x + "px";
+			odiv.style.height="50px";  //模仿视觉效果
+			animate(odiv,{bottom:bottom,height:3},300,function(e){
+				var e = e || event;
+				odiv.remove();
+				var sdiv = createEle(20);
+				for(var i=0;i<sdiv.length;i++){
+					//烟花的运动轨迹
+					sdiv[i].style.left = pos.x + "px";
+					sdiv[i].style.top = pos.y + "px";
+					var radius = 1;
+					sdiv[i].degree = i*18; 
+					(function(i){
+						r = randInt(100,500);
+						console.log(r);
+						sdiv[i].timer = setInterval(function(){
+							var x =( Math.cos(Math.PI*sdiv[i].degree/180)*radius)/2;
+							var y = (Math.sin(Math.PI*sdiv[i].degree/180)*radius)/2;
+							x = x>0?Math.ceil(x):Math.floor(x);
+							y = y>0?Math.ceil(y):Math.floor(y);
+							sdiv[i].style.left = pos.x + x +"px";
+							sdiv[i].style.top = pos.y + y +"px";
+							animate(sdiv[i],{opacity:0},500);
+							radius+=1;
+							if(radius >= r ){
+								clearInterval(sdiv[i].timer);
+								setTimeout(function(){
+									sdiv[i].parentNode.removeChild(sdiv[i]);
+								},600)
+							}
+						},30);
+					})(i);
+				}
+			});
+			
+		});
+		
+		function createEle(num){
+			var temp = [];
+			var frag = document.createDocumentFragment();  //创建缓存区 性能优化
+			for(var i=0;i<num;i++){
+				var odiv = document.createElement("div");
+				odiv.className = "ball";
+				odiv.style.background = randColor();
+				temp.push(odiv);
+				frag.appendChild(odiv);
+			}
+			box.appendChild(frag);
+			return temp;
+		}
+		
+    /*    var box = document.getElementById('box');
+        box.onclick = create;
+
+        function create(event){
+            var e = event||window.event;
+            var mouX = e.offsetX;
+            var mouY = e.offsetY;
+            var a = Math.random()*200+100;
+            for(var i = 0;i < 20;i++){
+                var ball = document.createElement('div');
+                ball.d = 18*i;
+                var r = Math.floor(Math.random()*255);
+                var g = Math.floor(Math.random()*255);
+                var b = Math.floor(Math.random()*255);
+                ball.style.background = 'rgb('+ r + ',' + g +  ','+ b + ')';
+                ball.style.left = mouX + 'px';
+                ball.style.bottom = 0 + 'px';
+                ball.className = 'ball';
+                box.appendChild(ball);
+                    animation(ball,{bottom:600-mouY},1000,function(){
+
+                        animation(this,{
+                            left:(Math.cos(this.d*Math.PI/180)*a)+ mouX,
+                            bottom:(Math.sin(this.d*Math.PI/180)*a)+ (600-mouY),
+                            opacity:0
+                        },2000,function(){
+                            box.removeChild(this)
+                        })
+                    })
+            }
+        }*/
+    </script>
+</html>

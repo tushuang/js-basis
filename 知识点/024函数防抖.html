@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            height: 2000px;
+            width: 800px;
+            background: #bbbbbb;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        sdsdafdsa
+    </div>
+</body>
+<script>
+    //函数防抖 触发结束一段时间后 才调用函数
+  /* function debounce(callback, delay=300, context){
+        var t = null;
+        return function(e){
+            clearTimeout(t);
+            t = setTimeout(()=>{
+                callback.call(context, e);
+            }, delay);
+        }
+    }
+
+    window.onscroll = debounce(function(){  //调用时 返回一个函数   
+        console.log("0k");
+    });*/
+    var timer;
+    function debounce(callback,delay=300){
+            //var timer = null;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+             // callback();
+              console.log("123");
+            },delay);
+		}
+
+		window.onscroll = debounce;//如果时间写为12毫秒，就会跟浏览器刷新时间一样，也会不停的触发
+        //不能加括号 加了错误
+       /* window.onscroll = function(){
+            debounce();
+        } */   //相当于 每触发一次window滚轮事件都调用一次这个函数
+        console.log(window.onscroll); 
+        //如果不写回调函数 需要把timer定义在外面 否则不会清除定时器
+</script>
+</html>

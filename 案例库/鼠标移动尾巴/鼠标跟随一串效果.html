@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>无标题文档</title>
+		<link href="css/font-awesome.css" rel="stylesheet">
+		<style type="text/css">
+
+		div{width:10px; height:10px; position:absolute; top:0; left:0;}
+		div::after{
+			font-family: fontawesome;
+			content:"\f06c";
+			font-size: 18px;
+			color:green;
+		}
+		</style>
+		<script type="text/javascript">
+
+
+			//使用鼠标的移动事件
+			document.onmousemove=function(ev){
+				var aDiv=document.getElementsByTagName('div');
+				var e=ev||event;
+				//遍历所有DIV，从第二个开始到结束
+				for(var i=aDiv.length-1;i>0; i--){
+					//将第N个的坐标 赋给 第N+1个（即第N+1个跟随第N个）
+					aDiv[i].style.top=aDiv[i-1].style.top;
+					aDiv[i].style.left=aDiv[i-1].style.left;	
+				}
+				//最后将鼠标位置赋给第一个
+				aDiv[0].style.left=e.clientX+'px';
+				aDiv[0].style.top=e.clientY+'px';
+				
+			}
+			
+		</script>
+	</head>
+
+<body>
+	<div style="left: 341px; top: 172px;"></div>
+	<div style="top: 172px; left: 341px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 75px; left: 275px;"></div>
+	<div style="top: 77px; left: 278px;"></div>
+	<div style="top: 81px; left: 281px;"></div>
+	<div style="top: 83px; left: 284px;"></div>
+	<div style="top: 86px; left: 291px;"></div>
+	<div style="top: 86px; left: 299px;"></div>
+	<div style="top: 89px; left: 309px;"></div>
+	<div style="top: 89px; left: 325px;"></div>
+	<div style="top: 89px; left: 339px;"></div>
+	<div style="top: 89px; left: 358px;"></div>
+	<div style="top: 86px; left: 380px;"></div>
+	<div style="top: 84px; left: 399px;"></div>
+	<div style="top: 80px; left: 427px;"></div>
+	<div style="top: 78px; left: 451px;"></div>
+	<div style="top: 75px; left: 506px;"></div>
+	<div style="top: 75px; left: 530px;"></div>
+</body></html>

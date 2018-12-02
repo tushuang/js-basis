@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+		<title>点击表格切换图片 </title>	
+		
+    </head>
+    <style>
+        .td-class{
+            width:20px;
+            height: 20px;
+        }
+		td.active {
+			background: orange;
+		}
+		div img{
+			position: absolute;
+			opacity: 0;
+		}
+    </style>
+	<script src="../comment.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">  
+/*		window.onload = function(){
+			var tab = document.getElementById("tab");
+			var showImg = document.getElementById("showImg");
+			tab.addEventListener("click", function(e){
+				if(e.target.tagName = "TD") {
+					for(var i=0; i<4; i++){
+						e.target.parentNode.children[i].className="td-class";
+					}
+					e.target.className = "td-class active";
+					var index = e.target.getAttribute("index");
+					var imgsrc = "00"+index+".jpg";
+					
+					fadeOut(showImg, function(){
+						showImg.src = imgsrc;
+						fadeIn(showImg);
+					});
+					
+				}
+			});
+		}
+		
+		function fadeIn(ele, callback) {
+			var val = Number(getStyle(ele).opacity);
+			clearInterval(ele.timer);
+			ele.timer = setInterval(function(){
+				val += 0.02;
+				ele.style.opacity = val;
+				if(val >= 1) {
+					clearInterval(ele.timer);
+					callback?callback():"";
+				}
+			},30);
+		}
+		
+		function fadeOut(ele, callback){
+			var val = Number(getStyle(ele).opacity);
+			clearInterval(ele.timer);
+			ele.timer = setInterval(function(){
+				val -= 0.02;
+				ele.style.opacity = val;
+				if(val <= 0) {
+					clearInterval(ele.timer);
+					callback?callback():"";
+				}
+			},30);
+		}*/
+		onload = function(){
+			var oimg = document.getElementsByClassName("showImg");
+			var tab = document.getElementById("tab");
+			var num=0;
+			tab.addEventListener("click",function(e){
+				var e = e|| event;
+				if(e.target.tagName == "TD"){
+					num = e.target.getAttribute("index");
+					for(var i=0;i<4;i++){
+						e.target.parentNode.children[i].className = "td-class";
+					}
+					e.target.className += " active";  
+					/*var img_src = oimg.src.substring(oimg.src.length-7,oimg.src.length);
+					console.log(img_src,imgSrc);
+					if(img_src != imgSrc ){
+						fadeout(oimg,function(){  //点击时 之前的图片淡出
+							oimg.src = imgSrc;
+							fadein(oimg);  // 点击到的图片淡入
+						});
+					}*/
+					//点击时 当前图片淡出 下一个图片 淡入
+					fadein(oimg[num]);  //找到对应图片显示出来
+					//console.log(oimg[num]);
+					for(var i=0;i<4;i++){
+						if(num != i){
+						fadeout(oimg[i]);
+						  }//除了当前图片其他图片全都淡出
+					}
+				}
+			});
+			var otd = document.getElementsByTagName("td");
+			setInterval(function(){  //没有点击时 利用定时器自动切换图片
+				fadein(oimg[num],function(){
+					++num>=4?num=0:"";  
+				});  //找到对应图片显示出来
+				
+				for(var i=0;i<4;i++){
+					otd[i].className = "td-class";
+				}
+				otd[num].className += " active";   //模拟点击
+
+				for(var i=0;i<4;i++){
+					if(num != i){
+					fadeout(oimg[i]);
+					}//除了当前图片其他图片全都淡出
+				}
+				//otd[(num)%4].click();
+			//	num++;
+				
+			},3000);
+		}
+		
+		function fadeout(ele,callback){  //淡出
+			var val = Number( getStyle(ele).opacity);
+			clearInterval(ele.timer);
+			ele.timer = setInterval(function(){
+				val -= 0.02;
+				ele.style.opacity = val;
+				if(val <= 0){
+					clearInterval(ele.timer);
+					callback?callback():"";
+				}
+			}.bind(ele),30);
+		}
+		
+		function fadein(ele,callback){  //淡入
+			var val = Number( getStyle(ele).opacity);
+			clearInterval(ele.timer);
+			ele.timer = setInterval(function(){
+				val += 0.02;
+				ele.style.opacity = val;
+				if(val >= 1){
+					clearInterval(ele.timer);
+					callback?callback():"";
+				}
+			}.bind(ele),30);
+		}
+    </script>
+	<body>
+        <table id="tab" border="1">
+            <tr>
+                <td index=0 class="td-class"></td>
+                <td index=1 class="td-class"></td>
+                <td index=2 class="td-class"></td>
+                <td index=3 class="td-class"></td>
+            </tr>
+        </table>
+		<div>
+			<img class="showImg" src="001.jpg" style="width:300px"/>
+			<img class="showImg" src="002.jpg" style="width:300px"/>
+			<img class="showImg" src="003.jpg" style="width:300px"/>
+			<img class="showImg" src="004.jpg" style="width:300px"/>
+        </div>
+	</body>
+</html>

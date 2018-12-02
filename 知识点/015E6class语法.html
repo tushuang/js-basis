@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>  //特点 	先定义再使用
+			class Person{   //相当于构造函数  是一个类  constructor被称之为构造方法，在我们new 一个对象的时候，自动被调用
+				constructor(name,age) {   
+				    this.name = name;
+					this.age = age;
+					this.paly = function(){   //如果不想写在原形上 函数要按照正常的写法
+						console.log("123");
+					}
+				}
+				sports(){   //是创建在原形对象上的
+					console.log(this.name);  //这里的this指的是调用该构造函数的实例对象
+				}
+			}
+			
+			class People extends Person{  //继承
+				constructor(name,age,sex){
+					super(name,age); //需要写在一起  继承父类的属性
+					//这相当于调用了父类的构造方法，类似于传统写法Father.call(this)
+					//但是这个方法是必须放在第一行先调用
+					this.sex = sex;
+				}
+				wage(){
+					console.log("30k+");
+				}
+				get weight(){
+					 return this._weight ;  //_weight再Java中称作私有属性
+				}
+				set weight(val){  //必须要传值 没有会报错
+					if(val <= 0) val= 50;    //监听检测
+					return this._weight = val;
+				}
+			}
+		//	var tutu = new Person("tutu",18);
+			var tutu2 = new People("tutu2",18,"Woman");
+			console.log(tutu2.sports());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

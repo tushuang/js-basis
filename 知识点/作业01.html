@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算天数</title>
+		
+	</head>
+	<body>
+		<input id="fd" type="text">华氏度是<input id="dc" type="text">摄氏度
+		<input type="button" value="计算" onclick="change()">
+	</body>
+	<script>
+		//计算多少天多少时
+			/*var day = parseInt(89/24);
+			var hours = parseInt(89%24);
+			console.log("共"+day+"天"+hours+"小时");*/
+			 /*console.log(fd+"华氏度是"+dc+"摄氏度");*/
+			 //var getElementById("fd").value = 
+			 function change (){
+		    var fd = document.getElementById("fd").value;
+			dc = 5/9.0*(fd-32);
+			dc = dc.toFixed(3);
+			document.getElementById("dc").value = dc;
+			console.log(dc);}
+		</script>
+</html>

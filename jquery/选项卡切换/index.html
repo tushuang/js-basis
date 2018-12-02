@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			ul,
+			ol {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul {
+				width: 500px;
+				height: 26px;
+			}
+			ul li {
+				float: left;
+				height: 26px;
+				padding: 0 16px;
+				cursor: pointer;
+			}
+			ol {
+				width: 488px;
+				padding: 6px;
+				background: #abcdef;
+			}
+			.hide {
+				display: none;
+			}
+			.show {
+				display: block;
+			}
+			.normal {
+				color: black;
+				background: #ddd;
+				border: 1px solid #abcdef;
+				border-bottom: 0;
+			}
+			.hover {
+				color: #fff;
+				background: #abcdef;
+				border: 1px solid #abcdef;
+				border-bottom: 0;
+			}
+		</style>
+
+	</head>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script>
+		// $(document).ready(function(){
+
+		// });
+
+	/*	$(function(){
+			$("ul>li").mouseover(function(){
+				$(this).addClass("hover").siblings().removeClass("hover");
+				$("ol>li:eq("+$(this).index()+")").show().siblings().hide();
+			})
+		})*/
+
+
+		$(function(){
+			$("ul>li").mouseover(function(){
+				$(this).addClass("hover").siblings().removeClass();
+				$("ol>li:eq("+ $(this).index()+")").show().siblings().hide();
+			})
+		})
+	</script>
+	<body>
+		<div id="tab">
+			<ul>
+				<li>tab1</li>
+				<li>tab2</li>
+				<li>tab3</li>
+			</ul>
+			<ol>
+				<li><img src="img/1.jpg" /></li>
+				<li><img src="img/5.jpg" /></li>
+				<li><img src="img/3.jpg" /></li>
+			</ol>
+		</div>
+
+	
+
+	</body>
+
+</html>

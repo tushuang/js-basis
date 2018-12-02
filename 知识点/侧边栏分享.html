@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>无标题文档</title>
+<script src="comment.js"></script>
+<style type="text/css">
+#div1{width:150px; height:100px; position:absolute; top:40%; left:-150px; background:#9CF;}
+#div1 span{width:20px; position:absolute; top:15px; left:150px; background:#9C9;}
+
+</style>
+
+<script type="text/javascript">
+window.onload=function(){
+	var box = document.getElementById("div1");
+	var oSpan = box.children[0];
+	oSpan.onmouseenter = function(){
+		clearInterval(oSpan.timer);  //是异步函数 每次触发事件都会再开启一个定时器 导致速度越来越快
+		/*oSpan.timer = setInterval(function(){
+			box.style.left = box.offsetLeft + 4 +"px";
+			if( parseInt(box.style.left) >=0){
+				box.style.left = 0;
+				clearInterval(oSpan.timer);
+			}
+		},30);*/
+		move(box,"left",0,1500);
+	}
+	box.onmouseleave = function(){	  //绑在父盒子上面  使用out的话 会冒泡 从span到box;   事件是一直存在的 函数才绑定
+		console.log("123");
+		clearInterval(oSpan.timer);
+		/*oSpan.timer = setInterval(function(){
+			box.style.left = box.offsetLeft - 4 +"px";
+			if( parseInt(box.style.left) <= -150){
+				box.style.left = "-150px";
+				clearInterval(oSpan.timer);
+			}
+		},30);*/
+		move(box,"left",-150,1500);	
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="div1"><span >分享到</span></div>
+</body>
+</html>
+ 

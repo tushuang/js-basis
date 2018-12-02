@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<style>
+		#distance{
+			width:200px;
+			height:50px;
+			background:pink;
+			position:fixed;
+			top:0px;
+			left:0px;
+		}
+	</style>
+	<body>
+		<!--<button id="button">点一点点一点。。。</button>-->
+		<div id="distance"></div>
+		
+	</body>
+	<script>	
+	/*	var btn = document.getElementById("button");
+		btn.onclick = function(event){
+			console.log(event.clientX,event.clientY);
+		}*/
+		var frag = document.createDocumentFragment();  //创建缓冲区 不是document元素 但是可以当做document元素使用
+	for(var i=0;i<1000;i++){
+		var p = document.createElement("p");
+		p.innerHTML = i;
+		//document.body.appendChild(p);
+		frag.appendChild(p);    //先把p标签加入缓冲区 减少页面的重绘次数 提高性能
+	}
+	document.body.appendChild(frag);  //再把缓冲区的内容一次性加入body
+		var distance = document.getElementById("distance");
+		document.onmousemove = function(e){                        //直接给页面加onmousemove
+			var e = e||event;
+			var scrollT = document.documentElement.scrollTop || document.body.scrollTop;  //需要加上滚轮滚动的距离
+			var scrollL = document.documentElement.scrollLeft || document.body.scrollLeft;
+			distance.innerHTML = "x:" + (e.clientX + scrollL) + ",y:" + (e.clientY + scrollT);
+		}
+	</script>
+</html>

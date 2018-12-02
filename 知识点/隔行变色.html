@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+.red{background:red;}
+</style>
+<script type="text/javascript">
+	onload = function(){
+		var oul = document.getElementById("ul01");
+		var oli = getAtrributeNodes(oul.childNodes);
+		console.log(oli);                 //输出的节点包含元素节点和空白文本节点
+		for(var i=0;i<oli.length;i++){
+			if(i%2 != 0) {
+				console.log(i);
+				oli[i].className = "red";
+			}
+		}
+		//过滤空白文本节点
+		function getAtrributeNodes(nodelist){
+			var temp = [];
+			for(var i=0;i<nodelist.length;i++){
+				if(nodelist[i].nodeType == 1){
+					temp.push(nodelist[i]);
+					console.log("123");
+				}
+			}
+			console.log(temp);
+			return temp;
+		}
+	}
+</script>
+</head>
+
+<body>
+<ul id="ul01">
+	<li>A</li>
+    <li>B</li>
+    <li>C</li>
+    <li>D</li>
+    <li>E</li>
+    <li>F</li>
+    <li>F</li>
+    <li>F</li>
+    <li>F</li>
+    <li>F</li>
+    <li>F</li>
+</ul>
+</body>
+</html>

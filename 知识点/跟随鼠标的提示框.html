@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+body{font:12px; padding:0; margin:0;}
+#bigdiv{width:1000px;  margin:0 auto;}
+
+.smalldiv{width:auto; height:100px; background:#066;}
+.infoa{color:#fff;}
+.infodiv{color:#fff; width:200px; position:absolute; height:150px; background:gray; display:none;}
+
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	var links = document.getElementsByClassName("infoa");
+	var layer = document.getElementsByClassName("infodiv")[0];
+	for(var i=0; i<links.length; i++){
+		links[i].addEventListener("click",function(evt){
+			var e = evt || event;
+			
+			layer.style.display = "block";
+			layer.style.left = e.clientX + "px";
+			layer.style.top = e.clientY + "px";
+			
+			e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+		
+		},false);
+	}
+	document.addEventListener("click",function(){
+		layer.style.display = "none";
+	},false);
+}
+
+</script>
+
+</head>
+
+<body>
+	<div id="bigdiv">
+		<div class="smalldiv">
+			<a href="#" class="infoa">个人信息AAA</a>
+		</div>
+		<div class="smalldiv">
+			<a href="#" class="infoa">个人信息BBB</a>
+		</div>
+		<div class="smalldiv">
+			<a href="#" class="infoa">个人信息CCC</a>
+		</div>
+		<div class="smalldiv">
+			<a href="#" class="infoa">个人信息DDD</a>
+		</div>
+		<div class="infodiv">弹出框</div>
+	</div>
+
+</body>
+</html>

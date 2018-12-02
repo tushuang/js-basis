@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<body>
+		<div id="time">
+		</div>
+	<!--	<div id="time">
+			<img src="img/1.png">
+			<img src="img/1.png">
+			时
+			<img src="img/1.png">
+			<img src="img/1.png">
+			分
+			<img src="img/1.png">
+			<img src="img/1.png">
+			秒
+		</div>-->
+	</body>
+	<script>
+	/*	var d = new Date();  //是当前时间
+		function time(d){    //当把d直接传进去的时候 时间没有变 要传人一个新的Date类型
+			return d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate()+" "+ d.getHours() +"."+d.getMinutes()+"."+d.getSeconds();
+		}
+		setInterval(function (){
+			console.log(time(new Date()));
+		},1000)*/
+		
+		//倒计时
+		var time = document.getElementById("time");
+		var totall = 7200;
+		setInterval(function(){
+			totall--;
+			var hour = Math.floor(totall/3600);
+			var minth = Math.floor((totall - hour*3600)/60);
+			var second = totall-hour*3600- minth*60;
+			time.innerHTML = "剩余"+hour+"小时"+ minth +"分钟"+second;
+		},1000)
+	/*	var imgs = document.getElementsByTagName("img");
+		setInterval(function(){
+			var date = new Date();
+			var h = date.getHours();
+			var m = date.getMinutes();
+			var s = date.getSeconds();
+		//	console.log(s);
+			 h = h<10?"0"+h:h+"";
+			 m = m<10?"0"+m:m+"";
+			 s = s<10?"0"+s:s+"";
+			 
+			 imgs[0].src = "img/"+h[0]+".png";
+			 imgs[1].src = "img/"+h[1]+".png";
+			 imgs[2].src = "img/"+m[0]+".png";
+			 imgs[3].src = "img/"+m[1]+".png";
+			 imgs[4].src = "img/"+s[0]+".png";
+			 imgs[5].src = "img/"+s[1]+".png";
+		},1000);*/
+	</script>
+</html>

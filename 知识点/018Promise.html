@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>练习</title>
+		<script>
+			//写几个异步函数
+			function ajax1(resolve){//resolve是一个回调函数  reject拒绝
+				setTimeout(function(){  
+					console.log("这是ajax1");
+					//reject( "是ajax1的错误！！！！");//调用改函数时 会拒绝之后的函数的执行 需要放在resolve之前 否则无效  并且使用时会报错 为了让
+					//代码的执行不受影响 我们需捕捉错误 在最后.catch
+					resolve(); //在函数结束时调用 给Promise一个通知改函数已经结束 可以执行下一个函数
+				},Math.random()*3000+1000);
+			}
+			function ajax2(){
+				return new Promise(function(resolve){  //当有第三个函数要执行时 直接返回一个Promise
+					setTimeout(function(){     
+						console.log("这是ajax2");
+						resolve();
+					},Math.random()*3000+1000);
+				});
+			}
+			function ajax3(resolve){
+				setTimeout(function(){
+					console.log("这是ajax3");
+					resolve();
+				},Math.random()*3000+1000);
+			}
+// 			function ajax1(resolve){
+// 				setTimeout(function(){
+// 					console.log("这是ajax1");
+// 					resolve();
+// 				},Math.random()*3000+1000);
+// 			}
+			function ajax4(){
+				setTimeout(function(){
+					console.log("这是ajax4");
+					
+				},Math.random()+1000);
+			}
+			
+			new Promise(ajax1).then(ajax2).catch(function(mes){
+				console.log(mes);
+			});  //Promise 承诺ajax1执行完后 再执行后面的函数
+			//new Promise(ajax1).then(ajax2).then(ajax3);  //当有第三个函数要执行时 不能再给第二个函数传参 因为参数已经改变 并且一个
+			//Promise只能有一个承诺
+			
+			
+			//错误示范
+			/*var p1 = new Promise(ajax1); //每次创建一个Promise都会调用改函数
+			var p2 = new Promise(ajax3); 
+			p1.then(p2);  //不能保证顺序 */
+			
+			
+			//保证三个函数全都执行完后 再执行第四个
+			//Promise.all([new Promise(ajax1),new Promise(ajax2),new Promise(ajax3)]).then(ajax4);
+			//需保证前面的参数有结束通知
+			
+			
+			//前三个函数 结束任意一个后 执行第四个
+			//Promise.race([ new Promise(ajax1), new Promise(ajax2), new Promise(ajax3)]).then(ajax4);
+			/*async function test(){
+				//var res = await ajax2();  //ajax2需返回一个new  Promise  本质上还是promise 
+				//ajax4(res);
+				await ajax2();  
+				await ajax4();
+			}
+			test();*/
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

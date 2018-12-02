@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>数组排序</title>
+	<script>
+		//冒泡排序
+/*		var arr = [2,4,1,89,3,12,22,4];
+		for(var i=0;i<arr.length-1;i++){
+			for(var j=0;j<arr.length-i-1;j++){
+				if(arr[j]>arr[j+1]){
+					var temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		console.log(arr);*/
+		//选择排序
+	/*	var arr = [2,4,1,89,3,12,22,4];
+		for(var i=0;i<arr.length-1;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(arr[i]>arr[j]){
+					var temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+		}
+		console.log(arr);*/
+		
+		//快速排序
+/*		var arr = [2,4,1,89,3,12,22,4];
+		function quicksort(a){
+			if(a.length <= 0) return a;
+			var midindex =parseInt( a.length/2);
+			var left = [];
+			var right = [];
+			var temp = [];
+			for(var i=0;i<a.length;i++){
+				if(midindex == i) continue;
+				if(a[i]>a[midindex]){
+					right.push(a[i]);
+				}else{
+					left.push(a[i]);
+				}
+			}
+			console.log("ok");
+			return quicksort(left).concat(a[midindex]).concat(quicksort(right));
+		}
+		console.log(quicksort(arr));*/
+		
+		//数组新增API map 映射 返回的数组
+		/*var arr = [10000,12000,8000,18000];
+		function map(arr,fn){
+			var temp = [];
+			for(var i=0;i<arr.length;i++){
+				temp.push(fn(arr[i]));
+			}
+			return temp;
+		}
+		map(arr,function(num){   //回调函数
+			return num*1.1;
+		});*/
+		//数组新增API forEach
+	/*	arr.forEach(function(item,index){
+			console.log(item,index);
+		});*/
+		//filter 过滤器 返回的数组
+	/*	function filter (arr,fn){
+			var temp = [];
+			for(var i=0;i<arr.length;i++){
+				var res = fn(arr[i]);
+				if(res) temp.push(arr[i]);  //
+			}
+			return temp;
+		}
+		filter(arr,function(num){
+			return num>=2000;
+		});*/
+		
+		
+		//some 返回的是布尔类型 
+	/*	function some(arr,fn){
+			var flag= 0;
+			for(var i=0;i<arr.length;i++){
+				if(fn(arr[i])) flag=1;
+			}
+			if(flag) return true;
+			else return false;
+		}
+		some(arr,function(num){
+			var flag = 0;
+			if(num>=25000) flag =1;
+			if(flag) return  true;
+			else return false;
+		});*/
+		//reduce 返回的是一个数
+		/*arr.reduce( function(x,y){
+			return x+y;
+		});*/
+		/*var arr = [10000,12000,8000,18000];
+		function reduce(arr,fn){
+			var sum = 0;
+			var x = 0;
+			for(var i=0;i<arr.length-1;i++){
+				var y = arr[i+1];
+				if(i == 0) x=arr[i];
+				else x =sum;
+				sum = fn(x,y);
+			}
+			return sum;
+		}
+		reduce(arr,function(x,y){
+			return x+y;
+		});*/
+		
+		var arr = ["good1","good2","good3"];
+		var a = [2,3,1,2,3];
+		var temp = a.filter(function(){
+			return arr>2;
+		})
+	</script>
+	</head>
+	<body>
+	</body>
+</html>

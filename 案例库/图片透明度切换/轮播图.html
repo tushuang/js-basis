@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			*{
+				margin: 0px;padding: 0px;
+			}
+			ul{
+				list-style: none;
+				width: 4050px;
+				overflow: hidden;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			li{
+				float: left;
+			}
+			#box{
+				position: relative;
+				width: 810px;
+				height: 320px;
+				margin: auto;
+				overflow: hidden;
+			}
+			#circle{
+				width: 100px;
+				height: 20px;
+				overflow: hidden;
+				position: absolute;
+				top: 300px;
+				left: 722px;
+			}
+			#circle li {
+				float: left;
+				margin-right: 5px;
+				width: 15px;
+				height: 15px;
+				border-radius: 50%;
+				background: rgba(0,0,0,0.7);
+				cursor: pointer;
+			}
+			#circle li.active{
+				background: white;
+			}
+			
+			#left{
+				width: 60px;
+				height: 60px;
+				overflow: hidden;
+				background: url(btn.gif);
+				position: absolute;
+				left: 30px;
+				top: 100px;
+				cursor: pointer;
+			}
+			#right{
+				width: 60px;
+				height: 60px;
+				background: url(btn.gif) 0 -60px;
+				overflow: hidden;
+				position: absolute;
+				right: 30px;
+				top: 100px;
+				cursor: pointer;
+			}
+		</style>
+		<script src="../comment.js"></script>
+		<script>
+			onload = function(){
+				var obox = document.getElementById("box");
+				var oul = document.getElementsByTagName("ul")[0];
+				var cle = document.getElementById("circle").children;
+				var leftBtn = document.getElementById("left");
+				var rightBtn = document.getElementById("right");
+				console.log(cle);
+				var index = 0;
+				
+				function scrollImag(){
+					for(var i=0;i<cle.length;i++){
+						cle[i].className = "";
+					}
+					++index;
+					console.log(index);
+					cle[index>=4?0:index].className = "active";// 不能改变index的值
+					animate(oul,{left:-810*index},"",function(){
+						if(index >= 4){
+							oul.style.left = 0;
+							index = 0;
+						}
+					})
+				}
+				
+				var timer = setInterval(scrollImag,2000);
+				
+				obox.onmouseover = function(){
+					clearInterval(timer);
+				}
+				obox.onmouseout = function(){
+					timer = setInterval(scrollImag,2000);
+				}
+				
+				for(var i=0;i<cle.length;i++){
+					cle[i].num = i;
+					cle[i].onclick = function(){  //点击小圆点时
+						index = this.num-1;
+						scrollImag();
+					}
+				}
+				
+				leftBtn.onclick = function(){
+					if(index == 0){
+						index = 2;
+						console.log(index);
+					}
+					//console.log(index);
+					else index -= 2;
+					scrollImag();
+				}
+				rightBtn.onclick = function(){
+					scrollImag();
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li>
+					<img src="001.jpg">
+				</li>
+				<li>
+					<img src="002.jpg">
+				</li>
+				<li>
+					<img src="003.jpg">
+				</li>
+				<li>
+					<img src="004.jpg">
+				</li>
+				<li>
+					<img src="001.jpg">
+				</li>
+			</ul>
+			<ul id="circle">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			
+			<div id="left"></div>
+			<div id="right"></div>
+		</div>
+	</body>
+</html>

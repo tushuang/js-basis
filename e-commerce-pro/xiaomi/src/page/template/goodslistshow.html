@@ -1,0 +1,17 @@
+<script type="text/html" id="goodsshowlist">
+    <% for(var i=0;i<list.length; i++) { if(i<9){  %>
+            <li class="commontype">
+                    <img src="<%=list[i].img%>" alt=""> 
+                     <div class="goodshow-right" >
+                         <p class="p1"><%=list[i].goods_name%></p>
+                     <p class="p2"><%=list[i].goods_name%></p>
+                     <p class="process J_process"><span style="width: 100%;"></span><em>100%</em></p>
+                     <p class="p3"><span class="span1"><%=list[i].seckill_price%></span><s class="span2"><%=list[i].goods_price%></s></p>
+                     <div class="btn">
+                         提醒我
+                     </div>
+                     <p class="p4"><%=list[i].remind_num%></p>
+                     </div>
+                 </li>
+    <%}}%>
+</script>

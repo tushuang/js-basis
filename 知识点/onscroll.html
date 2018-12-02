@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<style>
+		#backtop{
+			width:50px;
+			height:50px;
+			border:1px #ccc solid;
+			position:fixed;
+			bottom:50px;
+			right:50px;
+			display:none;
+			}
+	</style>
+	<script>
+	/*	window.onload = function (){
+			var backtop = document.getElementById("backtop");
+			backtop.onclick = function(){
+				window.scrollY = document.documentElement.scrollTop = document.body.scrollTop = 0;
+			}
+			window.onscroll = function (){
+				var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+				if(scrollTop >= 500){
+					backtop.style.display = "block";
+				}else {
+					backtop.style.display = "none";
+				}
+			}
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		onload = function(){
+			var backtop = document.getElementById("backtop");
+			window.onscroll = function(){                   //必须加滚轮事件 才有效果
+				var distance = document.documentElement.scrollTop || document.body.scrollTop || window.scrollY;
+				if(distance>=300) backtop.style.display = "block";
+				else backtop.style.display = "none";
+			}
+			backtop.onclick = function(){
+				window.scrollY = document.documentElement.scrollTop = document.body.scrollTop = 0;   
+			}
+		}
+		
+		
+		
+		
+		
+	</script>
+	<body>
+		<div id="backtop" >
+		回到顶部
+		</div>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p><p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
+		
+	</body>
+</html>

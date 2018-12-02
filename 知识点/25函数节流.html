@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            height: 2000px;
+            width: 800px;
+            background: #bbbbbb;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        sdsdafdsa
+    </div>
+</body>
+<script>
+    //函数节流 设置一个时间 当请求的时间超过这个设定的时间时 才会触发该函数
+    function throttle(callback,delay=300){
+        var starTime = 0; //最开始的时间设置为0 函数一有请求就会触发
+        console.log("ok");
+        return function(){
+            var end = new Date().getTime();
+            if(end - starTime > delay){   //超过delay时间后 才会执行该函数  减少了函数的触发次数
+                callback();
+                starTime = new Date().getTime();  //调用后 重新给初始值设置时间
+            }
+        };
+    }
+
+    window.onscroll = throttle(function(){  //调用时 返回一个函数 
+        console.log("0k");
+    });  //调用了第一次后 以后每次调用的都是返回的函数  所以只会打印一次ok；
+</script>
+</html>

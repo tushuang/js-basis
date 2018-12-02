@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>聊天对话框</title>
+<style type="text/css">
+*{font-size: 14px; padding:0; margin:0;}
+.main{
+	position: relative;
+	margin: 20px auto;
+	border: 1px solid steelblue;
+	width: 430px;
+	height: 600px;
+}
+.msgInput{
+	display: block;
+	width: 406px;
+	height: 60px;
+	margin: 10px auto;
+	
+}
+.sendbtn{
+	position: absolute;
+	width: 100px;
+	height: 29px;
+	bottom: 5px;
+	right: 10px;
+}
+.content{
+	list-style: none;
+	width: 410px;
+	height: 480px;
+	margin: 5px auto;
+	border: 1px dotted #D1D3D6;
+	overflow-y: scroll;
+}
+.msgContent{
+	width:auto;
+	max-width: 250px;
+	height: auto;
+	word-break: break-all;
+	margin: 5px;
+	padding: 3px;
+	border-radius: 5px;
+}
+
+.content .left{
+	float: left;
+	text-align: left;
+	background-color: lightgrey;
+}
+.content .right{
+	float: right;
+	text-align: right;
+	background-color: yellowgreen;
+}
+
+
+</style>
+<script type="text/javascript">
+	onload = function(){
+		var sendBtn = document.getElementById("sendbtn");
+		var msgInput = document.getElementById("msg_input");
+		var oUL = document.getElementById("content");
+		sendBtn.onclick = function(){
+			var msg = msgInput.value;
+			msgInput.value = "";
+			var li = document.createElement("li");
+			var div = document.createElement("div");
+			div.style.clear = "both";
+			
+			li.innerHTML = msg;
+			li.className = "msgContent right";
+			oUL.appendChild(div);
+			oUL.appendChild(li);
+			
+			li.scrollIntoView();
+		}
+		
+		msgInput.onkeypress = function(e){
+			var e = e || event;
+			var asc = e.keyCode || e.which;
+			console.log(asc)
+			if( asc == 13 || asc ==10 && e.ctrlKey ){
+				sendBtn.onclick();
+				setTimeout(function(){
+					msgInput.value = "";
+				},0)
+			}
+		}
+		
+	}
+</script>
+
+</head>
+
+<body>
+	<div id="main" class="main">
+		<ul id="content" class="content">
+			<li class="msgContent left">
+
+				<span class="left">【张三】</span>hello?	
+			</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">hello</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">
+				<span class="right">【李四】</span>hi
+			</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">hehe</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">goodbye</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">。。。。</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">sdfasdsadfassdfsdfsdfdsfsdfsdfsdfdfasdffasdfasfdasd fasd fasd fasdfasdfasdf</li>
+			
+		</ul>
+		<textarea id="msg_input" class="msgInput"></textarea>
+		<button id="sendbtn" class="sendbtn">发送</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="template-web.js"></script>
+    <style>
+         *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #movie-wrapper img{
+            height: 220px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="movie-wrapper">
+
+        </div>
+        
+        <div class="row col-xs-12 col-xs-offset-6">
+            <a class="btn btn-primary">加载图片</a>
+        </div>
+
+        <div class="row" id="box-wrapper">
+            <div id="myModal" class="modal fade bs-example-modal-lg">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    </div>
+                   
+                </div>
+            </div> 
+        </div>
+        
+    </div>
+</body>
+<script id="str" type="text/html">
+   <%for(var i=0;i<list.length;i++) { %>
+       <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+            <img src="<%=list[i].images.small%>" class="img-thumbnail">
+       </div>
+    <%}%>
+</script> 
+<!-- 弹出框模板 -->
+<script id="pop-up" type="text/html">
+
+    <div class="container-fluid">
+        <div class="col-xs-12">
+            <h3 class="text-center"><%=list.title%><span class="text-muted"><%=list.year%></span></h3>
+        </div>
+        <div class="col-xs-3">
+            <img src="<%=list.images.small%>" class="img-thumbnail">
+        </div>
+        <div class="col-xs-6">
+                <ul style="list-style:none">
+                        <li>
+                           
+                           <span class="text-muted">导演</span> :
+                            <% for(var i=0;i<list.directors.length;i++){ %>
+                           <a href=""><%=list.directors[i].name%></a>
+                           <%}%>
+                        </li>
+                        <li>
+                           <span class="text-muted"> 主演</span>：<a href=""><%=list.casts[0].name%></a> / <a href=""><%=list.casts[1].name%></a> / <a href=""><%=list.casts[2].name%></a>
+                        </li>
+                        <li>
+                                <span class="text-muted">类型</span>： <span><%=list.genres[0]%></span>/<span><%=list.genres[1]%></span>/<span><%=list.genres[2]%></span>
+                        </li>
+                        <li>
+                                <span class="text-muted">制片国家/地区</span>： <span>美国</span>
+                        </li>
+                        <li>
+                                <span class="text-muted">类型</span> ： <span>法语</span>/<span></span>
+                        </li>
+                        <li>
+                                <span class="text-muted">上映日期</span>： <span>2018-8-31(中国大陆)</span>/<span>2018-8-31(中国大陆)</span>
+                        </li>
+                        <li>
+                                <span class="text-muted">片长</span>： <span>117分钟</span>
+                        </li>
+                    </ul>
+        </div>
+        <div class="col-xs-3" style="border-left:1px #bbb solid;padding-left:30px;">
+            <p class="text-muted"> 豆瓣评分</p>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span style="font-size:20px"><%=list.rating.average%></span> 
+                </div>
+                <div class="row col-xs-8">
+                    <span class="glyphicon glyphicon-star text-warning"></span>
+                    <span class="glyphicon glyphicon-star text-warning"></span>
+                    <span class="glyphicon glyphicon-star text-warning"></span>
+                    <span class="glyphicon glyphicon-star text-warning"></span>  <br>
+                    <span style="font-size:12px">15633人评价</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span>五星</span> 
+                </div>
+                <div class="row col-xs-8">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span style="">四星</span> 
+                </div>
+                <div class="row col-xs-8">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span style="">三星</span> 
+                </div>
+                <div class="row col-xs-8">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span style="">二星</span> 
+                </div>
+                <div class="row col-xs-8">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xs-4">
+                    <span style="">一星</span> 
+                </div>
+                <div class="row col-xs-8">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            60%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</script>
+
+<script>
+    $(function(){
+        var start = 0;
+        var d=[];
+       var map = new Map();
+        var count=0;
+        $("a").click(function(){
+        $.ajax({
+                type:"get",
+                url:" http://localhost:9090/proxy/api.douban.com/v2/movie/in_theaters?count=6&start="+start,
+                dataType:"json",
+                success:function(data){
+                  // data = JSON.parse(data);
+                  console.log(data.subjects);
+                   d.push(data.subjects);
+                    console.log(d);
+                    var tempstr = template("str",{
+                        list : data.subjects
+                    });
+                    $("#movie-wrapper").html( $("#movie-wrapper").html()+tempstr);
+                    start += 6;
+                }
+            })
+        });
+       
+        $("#movie-wrapper").on("click","img",function(e){
+            //得到当前图片的下标 确定是几张图片
+            var index = $(this).parent().index();
+            var boxStr = template("pop-up",{
+                list:d[parseInt(index/6)][index%6]
+            });
+            console.log(d[d.length-1],index%6,d);
+            $(".modal-content").html(boxStr);
+            $("#myModal").modal("show");
+            
+        });
+    })
+</script>
+</html>

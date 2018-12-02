@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>无标题文档</title>
+		<link href="css/font-awesome.css" rel="stylesheet">
+		<style type="text/css">
+
+		div{width:10px; height:10px; position:absolute; top:0; left:0;}
+		div::after{
+			font-family: fontawesome;
+			content:"\f06c";
+			font-size: 18px;
+			color:green;
+		}
+		</style>
+		<script type="text/javascript">
+		function toArry(arr){
+						var temp = [];
+						for(var i=0;i<arr.length;i++){
+							temp.push(arr[i]);
+						}
+						return temp;
+					 }
+			onload = function(){
+				var dot = toArry(document.getElementsByTagName("div"));  //方法二 必须要将dot放在事件外
+				document.onmousemove = function(e){
+					
+					var e = e || event;
+					var y = e.clientY;
+					var x = e.clientX;
+				
+				/*	var last = dot.pop();    //方法二 直接把鼠标坐标给最后一个
+					last.style.left = x + "px";
+					last.style.top = y + "px";
+					dot.unshift(last);*/  //取出来后 放到最前面 
+					
+				for(var i=dot.length-1;i>0;i--){        //把前面的叶子的坐标给后面的叶子 
+					console.log(i);
+					dot[i].style.left = dot[i-1].style.left;
+					dot[i].style.top = dot[i-1].style.top;
+				}
+					dot[0].style.left = x + "px";    //鼠标的坐标给第一个叶子
+					dot[0].style.top = y + "px";
+					console.log("ok");
+				}
+			}
+			
+		</script>
+	</head>
+
+<body>
+	<div style="left: 341px; top: 172px;"></div>
+	<div style="top: 172px; left: 341px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 69px; left: 272px;"></div>
+	<div style="top: 75px; left: 275px;"></div>
+	<div style="top: 77px; left: 278px;"></div>
+	<div style="top: 81px; left: 281px;"></div>
+	<div style="top: 83px; left: 284px;"></div>
+	<div style="top: 86px; left: 291px;"></div>
+	<div style="top: 86px; left: 299px;"></div>
+	<div style="top: 89px; left: 309px;"></div>
+	<div style="top: 89px; left: 325px;"></div>
+	<div style="top: 89px; left: 339px;"></div>
+	<div style="top: 89px; left: 358px;"></div>
+	<div style="top: 86px; left: 380px;"></div>
+	<div style="top: 84px; left: 399px;"></div>
+	<div style="top: 80px; left: 427px;"></div>
+	<div style="top: 78px; left: 451px;"></div>
+	<div style="top: 75px; left: 506px;"></div>
+	<div style="top: 75px; left: 530px;"></div>
+</body></html>

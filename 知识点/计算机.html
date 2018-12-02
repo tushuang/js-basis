@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算器</title>
+	</head>
+	<body>
+	 <input id="num1" type="text"> + <input id="num2" type="text"> = <input id="res1" type="text"> <br>
+	 <input id="num3" type="text"> - <input id="num4" type="text"> = <input id="res2" type="text"> <br>
+	 <input id="num5" type="text"> * <input id="num6" type="text"> = <input id="res3" type="text"> <br>
+	 <input id="num7" type="text"> / <input id="num8" type="text"> = <input id="res4" type="text"> <br>
+	 <input id="num9" type="text"> % <input id="num10" type="text"> = <input id="res5" type="text"> <br>
+	 <input type="button" value="计算" onclick="jisuan()">
+	</body>
+	<script>
+		function jisuan() {
+		document.getElementById("res1").value = parseInt(document.getElementById("num1").value) + parseInt( document.getElementById("num2").value);
+		document.getElementById("res2").value = parseInt(document.getElementById("num3").value) - parseInt( document.getElementById("num4").value);
+		document.getElementById("res3").value = parseInt(document.getElementById("num5").value) * parseInt(document.getElementById("num6").value);
+		document.getElementById("res4").value = parseInt(document.getElementById("num7").value) / parseInt(document.getElementById("num8").value);
+		document.getElementById("res5").value = parseInt(document.getElementById("num9").value) % parseInt(document.getElementById("num10").value);
+		
+		}
+	</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+</body>
+
+<script src="../js/framework.js"></script>
+<script>
+   //工厂模式 批量生产
+ /*  var  Factory = function(){
+        var list ={          //写在函数内部 外面不能访问 保证了安全问题  是对象
+            "天启":function(){
+                this.name = "天启"
+            }
+        }
+        return {
+            create(type){    //策略模式 没有判断直接返回
+                try{
+                    return new list[type]; // 返回一个实例对象 new 直接调用后面的list[type] 加不加括号无所谓
+                }catch(e){
+                    console.log("你输入的类型有错误");
+                    return null; 
+                }
+            }
+        }
+    }();
+
+  //console.log(typeof Factory.create("天启"));
+  console.log(Factory.create("地狱"));*/
+
+  var Factory = function(){
+      list = {
+          "天启": function(){
+              this.name = "天启"
+          },
+          "坦克": function(){
+              this.name = "坦克"
+          }
+      }
+      return {
+        create : function(type){
+            try{
+                return  new list[type]();
+            }catch(e){
+              console.log("类型不对");
+            }
+        }
+      }
+  }
+
+  var tain = new Factory().create("天启");
+  var tian = new Factory().create("坦克");
+  var e = new Factory().create("坦");
+  console.log(tain,tian,e);
+  
+</script>
+
+</html>

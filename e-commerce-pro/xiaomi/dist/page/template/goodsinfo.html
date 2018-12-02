@@ -1,0 +1,26 @@
+<script type="text/html" id="goodsinfolist">
+    <% for(var i=0;i<5;i++)  {%>
+    <li>
+        <img class="person" src="<%=list[i].memberIdPic %>" alt="">
+        <span class="font "><%= list[i].content %></span>
+        <div class="mood ">
+           <span class="span1"> 超爱 </span><span class="span2 iconfont icon-xiaolian"></span>
+        </div>
+        <img class="photo" src="<%=list[i].memberIdPic %>" alt="">
+        <div class="reply">
+            <div class="inputbox">
+                <input type="text">
+                <div class="replybtn">回复</div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="left">
+               <span><%=list[i].nickName%></span>&nbsp;&nbsp;<%=list[i].createdStr%> 
+            </div>
+            <div class="right">
+                赞46
+            </div>
+        </div>
+    </li>
+    <% } %>
+</script>

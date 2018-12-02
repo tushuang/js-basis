@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			var json = {
+					name:"tutu",
+					age:18,
+					address:"Beijing"};
+			var arr = JSON.stringify(json); //{"name":"tutu","age":18,"address":"Beijing"}  字符串
+			var a = JSON.parse(arr);//Object {name: "tutu", age: 18, address: "Beijing"}  对象
+			console.log(arr,a);
+			var x = "[  {
+							"id" : 0,
+							"username" : "zhangsan",
+							"password" : 123
+						},{
+							"id" : 1,
+							"username" : "lisi",
+							"password" : 111
+						},{
+							"id" : 2,
+							"username" : "wangwu",
+							"password" : 222}]";
+			var str = JSON.parse(x);
+			console.log(str);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+	<script src="comment.js"></script>
+</head>
+<script>
+	/*function getPagePosition(target){
+			var sumLeft = target.offsetLeft;
+			var sumTop = target.offsetTop;
+			while(target.offsetParent != null){    //获取有定位的父元素
+				sumLeft += target.offsetParent.offsetLeft; //自身相对父元素的定位 加上有定位的父元素相对于页面或者其他元素的定位
+				sumTop += target.offsetParent.offsetTop;  
+				
+				target = target.offsetParent;
+			}
+			return {
+				pagesX:sumLeft,  //之间返回一个对象
+				pagesY:sumTop
+			};
+	}*/
+	window.onload = function(){
+		var date_table = document.getElementById("data-table");
+		date_table.addEventListener("click",function(e){
+			var e = e||event;
+			if(e.target.nodeName == "TD" && e.target.className != "operation" ){
+				var $this = e.target;
+				var val = $this.innerHTML;
+				var InputBox = document.createElement("input"); //创建节点
+				InputBox.value = val;
+				InputBox.type = "text";
+				$this.innerHTML = ""; //先把td里的内容清空
+				$this.appendChild(InputBox);
+				InputBox.focus();
+				InputBox.addEventListener("blur",function(e){  //失去焦点时 保存值
+					var e = e||event;
+					var val = this.value;
+					$this.innerHTML = val;
+				})
+			}
+			if(e.target.nodeName == "A"){ //如果点击的节点名是a 则删除tr
+				e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+			}
+		})
+		
+		var btn_more = document.getElementsByClassName("btn-primary")[0];
+		var input_date = document.getElementById("myModal");
+		var input_date_box = document.getElementsByClassName("form-control");//输入框
+		var btn_save = document.getElementsByClassName("btn-primary")[1];  //获得保存的按钮
+		var btn_close = document.getElementsByClassName("btn-default")[0];//获得关闭按钮
+		btn_more.addEventListener("click",function(){
+			for(var i=0;i<input_date_box.length;i++){ //每次点击添加都清空输入框中的文字
+				input_date_box[i].value = "";
+			}
+			input_date.style.display = "block";   //点击添加按钮弹出 修改信息框
+		})
+		var tab_body = document.getElementsByTagName("tbody")[0];
+		btn_save.addEventListener("click",function(){
+			var otr = document.createElement("tr"); 
+			for(var i=0;i<input_date_box.length+1;i++){
+				var otd = document.createElement("td");
+				if(i == input_date_box.length){
+					//如果i是最后一个  创造一个a按钮 插入td中
+					console.log("ok");
+					var del_a = document.getElementsByClassName("btn-danger")[0];
+					//复制节点 
+					var clone_a = del_a.cloneNode(true);
+					otd.appendChild(clone_a);
+				}else{
+					otd.innerHTML = input_date_box[i].value;
+				}
+				//每次都要放入otr中
+				otr.appendChild(otd);
+			}
+			tab_body.appendChild(otr);
+			input_date.style.display = "none";
+		})
+		
+		btn_close.addEventListener("click",function(){
+			input_date.style.display = "none";
+		})
+		
+		//拖拽效果 拖动标题
+		var title = document.getElementsByClassName("modal-title")[0];
+		var box = document.getElementsByClassName("modal-content")[0];
+		var fa = document.getElementsByClassName("modal-dialog")[0];
+		//draggable(box,title);
+		 draggable(box,fa,title);
+	}
+</script>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<br>
+				<a class="btn btn-large btn-primary">添加</a>
+				<br><br>
+				<table id="data-table" class="table table-striped">
+					<tr>
+						<th>姓名</th>
+						<th>联系电话</th>
+						<th>学历</th>
+						<th>年龄</th>
+						<th>期望薪资</th>
+						<th>操作</th>
+					</tr>
+					<tr>
+						<td>Steven.Jobs</td>
+						<td>13701364084</td>
+						<td>大学辍学</td>
+						<td>45</td>
+						<td>$2300000</td>
+						<td class="operation">
+							<a class="btn btn-xs btn-danger">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>ZuckerBerg</td>
+						<td>13701364084</td>
+						<td>哈佛大学博士</td>
+						<td>45</td>
+						<td>$99000000</td>
+						<td class="operation">
+							<a class="btn btn-xs btn-danger">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Bill.Gates</td>
+						<td>13701364084</td>
+						<td>大学辍学</td>
+						<td>45</td>
+						<td>$99000000</td>
+						<td class="operation">
+							<a class="btn btn-xs btn-danger">删除</a>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div id="myModal" class="modal" style="background: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">请修改信息</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" style="margin-top: 30px;">
+						<div class="form-group">
+							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+									<input type="text" class="form-control" id="exampleInputAmount" placeholder="只能包含数字字母下划线，且数字不能开头，长度在8~16之间">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">联系电话</div>
+									<input type="text" class="form-control" placeholder="Amount">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</div>
+									<input type="text" class="form-control" placeholder="Amount">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</div>
+									<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">期望薪资</div>
+									<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default">关闭</button>
+					<button type="button" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+
+</html>

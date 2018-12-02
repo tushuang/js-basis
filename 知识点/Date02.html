@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<body>
+	</body>
+	<script>
+	//判断是否是闰年
+	function isLeapYear(year){
+		return  year%4 == 0 && year%100 != 0 || year%400 == 0;
+	}
+	//格式化输出日期
+	function dateString(date,sep){   //dateString(new Date("2012-12-12"));
+		var sep = sep || "-";
+		var m = date.getMonth()+1;
+		var d = date.getDate();
+		return date.getFullYear() + sep + (m<10?"0"+m:m) + sep + (d<10?"0"+d:d);
+	}
+	
+	function dateString(d,sep){
+		var sep = sep || "-";
+		var m = d.getMonth()+1;
+		var day = d.getDate();
+		return d.getFullYear() + sep + (m<10?0+m:m) + sep + (day<10?"0"+day:day);
+	}
+	//将字符串转化为日期 
+/*	function string2Date(datestr,sep){    //输入的时候需是字符串格式
+		if(!sep || !(datestr && datestr.length >= 8)){
+			console.log("字符串格式错误");
+			return;
+		}
+		var list = datestr.split(sep);
+		if(!(list[0].length == 4 && (list[1]>0 && list[1]<13) && list[2]>0&&list[2]<32)){
+			return;
+		}
+		return new Date(datestr);
+	}*/
+	//返回月份的天数
+/*	function getDaybyMonth(month,year){
+		if(!year){
+			console.log("请输入四位数年份")
+			return;
+		}
+		if(!(month>0 && month<13)){
+			return;
+		}
+		switch(month){
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:return 31;
+			case 2: return (isLeapYear(year)?29:28);
+			case 2:
+			case 4:
+			case 6:
+			case 11:return 30;
+		}
+	}*/
+	
+	//判断两个日期相隔的天数
+	function getDaysbetweenMonth(d1,d2){
+		if(!(d1 instanceof Date && d2 instanceof Date)){
+			consolse.log("请输入正确的日期");
+			return;
+		}
+		var div1 = d1.getTime();
+		var div2 = d2.getTime();
+		return (Math.abs(div1-div2)/1000/3600/24).toFixed(2);
+	}
+	//获得N天以后的日期
+	function get_date(n){
+		var date = new Date();
+		//return  Date( date.setDate(date.getDate() + n)); //设置对象中的某一天
+		date.setDate(date.getDate() + n);
+		return dateString(date);
+	}
+	//将字符串转换为日期
+/*	function stringToDate(str){  //stringToDate("2012-2-13")
+		return dateString(new Date(str));
+	}*/
+    //判断两个日期相差的天数
+/*    function betweenDays(d1,d2){
+		var div1 = d1.getTime();
+		var div2 = d2.getTime();
+		return Math.abs(div1-div2)/1000/3600/24;
+	}*/
+	function date2String(date,sep){
+		var sep = sep || "-";
+		
+		var d = date.getMonth();
+		var m = date.getDate();
+		return date.getFullYear() + sep + (d<10?"0"+d:d)+sep+(m<10?"0"+m:m);
+	}
+	</script>
+</html>

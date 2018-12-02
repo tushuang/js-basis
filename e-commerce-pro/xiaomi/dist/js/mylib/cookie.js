@@ -1,0 +1,1 @@
+define([],function(){return{getCookie(a){for(var b,c=document.cookie,d=c.split("; "),e=0;e<d.length;e++)if(b=d[e].split("="),b[0]==a)return b[1];return null},setCookie(a,b,c,e){c=c||0;var f=null;c&&(f=new Date,f.setDate(f.getDate()+c)),document.cookie=a+"="+b+(f?"; expires="+f:"")+(e?"; path="+e:"")}}});

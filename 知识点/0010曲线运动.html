@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			.balls{
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				background: #3879D9;
+			}
+			#circle{
+				position: absolute;
+				width: 200px;
+				height: 200px;
+				top: 100px;
+				left: 100px;
+				border: 1px black solid;
+				border-radius: 50%;
+			}
+		</style>
+		<script>
+		onload = function(){
+			var oball = document.getElementById("ball");
+			//正弦运动 y=sin(x)
+			var degree = 0;
+			/*setInterval(function(){
+				var x = Math.PI/180*degree;//求出弧度
+				var y = Math.sin(x)*100;
+				oball.style.left = degree + "px";
+				oball.style.top = y+200 + "px";
+				degree+=5;
+			},30);*/
+			
+			setInterval(function(){
+				var y = Math.PI/180*degree;//求出弧度
+				var x = Math.sin(y)*100;
+				oball.style.left = x+200 + "px";
+				oball.style.top = -degree+window.innerHeight + "px";
+				degree+=5;
+			},30);
+			
+			//圆周运动  x^2 + y^2 = r^2
+			var r = 100;
+		/*	setInterval(function(){
+				var x = Math.cos(Math.PI/180*degree)*r;
+				var y = Math.sin(Math.PI/180*degree)*r;
+				oball.style.left = x - oball.offsetWidth/2 +200 + "px";  //200相当于圆心的坐标
+				oball.style.top = y -oball.offsetHeight/2 +200+ "px";
+				degree+=1;
+			},30);*/
+			
+	/*		var oballs = document.getElementsByClassName("balls");
+			for(var i=0;i<oballs.length;i++){
+				oballs[i].degree = i*90;  //使每一个圆球的半径不一样
+				//console.log(degree);
+				(function(that){
+					oballs[that].timer = setInterval(function(){
+						oballs[that].style.width = oballs[that].style.height = parseInt( oballs[that].offsetTop)/2 - 30 + "px";
+						var x = Math.cos(oballs[that].degree * Math.PI / 180)*200;
+						var y = Math.sin(oballs[that].degree * Math.PI / 180)*100;
+						
+						//oballs[0].style.width = "20px";
+						
+						oballs[that].style.left = x - oballs[that].offsetWidth/2 + 200 + "px";  //200相当于圆心的坐标
+						oballs[that].style.top = y - oballs[that].offsetHeight/2 + 200+ "px";
+						oballs[that].degree += 1;
+					},20);
+				})(i);
+			}*/
+		}
+		</script>
+	</head>
+	<body>
+		<div id="ball" class="balls"></div>
+		<div class="balls"></div>
+		<div class="balls"></div>
+		<div class="balls"></div>
+		<div id="circle"></div>
+	</body>
+</html>

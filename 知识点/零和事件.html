@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.main{
+				list-style: none;
+				overflow: hidden;
+				height: 200px;
+				width: 1200px;
+				margin: auto;
+				margin-top: 200px;
+			}
+			.ex{
+				float: left;
+				height: 100px;
+				width: 10px;
+				background: skyblue;
+				margin-right: 2px;
+				margin-bottom: 0px;
+			}
+		</style>
+		<script>
+			function randInt(min,max){  //随机数
+				return parseInt((Math.random()*(max-min))+min);
+			}
+			
+			onload = function(){
+				var oul = document.getElementsByClassName("main")[0];
+				for(var i=0;i<100;i++){
+					var oli = document.createElement("li");
+					oli.className = "ex";
+					oul.appendChild(oli);
+				}
+				var oLi = document.getElementsByTagName("li");
+				oLi = Array.from(oLi);
+				var all = 0;
+				setInterval(function(){
+					var random1 = randInt(0,100);
+					var random2 = randInt(0,100);
+					oLi[random1].style.height = --oLi[random1].offsetHeight + "px";
+					oLi[random2].style.height = ++oLi[random2].offsetHeight + "px";
+				},16);
+				for(var i in oLi){
+					all += oLi[i].offsetHeight;
+				}
+				console.log(all);
+			}
+		</script>
+	</head>
+	<body>
+		<ul class="main">
+			
+		</ul>
+	</body>
+</html>

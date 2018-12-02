@@ -1,0 +1,253 @@
+@import "../mixins/mixins";
+
+.container {
+    width: 100%;
+    height: 745px;
+}
+
+.top {
+    height: 98px;
+    width: 1130px;
+    margin: auto;
+}
+
+.logo {
+    width: 200px;
+    height: 98px;
+    background: url("https://account.xiaomi.com/static/res/7f6f2f5/account-static/respassport/acc-2014/img/mistore_logo.png") no-repeat;
+}
+
+.body {
+    width: 100%;
+    height: 535px;
+    position: absolute;
+    left: 0;
+    top: 98px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-image: url("https://i8.mifile.cn/b2c-mimall-media/dc11bf4fdf2d7790484483ec460120fc.jpeg");
+
+    .login {
+        width: 410px;
+        margin-top: 30px;
+        height: 505px;
+        margin-left: 830px;
+        background: white;
+
+        .tabs {
+            width: 410px;
+            height: 82px;
+            color: #666;
+            font-size: 24px;
+
+            span {
+                cursor: pointer;
+                float: left;
+                text-align: center;
+                width: 205px;
+                height: 82px;
+                line-height: 82px;
+            }
+
+            span.tabs1 {
+                position: relative;
+                color: #ef5b00;
+                &:after {
+                    @include afterline(#E0E0E0, 23px, 23px, 0)
+                }
+            }
+            span.tabs2 {
+                &:hover{
+                    color: #ef5b00;
+                }
+            }
+
+        }
+    }
+}
+
+.tab1body {
+    height: 403px;
+    width: 410px;
+    margin-top: 20px;
+
+    form {
+        width: 348px;
+        height: 111px;
+        margin: auto;
+
+        .id {
+            width: 346px;
+            height: 48px;
+            border: solid 1px #E0E0E0;
+
+            input {
+                margin: 1px 12px;
+                width: 322px;
+                height: 46px;
+                border: none;
+                outline: none;
+            }
+        }
+
+        .password {
+            margin-top: 15px;
+            width: 346px;
+            height: 48px;
+            border: solid 1px #E0E0E0;
+
+            input {
+                margin: 1px 12px;
+                width: 322px;
+                height: 46px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .loginalert{
+        margin-top:20px;
+        margin-left: 30px;
+        color: #ef5b00;
+        font-size: 14px;
+        display: none;
+    }
+    .loginbtn {
+        width: 348px;
+        height: 50px;
+        margin: auto;
+        margin-top: 20px;
+        line-height: 50px;
+        background: #ef5b00;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .info {
+        font-size: 14px;
+        span {
+            float: left;
+            margin-left: 30px;
+            margin-top: 10px;
+
+            a {
+                color: #ef5b00;
+                cursor: pointer;
+            }
+        }
+
+        div {
+            float: right;
+            margin-right: 30px;
+            margin-top: 10px;
+
+            a {
+                color: #999;
+                line-height: 21px;
+                margin-left: 5px;
+                cursor: pointer;
+                &:hover{
+                    color: #ef5b00;
+                }
+            }
+
+            a.signupline {
+                position: relative;
+                &:after {
+                    @include afterline(#999, 0, 0, -5px);
+                }
+            }
+        }
+    }
+    .more{
+        position: relative;
+        clear: both;
+        .line{
+            height: 0;
+            width: 348px;
+            margin: auto;
+            margin-top: 95px;
+            border-bottom: solid #E0E0E0 1px;
+        }
+        .font{
+            background: white;
+            color: #E0E0E0;
+            position: absolute;
+            top: -11px;
+            left:155px;
+        }
+    }
+    .qqbegin{
+        width: 288px;
+        height: 36px;
+        padding:0 30px;
+        margin: auto;
+        margin-top:40px;
+        .img1{
+            background:url(../../../img/qq.png)center no-repeat;
+            width: 25%;
+            height: 30px;
+            float: left;
+        }
+        .img2{
+            background: url(../../../img/weibo.png)center no-repeat;
+            width: 25%;
+            height: 30px;
+            float: left;
+        }
+        .img3{
+            background: url(../../../img/zhifubao.png)center no-repeat;
+            width: 25%;
+            height: 30px;
+            float: left;
+        }
+        .img4{
+            background: url(../../../img/weixin.png)center no-repeat;
+            width: 25%;
+            height: 30px;
+            float: left;
+        }
+    }
+}
+
+
+
+.footer {
+    clear: both;
+    margin-top:25px; 
+    width: 786px;
+    height: 90px;
+    margin: auto;
+    text-align: center;
+
+    ul {
+        width: 300px;
+        height: 40px;
+        margin: auto;
+        line-height: 40px;
+        position: relative;
+        text-align: center;
+        li {
+            color: #9d9d9d;
+            font-size: 14px;
+            float: left;
+            cursor: pointer;
+            &:hover{
+                color:black;
+            }
+        }
+        li.haveline{
+            position: relative;
+            margin-right: 20px;
+           &:after{
+               @include afterline(#9d9d9d,14px,14px,-10px);
+           }
+            
+        }
+    }
+    span.bottom{
+        clear: both;
+        color: #9d9d9d;
+    }
+}

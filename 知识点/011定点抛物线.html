@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			#start,#end{
+				width:20px;
+				height: 20px;
+				background: palevioletred;
+				border-radius: 50px;
+				position: absolute;
+				top: 400px;
+				left:  50px;
+			}
+			#end{
+				background: #99CCFF;
+				top: 100px;
+				left: 300px;
+			}
+		</style>
+		<script>
+			onload = function(){
+				//先获取做抛物线运动的小球的起始位置
+				var starBall = document.getElementById("start");
+				var endBall = document.getElementById("end");
+				/*var starPos = {
+					x:starBall.offsetLeft,
+					y:starBall.offsetTop
+				};
+				var a = -0.005; //a为负数表示开口向下
+				// 获取结束小球的坐标
+				var endPos = {
+					x:endBall.offsetLeft - starPos.x,
+					y:-(endBall.offsetTop - starPos.y)  //浏览器top方向与y轴相反
+				};
+				//求出b
+				var b = (endPos.y - (a*endPos.x*endPos.x))/endPos.x;
+				var offsetX = 0;  //代表x轴
+				window.requestAnimationFrame(function(){
+					var x = starPos.x + offsetX;
+					var y = starPos.y - (a*offsetX*offsetX + b*offsetX) ;
+					offsetX+=3;
+					starBall.style.left = x + "px";
+					starBall.style.top = y + "px";
+					if( parseInt(starBall.style.left) >= endBall.offsetLeft){
+						starBall.style.left = endBall.offsetLeft + "px";
+						return;
+					}
+					window.requestAnimationFrame(arguments.callee); // 调用自身
+				})*/
+				
+				parabola(starBall,{
+					x:endBall.offsetLeft,
+					y:endBall.offsetTop
+				},function(){
+					console.log("123");
+				});
+			}
+			/*
+			* parabola(ele,{x:终点值，y:终点y值})
+			*/
+			function parabola(ele,stop,callback){
+				//先获取做抛物线运动的小球的起始位置
+				var starPos = {
+					x:ele.offsetLeft,
+					y:ele.offsetTop
+				};
+				var a = -0.005; //a为负数表示开口向下
+				// 获取结束小球的坐标
+				var endPos = {
+					x:stop.x - starPos.x,   //是相对于运动小球的的坐标
+					y:-(stop.y - starPos.y)  //浏览器top方向与y轴相反
+				};
+				//求出b
+				var b = (endPos.y - (a*endPos.x*endPos.x))/endPos.x;
+				var offsetX = 0;  //代表x轴
+				window.requestAnimationFrame(function(){
+					var x = starPos.x + offsetX;
+					var y = starPos.y - (a*offsetX*offsetX + b*offsetX) ;
+					offsetX+=3;
+					ele.style.left = x + "px";
+					ele.style.top = y + "px";
+					if( parseInt(ele.style.left) >= stop.x){
+						ele.style.left = stop.x + "px";
+						callback?callback():"";
+						return;
+					}
+					window.requestAnimationFrame(arguments.callee); // 调用自身
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="start"></div>
+		<div id="end"></div>
+	</body>
+</html>

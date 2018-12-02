@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %providerName
+Fragment-Host: org.xmind.ui
+Bundle-Version: 3.5.1.201411201906
+Bundle-Localization: fragment_resources
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.xmind.ui.resources;singleton:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+
+

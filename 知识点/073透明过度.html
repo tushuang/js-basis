@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			function getStyle(ele){
+				if(ele.currentStyle){
+					return ele.currentStyle;
+				}else{
+					return getComputedStyle(ele);
+				}
+			}
+			onload = function(){
+				var oimg = document.getElementsByTagName("img")[0];
+				oimg.onmouseover = function(){
+					console.log("ok");
+					//var val = Number( getComputedStyle(this).opacity);  //得到透明度  就算没有定义 也会有默认值
+					var val = Number(getStyle(this).opacity);
+					clearInterval(this.timer);   //每次开启一个定时器时 把其他定时器都关闭
+					this.timer = setInterval(function(){  //把定时器加在oimg上
+						val -= 0.01;
+						this.style.opacity = val;
+						if(val <= 0){
+							clearInterval(oimg.timer);
+						}
+					}.bind(this),30);
+					/*oimg.onmouseout = function(){
+						var val = Number( getComputedStyle(this).opacity);  //得到透明度
+						console.log(val);
+						clearInterval(oimg.timer);
+						oimg.timer = setInterval(function(){
+							val += 0.01;
+							this.style.opacity = val;
+							if(val >= 1){
+								clearInterval(oimg.timer);
+							}
+						}.bind(this),30);
+					}*/
+					this.addEventListener("mouseout",function(){
+						var val = Number( getComputedStyle(this).opacity);  //得到透明度
+						console.log(val);
+						clearInterval(this.timer);
+						this.timer = setInterval(function(){
+							val += 0.01;
+							this.style.opacity = val;
+							if(val >= 1){
+								clearInterval(oimg.timer);
+							}
+						}.bind(this),30);
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<img src="XMind/jre/lib/deploy/splash.gif">
+	</body>
+</html>

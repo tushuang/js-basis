@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			//只能用hbuilder 打开 才能看到cookie
+			//cookie
+		/*	var d = new Date();
+			d.setDate(d.getDate()+10);
+			document.cookie = "username=Tutu;expires = " + d; //expires 设置过期时间*/
+			
+			var d = new Date();
+			d.setDate(d.getDate()+2);
+			document.cookie = "username =TUTU;expires = "+ d;   //要分开写啊
+			document.cookie = "age=8";
+			function getCookie(key){
+				var cookies = document.cookie;
+				list = cookies.split("; ");
+				console.log(list);
+				for(var i=0;i<list.length;i++){
+					str = list[i].split("=");
+					if(str[0]==key) return str[1];
+				}
+				return null;
+			}
+			console.log(getCookie("username"));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

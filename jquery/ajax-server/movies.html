@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .container img {
+        margin-bottom: 20px;
+        height: 220px;
+    }
+</style>
+
+<body>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            
+        </div>
+    </div>
+    <p class="text-center">
+        <a id="loadmoreBtn" class="btn btn-primary btn-lg">加载更多</a>
+    </p>
+</body>
+<script>
+    $(function(){
+        $("#loadmoreBtn").click(function(){
+            $.ajax({
+                url : "http://localhost:9090/proxy/api.douban.com/v2/movie/in_theaters?count=6",
+                dataType : "json",
+                success : function(data){
+                    var movies = data.subjects;
+                    movies.forEach(function(){
+
+                    })
+                }
+            })
+        })
+    })
+</script>
+</html>

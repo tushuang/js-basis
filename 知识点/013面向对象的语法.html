@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />  
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			function Itouch(){
+				//为了保证构造函数必须与new命令一起使用
+				//方法1
+				//"use strict";  //使用严格模式时 函数内部的this 不能指向全局对象 默认等于undefined 导致不加new会出错
+				
+				//方法2: 
+				/*if( !(this instanceof Itouch)){   //判断this的指向是不是ITouch的实例对象 如果不是 放回一个实例对象
+					return new Itouch();
+				}*/
+				
+				//方法3: new.target 
+				/*if(!(new.target == Itouch)){     //如果是使用new调用的 new.target会指向当前函数  否则为undefined
+					return new Itouch();            //或者写成 !new.target
+				}*/
+				
+				this.price = 3000;
+			}
+			
+			var num1 = new Itouch();  //当没有加new 命令的时候 函数返回值是undefine
+			console.log(Object.getPrototypeOf(num1)==Itouch.prototype);  //Object.getPrototypeOf()得到的是改实例对象的原形
+			console.log(num1.__proto__ == Itouch.prototype);   //用实例访问时需用__prototype__方法
+			console.log(num1);
+			
+			
+			//Object.setPrototypeOf()
+			var a = {
+				num : "tutu",
+				age : 18,
+				xin: function(){}
+			};
+			var b = {
+				grade : "200"
+			}
+			var c = Object.setPrototypeOf(b,a); //把b的原形设置为a  并返回改参数对象
+			console.log(a.__proto__,b.__proto__,c.__proto__); 
+			//Object {} Object {num: "tutu", age: 18}Object {num: "tutu", age: 18}
+			 
+			//console.log('age' in a);  //true
+			
+			var o1 = { p1: 123 };
+			//以o1为模板  创造了o2
+			var o2 = Object.create(o1, { p2: { value: "abc", enumerable: true }});
+
+			for (i in o2) {
+			  console.info(i);   //输出两个属性值 p1 和p2  i代表的是属性值
+			}
+			
+			
+			
+			//var obj = Object.create(null);
+		/*	var obj = {null:null};
+			typeof obj // "object"
+			console.log(obj instanceof Object); // false*/
+			
+		function f() {
+			return '姓名：' + this.name;
+		}
+
+		var A = {
+			name: '张三',
+			describe: f
+		};
+
+		var B = {
+			name: '李四',
+			describe: f
+		};
+		//var A=new f();
+		A.describe; // "姓名：张三"
+		B.describe; // "姓名：李四"
+
+		</script>
+	</head> 
+	<body>
+	</body>
+</html>

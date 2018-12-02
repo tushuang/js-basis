@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>循环02</title>
+	</head>
+	<body>
+	
+	</body>
+	<script>
+/*	 var scope = "global";
+	 function f(){             
+		console.log(scope);    //函数内的所有变量再声明之前已经有定义   undefined
+		var scope = "local";    //但只有再执行到这个变量时 才会被真正赋值。
+		console.log(scope);     //local
+	 }
+	 f(); */
+	 
+	 //计算两个数的和差积商
+/*	 function calc(n1,n2,sign){
+		switch(sign){
+			case "+": return n1+n2;
+			case "-": return n1-n2;
+			case  "*":return n1*n2;
+			case "/": return n1/n2;
+		}
+	 }
+	 
+	 var  sum = calc(2,4,"*");
+	 console.log(sum);
+	 console.log(calc(4,2,"/")); */
+	 
+/*	 var num = 100;
+	 function text(){
+	    console.log(num); 
+		var num = 99;
+		function li(num){
+		  console.error(num); 
+		  function li3(){
+		  console.log(num);
+		  }li3();
+		}li(11);
+	 }
+	 text();*/
+	 
+/*	 var arr = [1,2,3];
+	 function test (a1){
+		a1[0]++;
+	 }
+	 test(arr);
+	 console.log(arr);*/
+	 
+/*	 var str = "123"
+	 function panduan(num){
+		if(num == 0) return  true;  //使用Number()函数转化有三种情况 0 数字 NAN 将0拿出处理
+		return !!Number(num);       //使用！！做类型转化 但意图未变 NaN为false
+	 }
+	 res = panduan(str);
+	 console.log(res);*/
+	
+	/*
+	  function compare(a,b,c){
+		if(a>b) { if(b>c) return c,b,a;
+					else  return b,c,a;
+					}
+		if(b>a) { if(a>c) return c,a,b;
+					else  return a,c,b;
+					}
+		if(c>a) { if(a>b) return b,a,c;
+					else  return a,b,c;
+					}
+	  }
+         console.log(    compare(1,2,3));*/
+		 
+/*		 var arr = [4,8,3,1,2,9,0,5];
+		 function compare(a){
+		   var k;
+			for(var j=0;j<a.length;j++){   //拿出每个数分别比较
+				for(var i=1; i<a.length-j;i++){  //决定判断的次数
+				 if(a[j]>a[j+i]){  //如果前面的数比后面的数大 则交换位置
+					k = a[j];
+					a[j] = a[j+i];
+					a[j+i] = k;
+				 }
+				}
+		 }
+		 return a;
+		 }
+		 compare(arr);
+		 console.log(arr);*/
+		 
+		// "use strict"
+		 
+	/*	 function fn(a,b,c){
+		   a = 10;
+		   b = 1;
+		 console.log(arguments); 
+		 }
+		 fn(1,2,3);*/
+  
+
+    //理解闭包  
+	/*	 function m1(){
+			var num = 0;
+			return function(){
+				console.log(++num);
+			}
+		 }
+		var m2 = m1();  //实际上是将里面的函数给了m2
+		m2();     //1   每次调用m2相当于直接调用里面的函数 对里面的函数来说num又是全局变量  m2的地址指向里面的函数 
+		              //里面的函数叫做闭包函数 函数可以访问函数外部的变量
+		m2();     //2 
+		m1()();    //1   每次都会重新调用m1函数 所以num会重新赋值
+		m1()();    //1
+		console.log(typeof m1());  //function */
+		
+	/*	var a;
+		function a(){
+		  return 3;             
+		}
+		console.log(a);   //返回是a函数*/
+		
+/*		function a(){
+		  return 3;             
+		}
+		var a;  
+		console.log(a); */// 返回的也是a函数
+		
+		//求100！
+	    //100!=100*99!
+		//f(n)=n*f(n-1)
+/*		function f(n){           //递归的两个条件
+			if(n==1) return 1;  //结束终止条件
+			return n*f(n-1);    //自身调自身
+		}
+		console.log(f(5));*/
+		 //斐波那契数列
+		 // 1 1 2 3 5 8 13 21
+		/* function f(n){
+			if(n<=2) return 1;
+			return f(n-1)+f(n-2)
+		 }*/
+		 
+	/*	 function f(m,n){
+		    
+			if(m%n == 0) return m;
+			return f(n,m%n)
+		 }*/
+		 
+/*		 function f(x,y){
+		    if(x%2 == 0 && y%2 == 0){
+				x = x/2;y=y/2;
+				return 2*f(x,y);
+			}else{
+			   if(x>y){
+			      var c = x-y;
+				  if(c==y) return c;else return f(c,y)
+			   }else
+			      var c = y-x;
+				  if(c==x) return c;else return f(c,x);
+			}
+		 }
+	console.log(f(60,30));*/
+	
+var  str = [2,4,1,3];
+function compare(a){
+	var k=0;
+	for(var i = 0;i<a.length-1;i++){
+		for(var j=1;j<a.length-i;j++){
+			if(a[i]>a[i+j]){
+				k = a[i];
+				a[i] = a[i+j];
+				a[i+j] = k;
+			}
+		}
+	}
+	console.log(a);
+}
+compare(str);
+/*var str=[1,2,5,0,3,6];
+function maopao(a){             //选择排序法
+	var k; 
+	var newa=[];
+	for(var i=0;i<a.length;i++){   //从第一个开始和后面的数比较 得到最小的数，总共比较arr.length-1个数
+		newa[i]=a[i];             
+	}
+	for(var i=0;i<newa.length-1;i++){   //每个数和后面的数比较
+		for(var j=i+1;j<newa.length;j++){
+		if(newa[i]>newa[j])	jiaohuan(i,j,newa)
+			}
+		}
+	return newa;
+}
+function jiaohuan(i,j,newa){
+	var temp = 0;
+	temp = newa[i];
+	newa[i] = newa[j];
+	newa[j] = temp;
+}*/
+		//快速排序
+/*		var str=[1,2,5,0,3,6];         
+		function quicksort(arr){
+		if(arr.length<=1) return arr;
+			var midindex = parseInt(arr.length/2);        //首先找到中间值
+			var left = [],right = [];                     //创建两个数组 right用来存放较大的数 left存放较小数
+			for(var i=0;i<arr.length;i++){                //因为已经有判断下标是否和中间值相等 所以length不用减1
+				if(i == midindex)  continue;                //如果下标等于中间数的下标 则跳出此次循环
+				if(arr[i]>arr[midindex]){                    //将每个数分别和中间数比较
+					right.push(arr[i]);
+				}
+				else{left.push(arr[i]);}
+			}
+			return quicksort(left).concat(arr[midindex]).concat(quicksort(right)); //递归调用
+		}*/
+		
+/*		var arr = [];             //先创建一个一维数组
+		//var count = 0;
+		for(var i=0;i<25;i++){
+			if(i%5 == 0){           //当a=0,5,10,15时 创建一个新数组
+				var temp = [];
+				arr.push(temp);    //并且将这个新数组放入arr中  arr就变成了一个二维数组
+			//	count++;
+			}
+			temp.push(i+1);           //同时也往新添加的数组里 添加数字
+			//arr[count-1].push(i+1);
+		}
+		document.write(arr);
+		for(var i=0;i<arr.length;i++){          //输出五行
+			for(var j=0;j<=i;j++){              //第一行1个 第二行两个...
+				document.write(arr[i][j]);      
+			}
+			document.write("<br>");
+		}*/
+	</script>
+</html>

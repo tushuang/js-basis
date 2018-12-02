@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>band</title>
+		<style>
+			#box{
+				width: 50px;
+				height: 50px;
+				background: red;
+				position: absolute;
+			}
+		</style>
+		<script src="../js/framework.js"></script>
+		<script>
+		/*	var getStyle = function(ele){
+				if(ele.currentStyle) {
+					return ele.currentStyle;
+				} else {
+					return getComputedStyle(ele);
+				} 
+			}*/
+			
+			onload = function(){
+			//	$("#box").animate({left:200,top:300},"");
+				//var obox = document.getElementById("box");
+				console.log($("#box").getStyle('width'));
+				var val = "width";
+			/*	$("#box").addEventHander("click",function(){
+					console.log("213");
+				},true);*/
+				//console.log(getStyle(obox)[val]);
+				console.log($("#box").getPagePosition());
+				console.log($.randInt(10,20));
+				//obox.style.background = $.randColor();
+				document.cookie = "name=tutu;"
+				console.log($.getCookie("name"));
+				$.setCookie("age","16","30");
+				console.log($("#box").ele);
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+	</body>
+	
+</html>

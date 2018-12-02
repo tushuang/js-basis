@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			body{
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+			}
+			#box{
+				width: 50px;
+				height: 50px;
+				background: deeppink;
+				border-radius: 50%;
+				position:absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+		<script>
+			onload = function(){
+				var speedX = 14,speedY = 8;
+				var ball = document.getElementById("box");
+				//向左运动
+				setInterval(function(){
+					if(ball.offsetLeft<0 || ball.offsetLeft>=(window.innerWidth - box.offsetWidth)){
+						speedX = -speedX;
+					}
+					ball.style.left = ball.offsetLeft + speedX + "px";
+				},20);
+				//向下运动
+				setInterval( function(){
+					if(ball.offsetTop<0 || ball.offsetTop>=(window.innerHeight - box.offsetHeight)){
+						speedY = -speedY;
+					}
+					ball.style.top = ball.offsetTop + speedY + "px";
+				},20)
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+</html>

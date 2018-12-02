@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>考前练习</title>
+	<script>
+	//编写一个函数，计算任意两个数字之间所能组成的奇数个数，数字必须是个位数。
+	//比如：计算0~3之间能组成的奇数是： 01、03、13、21、23、31
+/*	function f(m,n){
+		var temp = [];
+		for(var i=m;i<=n;i++){
+			for(var j=m;j<=n;j++){
+				if(i==j) continue;
+				var k = i+""+j;
+				if(parseInt(k)%2 != 0){
+					console.log("ok");
+					temp.push(k);
+					k = 0;
+				}
+			}
+			console.log(temp);
+		}
+	}
+	//f(0,3);*/
+	
+	//编写函数digit(num, k)，函数功能是：求整数num从右边开始的第k位数字的值，如果num位数不足k位则返回0。
+/*	function digit(num,k){
+		var flag = 0;
+		console.log("ok");
+		for(var j=0;j<k;j++){
+			flag = num%10;
+			num = parseInt(num/10);
+			console.log("ok");
+		} 
+		 return flag;
+	}
+	var k = digit(1233,5);
+	//console.log(k);*/
+	
+	
+	//编写函数计算一个数字的长度
+	/*function f(num){
+		var k=0; //首先设置一个flag
+		do{
+			if(num%10){   //每整除一次 k加1；
+				k++;
+				num = parseInt(num/10);
+			}
+		}while(num>0);  //只要num等于0 就跳出循环
+		return k;
+	}
+	var k = f(1455);
+	console.log(k);*/
+	//编写一个函数，在页面上输出一个N行M列的表格，表格内容填充0~100的随机数字
+/*	function f(n,m){
+		document.write("<table>");
+		for(var i=0;i<n;i++){
+			document.write("<tr>");
+				for(var j=0;j<m;j++){
+					document.write("<td>");
+					document.write(parseInt(Math.random()*100));  //输数字的时候也要加 document。write
+					document.write("</td>");
+				}
+			document.write("</tr>");
+		}
+		document.write("</table>");
+	}
+	f(2,3);
+	document.write("<table>");
+	document.write("</table>");
+	
+	//编写函数，判断一个字符串的内容是不是纯数字
+	function isNumber(num){
+		if(num == 0) return true;
+		return !!Number(num);  //如果num不是纯数字 Number（）等于NaN NaN为false
+	}
+	var k = isNumber("123a");
+	console.log(k);*/
+	
+	//通过循环生成顺序为一个5×5的二维数组a赋1到25的自然数，然后输出该数组的左下半三角。试编程。
+/*	var str = [];
+	for(var i=0;i<25;i++){
+		if(i%5 == 0){
+			var temp = [];
+			str.push(temp);
+		}
+		temp.push(i+1);
+	}*/
+/*	var str = [[],[],[],[],[]];  //先定义一个二维数组
+	var k=0;
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
+		//	str[i].push(++k);
+			str[i][j] = ++k;
+		}
+	}
+	console.log(str);
+	for(var i=0;i<5;i++){
+		for(var j=0;j<=i;j++){
+			document.write(str[i][j]);
+		}
+		document.write("<br>");
+	}
+	*/
+	//定义一个含有30个整型元素的数组，按顺序分别赋予从2开始的偶数；然后按顺序每五个数求出一个平均值，放在另一个数组中并输出。试编程。
+/*	var str = [];
+	for(var i=2;i<=60;i++){
+		if(i%2 == 0) str.push(i);
+	}
+	console.log(str);
+	var temp = [];
+	var k = 0;
+	for(var i=0;i<30;i++){
+		if(i%5 == 0 && i != 0){
+			k = parseInt(k/5);
+			temp.push(k);
+			k=0;
+		}
+		k +=str[i];
+	}
+	console.log(temp);*/
+	
+	//编写函数has(arr , 60) 判断数组中是否存在60这个元素，返回布尔类型
+/*	function has(arr,x){
+		var flag = false;
+		for(var i=0;i<arr.length;i++){
+			if(arr[i] == x) flag = true;
+		}
+		return flag;
+	}
+	var arr = ["abc",234,3,"d",24,60];
+	console.log(arr);
+	console.log(has(arr,"60"));*/
+	//使用函数完成任意数字阶乘的计算
+	function cal(num){
+		if(num == 1) return 1;
+		return cal(num-1)*num;
+	}
+	console.log(cal(5));
+	
+	//编写函数norepeat(arr) 将数组的重复元素去掉，并返回新的数组
+/*	function noRepeat(arr){
+		var temp = [];
+		var flag = true;
+		for(var i=0;i<arr.length;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(arr[i] == arr[j]){
+					flag = false;
+				}
+			}
+			if(flag) {
+				temp.push(arr[i]);   //判断完后要将flag重置
+			}else flag = true;
+		}
+		console.log(temp);
+	}
+	
+	var arr = [2,3,3,12,1,4,1,7];
+	noRepeat(arr);*/
+	
+	</script>
+	</head>
+	<body>
+	</body>
+</html>

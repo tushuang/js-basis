@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0px; padding:0px;}
+        #container{width:800px;height:500px;border:orange solid 1px;margin:40px 0 0 200px;}
+        #box{width:680px;font-size:55px;text-align:center;line-height:400px;height:400px;position:relative;border:orangered solid 1px;margin:20px 60px;}
+        button{margin-left:50px;width:100px;}
+        #bubble{width:15px;height:15px;
+            background-color: red;
+            border-radius:50%;
+            position:absolute;
+            bottom: 10px;
+            left:180px;
+        }
+        #board{width:150px;height:10px;
+            background-color: orange;
+            border-radius:5px;
+            position:absolute;
+            bottom:0;
+            left:160px;
+            }
+        ul{list-style:none;}
+        ul>li{width:66px;height:15px;
+            background-color: #069;
+        border:solid 1px #ccc;position:absolute; }
+    </style>
+</head>
+<body>
+    <!-- 游戏面板 -->
+    <div id="container">
+        <!-- 游戏区域 -->
+        <div id="box">
+            <!-- 挡板、小球、砖块 -->
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div id="bubble"></div>
+            <div id="board"></div>
+        </div>
+        <button id="start">开始游戏</button>
+    </div>
+    <script>
+        var _start = document.getElementById("start");
+        var _bubble = document.getElementById("bubble");
+        var _box = document.getElementById("box");
+        var _board = document.getElementById("board");
+        // 获取所有的砖块
+        var _lis = document.getElementsByTagName("li");
+        // 0. 准备砖块，定位
+        var _left;
+        var _lefti = 0;
+        var _top = 0;
+        var _col = Math.floor(_box.offsetWidth / _lis[0].offsetWidth);
+
+        for(var i = 0; i < _lis.length; i++) {
+            _lis[i].style.backgroundColor = "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+            _left = _lefti * _lis[0].offsetWidth;
+            _lis[i].style.left = _left +"px";
+            _lis[i].style.top = _top + "px";
+            _lefti ++;
+            if(i != 0 && (i+1) % _col == 0){
+                _top += _lis[i].offsetHeight;
+                _lefti = 0;
+            }
+        }
+
+        // 1.模块：小球运动
+        var _x = 1;
+        var _y = -1;
+        _start.onclick = function() {
+
+            var timer = setInterval(function() {
+                // 让小球运动
+                _bubble.style.left = _bubble.offsetLeft + _x + "px";
+                _bubble.style.top = _bubble.offsetTop + _y + "px";
+                // 处理右边界
+                if(_bubble.offsetLeft >= _box.offsetWidth - _bubble.offsetWidth) {
+                    _x = -1;// 让水平的速度变成负数，就会向相反的方向运动
+                }
+                // 上边界
+                if(_bubble.offsetTop <= 0){
+                    _y = 1;
+                }
+                for(var i = 0; i < _lis.length; i++) {
+                    // 砖块下边界判断；判断小球是否撞击到li砖块，撞击时，小球运动速度取反；对应的砖块消失
+                    if((_bubble.offsetTop == _lis[i].offsetTop + _lis[i].offsetHeight)
+                        && (_bubble.offsetLeft >= _lis[i].offsetLeft
+                            && _bubble.offsetLeft <= (_lis[i].offsetLeft + _lis[i].offsetWidth) )){
+                        _lis[i].style.display = "none";
+                        _y = 1;
+                    }
+                }
+
+                // 左边界
+                if(_bubble.offsetLeft <= 0) {
+                    _x = 1;
+                }
+                // 下边界
+                if(_bubble.offsetTop >= _box.offsetHeight - _bubble.offsetHeight){
+                    // alert("game over!游戏结束！");
+                    _box.appendChild(document.createTextNode("GAME OVER！"));
+                    clearInterval(timer);
+                    // _y = -1;
+                }
+                // 挡板挡住小球，边界判断
+                if((_bubble.offsetTop + _bubble.offsetHeight) >= _board.offsetTop
+                && (_bubble.offsetLeft >= _board.offsetLeft && _bubble.offsetLeft <= (_board.offsetLeft + _board.offsetWidth))) {
+                    _y = -1;
+                }
+            }, 10);
+        }
+
+        // 2. 模块：挡板运动
+        document.onkeydown = function(e) {
+            e =e || window.event;
+            console.log(e.keyCode);// 检测得知，方向键左键：37 右键:39
+
+            if(e.keyCode == 37) {
+                // 判断当小球刚好在挡板上时，改变运动方向
+                /*if((_bubble.offsetTop + _bubble.offsetHeight) == _board.offsetTop){
+                    _x = -1;
+                }*/
+                _board.style.left = _board.offsetLeft - 5 + "px";
+            }
+            if(e.keyCode == 39) {
+                /*if((_bubble.offsetTop + _bubble.offsetHeight) == _board.offsetTop){
+                    _x = 1;
+                }*/
+                _board.style.left = _board.offsetLeft + 5 + "px";
+            }
+        }
+    </script>
+</body>
+</html>

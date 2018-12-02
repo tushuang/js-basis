@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+		<script src="scripts/template-web.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background: #f3f2f3;
+			}
+			img.img-items {
+				height: 240px;
+				box-shadow: 0 0 5px gray;
+				margin-top: 20px;
+			}
+			div.progress-bar {
+				color : black;
+			}
+		</style>
+		
+	</head>
+	<script id="temp-item" type="text/html">
+		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+			<img src="<%=item.images.small%>" class="img-thumbnail img-items" />
+		</div>
+	</script>
+	<body>
+		<div id="main" class="container">
+			<div class="row">
+
+			</div>
+		</div>
+		<div class="container text-center">
+			<div class="panel-body">
+					<a class="btn btn-primary" onclick="init();">加载图片</a>
+			</div>
+		</div>
+		
+		<!--模态窗口-->
+		<div id="myModal" class="modal fade bs-example-modal-lg">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="container-fluid">
+						<h2>
+							<p class="text-center">碟中谍6：全面瓦解 Mission: Impossible - Fallout <span class="text-muted">(2018)</span></p>
+						</h2>
+						<div class="col-xs-3">
+							<img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2529365085.jpg" class="img-thumbnail" />
+						</div>	
+						<div class="col-xs-6">
+							<p>
+								<span class="text-muted">导演:</span>
+								<a href="https://movie.douban.com/celebrity/1276314/">克里斯托弗·麦奎里</a>
+							</p>
+							<p>
+								<span class="text-muted">主演:</span>
+								<a href="https://movie.douban.com/celebrity/1054435/">汤姆·克鲁斯</a>  / 
+								<a href="https://movie.douban.com/celebrity/1044713/">亨利·卡维尔</a>  /
+								<a href="https://movie.douban.com/celebrity/1048129/">文·瑞姆斯</a>
+							</p>
+							<p>
+								<span class="text-muted">类型:</span> 动作 / 惊悚 / 冒险
+							</p>
+							<p>
+								<span class="text-muted">制片国家/地区:</span> 美国
+							</p>
+							<p>
+								<span class="text-muted">语言:</span> 英语 / 法语
+							</p>
+							<p>
+								<span class="text-muted">上映日期:</span> 2018-08-31(中国大陆) / 2018-07-27(美国)
+							</p>
+							<p>
+								<span class="text-muted">片长:</span> 147分钟 / 148分钟(中国大陆)
+							</p>
+						</div>	
+						<div class="col-xs-3" style="border-left: solid 1px #bbb ">
+							<p class="text-muted">豆瓣评分</p>
+							<div class="row">
+								<div class="col-xs-4">
+									<span style="font-size: 20px;">8.3</span>	
+								</div>
+								<div class="col-xs-8">
+									<span class="text-warning glyphicon glyphicon-star"></span>
+									<span class="text-warning glyphicon glyphicon-star"></span>
+									<span class="text-warning glyphicon glyphicon-star"></span>
+									<span class="text-warning glyphicon glyphicon-star"></span><br>
+									<span>156333人评价</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3">
+									<span class="text-muted">5星</span>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress" style="margin-bottom: 5px">
+										<div class="progress-bar progress-bar-warning" style="width: 32%">32% </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3">
+									<span class="text-muted">4星</span>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress" style="margin-bottom: 5px">
+										<div class="progress-bar progress-bar-warning" style="width: 50%">50% </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3">
+									<span class="text-muted">3星</span>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress" style="margin-bottom: 5px">
+										<div class="progress-bar progress-bar-warning" style="width: 16%">16% </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3">
+									<span class="text-muted">2星</span>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress" style="margin-bottom: 5px">
+										<div class="progress-bar progress-bar-warning" style="width: 1%">1% </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-3">
+									<span class="text-muted">1星</span>
+								</div>
+								<div class="col-xs-9">
+									<div class="progress" style="margin-bottom: 5px">
+										<div class="progress-bar progress-bar-warning" style="width: 0.5%">0.5% </div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<p>
+
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$("#main").on("click", "img", function(){
+				$("#myModal").modal("show");
+			})
+
+			var container =  document.getElementById("main").children[0];
+			var start = 0;
+			function init(){
+				var req = new XMLHttpRequest();
+				req.open("get", "http://localhost:9090/proxy/api.douban.com/v2/movie/in_theaters?count=6&start="+start, true);
+				req.onload = function(){
+					//把获取到的json格式的字符串转换成对象
+					var list = JSON.parse( req.responseText ).subjects;
+					console.log(JSON.parse( req.responseText ));
+					list.forEach(item => {
+						let tempstr = template("temp-item", {
+							"item" : item
+						});
+						container.innerHTML += tempstr;
+					});
+					start+=6;
+				}
+				req.send();
+				
+			}
+
+			
+		</script>
+	</body>
+
+</html>

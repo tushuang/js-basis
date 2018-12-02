@@ -1,0 +1,20 @@
+<script type="text/html" id="phonelist">
+    <% for(var i=0;i<list.length;i++)  {%>
+        <li class="goodcommon">
+            <a href="../../page/goodsinfo.html">
+                <div class="phonegood" style="background:url(<%=list[i].iurl%>)center 40px no-repeat;background-size: 100px 100px;">
+                    <div class="phonegood-title">
+                       <%=list[i].pn%>
+                    </div>
+                    <div class="phonegood-info">
+                        小巧全面屏，高性能处
+                    </div>
+                    <div class="phoneprice">
+                        <span><%=list[i].gprice%></span>
+                        <s></s>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <% } %>
+</script>

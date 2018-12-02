@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+		</style>
+		<script>
+			function toArray(arr){
+				var temp = [];
+				for(var i=0;i<arr.length;i++){
+					temp.push(arr[i]);
+				}
+				return temp;
+			}
+			//封装选择器的方法
+			function $(selector){
+				//先判断传进来的是什么
+				if(selector[0]=='#'){
+					var str = selector.substring(1,selector.length);
+					return document.getElementById(str);
+				}else if(/^\.[a-zA-Z0-9]$/.test(selector)){
+					var str = selector.replace(/\./,"");
+					return toArray( document.getElementsByClassName(str));
+				}else if(/^\.\w+\[[0-9]\]$/.test(selector)){  //类名传进来的时候 判断有无下标
+					var str = selector.replace(/\[[0-9]\]/,"").replace(/\./,"");
+					var num = selector.replace(/^\.\w+\[/,"").replace(/\]/,"");
+					return document.getElementsByClassName(str)[num];
+				}else if(/^\w+$/.test(selector)){  // 不写加号只能匹配到一个
+					return toArray(document.getElementsByTagName(selector));
+				}else if(/^\w+\[[0-9]\]$/.test(selector)){  //标签传进来的时候 判断有没有下标
+					var str = selector.replace(/\[[0-9]\]/,"");
+					var num = selector.replace(/\w+\[/,"").replace(/\]/,"");
+					return document.getElementsByTagName(str)[num];
+				}
+			}
+		onload = function(){
+			var obox = $(".box[0]");
+			console.log(obox);
+			var odiv = $("div");
+			console.log(odiv);
+			var div = $("#icon");
+			console.log(div);
+		}
+		</script>
+	</head>
+	<body>
+		<div class="box"></div>
+		<div></div>
+		<div id="icon"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</body>
+</html>

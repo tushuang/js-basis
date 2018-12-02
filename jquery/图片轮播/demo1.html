@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<title>图片轮播</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			ul{list-style:none;}
+			.main{width:760px;height:300px;margin:50px auto;position:relative;}
+			.pic{width:760px;height:300px;overflow:hidden;}
+
+			.pic ul li{width:760px;height:300px;position:relative;overflow:hidden;}
+			.img1{position:absolute;left:-760px;top:0px;}
+			.img2{position:absolute;left:-20px;top:0px;display:none;}
+
+			/*按钮区域*/
+			.nav ul li{border:1px solid white;width:15px;height:15px;float:left;
+			           margin-left:5px;}
+			.nav{width:125px;height:30px;position:absolute;
+			left:620px;bottom:10px;}
+			.select{background-color:white;}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="pic">
+				<ul>
+					<li style="background:url(img/bg1.jpg);">
+						<img class="img1" src="img/text1.png"/>
+						<img class="img2" src="img/con1.png"/>
+					</li>
+					<li style="background:url(img/bg2.jpg);">
+						<img class="img1" src="img/text2.png"/>
+						<img class="img2" src="img/con2.png"/>
+					</li>
+					<li style="background:url(img/bg3.jpg);">
+						<img class="img1" src="img/text3.png"/>
+						<img class="img2" src="img/con3.png"/>
+					</li>
+					<li style="background:url(img/bg4.jpg);">
+						<img class="img1" src="img/text4.png"/>
+						<img class="img2" src="img/con4.png"/>
+					</li>
+					<li style="background:url(img/bg5.jpg);">
+						<img class="img1" src="img/text5.png"/>
+						<img class="img2" src="img/con5.png"/>
+					</li>
+				</ul>
+			</div>
+			<div class="nav">
+				<ul>
+					<li class="select"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript">
+			var index =0;//当前显示li的下标
+			myshow(); //页面加载时显示第一个li
+			var l = $(".pic ul li").size();
+			
+			function myshow(){ 
+				$(".pic ul li").eq(index).find(".img1").animate({"left":"0px"},1000,function(){
+					$(".pic ul li").eq(index).find(".img2").css("display","block");
+					$(".pic ul li").eq(index).find(".img2").animate({"left":"0px"},1000);
+				});
+			}
+
+			setInterval("change();",2500); //定时轮换
+			
+			function change(){//图片轮换
+				index++;
+				if(index == l){
+					index = 0;
+				}
+				$(".pic ul li").eq(index).fadeIn(100).siblings().fadeOut(100);
+				$(".nav ul li").eq(index).addClass("select").siblings().removeClass("select");
+				//显示动态效果图片
+				myshow();
+				//还原上一个li的样式
+				$(".pic ul li").eq(index).siblings().find(".img1").css("left","-760px");
+				$(".pic ul li").eq(index).siblings().find(".img2").css("left","-20px");
+				$(".pic ul li").eq(index).siblings().find(".img2").css("display","none");
+			}
+		</script>
+	</body>
+</html>

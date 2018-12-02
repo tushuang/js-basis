@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0; margin: 0;
+    }
+    .container {
+        width: 600px; height: 35px;
+        margin: 100px auto; position: relative;
+    }
+    .container .searchInput {
+        float: left; 
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        width: 500px; height: 35px;
+        box-sizing: border-box;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+    }
+    .container .searchBtn {
+        float: left; color: white; line-height: 35px; text-align: center;
+        width: 100px; height: 35px; background-color: #007ACC;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+    .container .droplist {
+        position: absolute; top: 35px;
+        list-style: none; box-sizing: border-box;
+        width: 100%; border: 1px solid #ccc;
+        display: none;
+    }
+    .container .droplist li {
+        float: left; height: 25px;
+        width: 596px; padding-left: 2px;
+    }
+    .container .droplist li:hover {
+        cursor: pointer;
+        background: #ccc;
+    }
+</style>
+<body>
+    <div class="container">
+        <input class="searchInput" type="text">
+        <span class="searchBtn">百度一下</span>
+        <ul class="droplist">
+        </ul>
+    </div>
+</body>
+
+<!--
+ $.ajax({
+	type:"get/post/jsonp";
+	url:
+	success:function(data){  //当执行成功后 对数据操作的内容
+		//内容
+	}
+	data:{    //使用post时url后如果需要传入数据 
+		a:XXX,
+		b:xxx
+	}
+	jsonp:"cb"; //自己定义的回调函数名字
+})
+-->
+
+
+<script src="../js/framework.js"></script>
+<script>
+ function debounce(callback,delay,context){
+        var t=null;
+       return function(e){
+           console.log();
+            var e = e||event;
+            clearTimeout(t);
+            t = setTimeout(function(){
+                callback.call(context,e);
+            },delay);
+        }
+    }
+
+	var inp = document.getElementsByClassName("searchInput")[0];//获取输入框
+	var list = document.getElementsByClassName("droplist")[0];//获取ul
+	inp.addEventListener("input",function(){
+		var val = inp.value;
+		//创建一个script标签
+		var _script = document.createElement("script");
+		_script.src = `http://suggestion.baidu.com/?wd=${this.value}&cb=callback`;  //设置请求的地址和数据
+		document.body.appendChild(_script);
+/*		$.ajax({
+			type:"jsonp",
+			url:`http://suggestion.baidu.com/?wd=${this.value}`,
+			jsonp : "cb",
+			success:function(data){
+				list.innerHTML = "";
+				data.s.forEach(item=>{
+					var oli = document.createElement("li");
+					oli.innerText = item;
+					list.appendChild(oli);
+				});
+				list.style.display = "block";
+			}
+		});*/
+    })
+	//点击li时 把数据填入输入框
+	list.addEventListener("click",function(e){
+		if(e.target.nodeName == "LI"){
+			inp.value = e.target.innerText;
+			list.style.display = "none";
+		}
+	});
+    
+    
+
+
+	//callback(data);
+	//定义一个回调函数
+	function callback(date){
+		//把数据加入li中
+		list.innerHTML = "";
+		date.s.forEach(item=>{
+			var oli = document.createElement("li");
+			oli.innerText = item;
+			list.appendChild(oli);
+			console.log(item);
+		});
+		list.style.display = "block";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   var searchInput = document.getElementsByClassName("searchInput")[0];
+    var droplist = document.getElementsByClassName("droplist")[0];
+    searchInput.addEventListener("input", function(){
+        console.log(this.value);
+        // var req = window.ActiveXObject ? new ActiveXObject("Msxml2.XMLHTTP") : new XMLHttpRequest();
+        // req.open("get", `http://suggestion.baidu.com/?wd=${this.value}&cb=callback`);
+
+        // req.onreadystatechange = function(){
+        //     console.log(  req.readyState  )
+        // }
+
+        // req.send();
+
+
+        var _script = document.createElement("script");
+        _script.src = `http://suggestion.baidu.com/?wd=${this.value}&cb=callback`;
+        document.body.appendChild(_script);
+
+
+    });
+
+    function callback(data){
+        console.log(data.s);
+        droplist.innerHTML = "";
+        
+        data.s.forEach(item => {
+            var li = document.createElement("li");
+            li.innerText = item;
+            droplist.appendChild(li);
+        });
+
+        droplist.style.display = "block";
+
+    }
+</script>
+
+</html>

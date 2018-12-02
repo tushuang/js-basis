@@ -1,0 +1,19 @@
+<script type="text/html" id="flashbuylist">
+    <% for(var i=0;i<list.length;i++)  {%>
+        <a href="http://localhost:9090/proxy/page/goodslist.html">
+    <div class="flashbuygood" style="background:url(<%=list[i].pc_img%>) center 40px no-repeat;background-size: 75%;">
+            <div class="flashbuygood-bg" style="border-top:solid 1px <%=colors[i]%>">
+                <% if(list[i].label_text!=""){ %>
+                    <div class="oneyuan"><%=list[i].label_text%></div>
+                <%}%>
+                <div class="flashbuygood-title"><%=list[i].goods_name %></div>
+                <div class="flashbuygood-info"><%= list[i].desc%></div>
+                <div class="flashgoodprice">
+                    <span><%= list[i].seckill_Price%>元</span>
+                    <s><%= list[i].goods_price %>元</s>
+                </div>
+            </div>
+        </div>
+    </a>
+        <% } %>
+</script>

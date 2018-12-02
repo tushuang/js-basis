@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			margin: 0; padding: 0;
+		}
+		html,body{width: 100%; height: 100%; overflow: hidden;}
+		
+		.main{
+			width: 900px;
+			height: 80px;
+			margin: 50px auto;
+		}
+		.main ul{
+			list-style: none;
+		}
+		.normal {
+			display: inline-block;
+			width: 100px; height: 120px;
+			border-radius: 6px;
+			margin-left: 5px;
+			background: darkcyan;
+			color: yellow; font-size: 30px;
+			font-family: "微软雅黑";
+			text-align: center; line-height: 120px;
+		}
+		.dragele {
+			list-style: none;
+			position: absolute;
+			width: 100px; height: 120px;
+			border-radius: 6px;
+			border: 1px dashed black;
+			background: rgba(0,0,0,0.5);
+			color: yellow; font-size: 30px;
+			font-family: "微软雅黑";
+			text-align: center; line-height: 120px;
+		}
+		.info{
+			width: 900px;
+			height: 300px;
+			line-height: 300px;
+			font-size: 40px;
+			font-family: "微软雅黑";
+			font-weight: bold;
+			text-align: center;
+			color: grey;
+			margin: 30px auto;
+			
+		}
+	</style>
+	<script src="jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div class="main">
+			<ul>
+				<li class="normal">15</li>
+				<li class="normal">6</li>
+				<li class="normal">18</li>
+				<li class="normal">56</li>
+				<li class="normal">3</li>
+				<li class="normal">22</li>
+				<li class="normal">52</li>
+				<li class="normal">13</li>
+			</ul>
+		</div>
+		<div class="info">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var flag = false;
+		var $li;
+		var index;
+		var $that;
+		var val;
+		$(".main li").mousedown(function(e){
+			console.log($(this));
+			//点击创建
+			$li = $("<li>");
+			$li.addClass("dragele");
+			$li.appendTo("body");
+			$li.css({
+				left:$(this).position().left,
+				top:$(this).position().top
+			});
+			var mouPos = {
+				x:e.offsetX,
+				y:e.offsetY
+			};
+			startPos = {
+					left: $(this).position().left,
+					top:$(this).position().top
+				}
+			$that = $(this);
+			val = parseInt( $(this).text());
+			$li.text(val);
+			$(document).mousemove(function(e){ //找出与该移动的li最近的距离
+				var pagePos = {
+					x:e.clientX,
+					y:e.clientY
+				};
+				$li.css({
+					left:pagePos.x - mouPos.x,
+					top:pagePos.y-mouPos.y
+				});
+				//找到最小的距离
+				$(".main li").each(function(){
+					if( Math.abs($(this).position().left - $li.position().left) < 10&&Math.abs($(this).position().top - $li.position().top) < 10 && $that.get(0) != $(this).get(0)){  
+						index = $(this).index();
+					} 
+				});
+				//必须写在外面 否则移开去判断别的卡片时 可能不是最小距离 便不会进入判断
+				//每次都重新寻找最小的距离 找到后判断卡片数字的大小 同时还要判断 还是不是最小的距离如果不是及时取消选择
+				if( parseInt($(".main li").eq(index).text()) > val && Math.abs( $(".main li").eq(index).position().left - $li.position().left) <10){
+					flag = true;
+					$li.css({"background":"forestgreen","color":"black"});
+					$(".info").text("允许交换");
+				}else{
+					flag = false;
+					$li.css({background: "rgba(0,0,0,0.5)", color:"yellow"});
+					$(".info").text("");
+				}
+			})
+		}); 
+		$(document).mouseup(function(){
+			//鼠标松开的时候 判断能不能交换
+			if(flag){
+				//交换
+				console.log($(".main li").eq(index),$that.position().left,$that);
+				var target1 = $("<li>").addClass("normal");
+				var target2 = $("<li>").addClass("normal");
+				target1.appendTo("body");
+				target2.appendTo("body");
+				target1.css({
+					left:$that.position().left,
+					top:$that.position().top,
+					position:"absolute"
+				});
+				target1.text(val);
+				target2.css({
+					left:$(".main li").eq(index).position().left,
+					top:$(".main li").eq(index).position().top,
+					position:"absolute"
+				});
+				target2.text($(".main li").eq(index).text());
+				target1.animate({left:$(".main li").eq(index).position().left},1000,function(){
+					target1.css({display:"none"});
+					$that.css({background:"darkcyan"});
+					$that.text($(".main li").eq(index).text());
+				});
+				target2.animate({left:$that.position().left },1000,function(){
+					target2.css({display:"none"});
+					$(".main li").eq(index).css({background:"darkcyan"});
+					$(".main li").eq(index).text(val);
+					$(".info").text("");
+				});
+				$(".info").text("交换中...");
+				$(".main li").eq(index).css({background:"white",border:"none"});
+				$that.css({background:"white",border:"none"});
+				flag = false;
+			}
+			$(document).off("mousemove");
+			$li.remove();
+			
+		})
+
+	</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #ball {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 400px;
+            top: 400px;
+            background: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ball"></div>
+</body>
+<script>
+    var ball = document.getElementById('ball');
+    var o = -100;
+    //圆周
+       /* var timer = setInterval(function () {
+            o++;
+            var oDiv = document.createElement('div');
+            var x = Math.cos(o * Math.PI / 180) * 50;
+            var y = Math.sin(o * Math.PI / 180) * 50;
+            if (o <= 360) {
+                oDiv.style.cssText = 'width:1px;height:1px;position:absolute;background:black;left:' + (x + 400) + 'px;top:' + (y + 400) + 'px;'
+                document.body.appendChild(oDiv)
+            }
+    
+            ball.style.left = x + 350 + 'px';
+            ball.style.top = y + 350 + 'px';
+    
+        }, 10)*/
+    //曲线
+        var timer = setInterval(function(){
+            o++;
+            var oDiv = document.createElement('div');
+            var y = Math.sin(o * Math.PI / 180) * 100;
+            if (o <= 360) {
+                oDiv.style.cssText = 'width:1px;height:1px;position:absolute;background:black;left:' + (o + 400) + 'px;top:' + (y + 400) + 'px;'
+                document.body.appendChild(oDiv)
+            }
+            
+            ball.style.left = o + 400 + 'px';
+            ball.style.top = y + 400 + 'px';
+        },10)
+</script>
+
+</html>

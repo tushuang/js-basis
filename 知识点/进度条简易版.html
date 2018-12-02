@@ -1,0 +1,67 @@
+﻿<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>进度条 </title>	
+	</head>
+	<style>
+		#progress{
+			position: relative;
+			margin: auto;
+			top: 200px;
+			display: block;
+			width: 200px;
+			height: 20px;
+			border-style: dotted;
+			border-width: thin;
+			border-color: darkgreen;
+		}
+		#filldiv{
+			position:absolute;
+			top: 0px;
+			left: 0px;
+			width: 0px;
+			height: 20px;
+			background: blue;
+		}
+		#percent{
+			position: absolute;
+			top: 0px;
+			left: 200px;
+			
+		}
+	</style>
+	
+	<script>
+		function jindutiao(){
+			var ofilldiv = document.getElementById("filldiv");  //获取进度条
+			var npercent = document.getElementById("percent");  //获取百分数
+			//var _w = 0;                                         //最开始时 设置进度条的宽度width等于0
+			var timer = setInterval(function (){
+			//	_w++;                                            //每调用定时器 width都会增加
+			//	ofilldiv.style .width = _w + "px";                //将_w设置为进度条的宽度
+			//	npercent.innerHTML = parseInt(_w/200*100)+"%"; 
+			//	var w = parseInt(getStyle(ofilldiv).width) +1;
+				console.log(getStyle(ofilldiv).width);
+				//getStyle(ofilldiv).width = ( parseInt(getStyle(ofilldiv).width) +1) + "px";
+				ofilldiv.style .width = ( parseInt(getStyle(ofilldiv).width) +1) + "px";
+				console.log(getStyle(ofilldiv).width);
+				npercent.innerHTML = parseInt(( parseInt(getStyle(ofilldiv).width) +1)/200*100) +"%";
+				if(parseInt(getStyle(ofilldiv).width) == 200) clearInterval(timer);               //如果width为200 则停止定时器
+			},50); 
+		}
+		 function getStyle(ele){
+			if(ele.currentStyle){
+				return ele.currentStyle;
+			}else{
+				return getComputedStyle(ele,null);
+			}
+		 }
+		
+	</script>
+	<body onload="jindutiao()">
+		<div id="progress">
+			<div id="filldiv"></div>
+			<span id="percent">0</span>
+		</div>
+	</body>
+</html>

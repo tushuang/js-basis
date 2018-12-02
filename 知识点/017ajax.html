@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			onload = function(){
+				var obtn = document.getElementById("btn");
+				var input = document.getElementById("inp");
+				//输入框失去焦点时 触发
+				input.onblur = function(){
+					//创建一个请求对象
+					var req = new XMLHttpRequest();
+					//设定请求 有三个参数 请求方式 请求地址  是否异步 true代表异步
+					req.open("GET","http://10.9.189.112:9090/login?username="+ input.value,true);
+					req.onload = function(){   //事件函数  请求完成时加载  即请求发送完后再加载
+						if(req.responseText == "true" ){
+							console.log("用户名已存在，换一个吧");
+						}
+					}
+					req.send();  //发送请求
+					//console.log(req.responseText); 
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="inp">
+		<button id="btn" type="button">提交</button>
+	</body>
+</html>

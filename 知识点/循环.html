@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算器</title>
+	</head>
+	<body>
+	
+	</body>
+	<script>
+	//打印出100到999的水仙花数 abc = a^3 + b^3 + c^3
+/*	for(var i=100;i<=999;i++){
+		a = parseInt(i/100);    //分别取出个十百位的数
+		b = parseInt((i%100)/10);
+		c = parseInt(i%10);
+		if( Math.pow(a,3)+Math.pow(b,3)+Math.pow(c,3) == i){ console.log(i);}
+	}*/
+	
+/*	for(var i=1; i<=8;i++){
+		for(var j=1;j<=8-i; j++){
+		 document.write("#");
+		}
+		for(var k=1;k<=i; k++){
+			document.write("u");
+			}
+		document.write("<br>");
+	}*/
+	/*for(var i=1; i<=8;i++){
+		for(var j=1;j<=8-i; j++){
+		 document.write("#");
+		}
+		for(var k=1;k<=i; k++){
+			document.write("u");
+			}
+		for(var k=1;k<=i-1; k++){
+			document.write("u");
+			}
+		document.write("<br>");
+	}*/
+/*	for(var i=0; i<5;i++){
+		for(var j=1;j<5-i;j++) document.write("#");
+		document.write("u");
+		for(var j=0;j<2*i; j++){ document.write("#");}
+		if(i != 0) document.write("u");
+		document.write("<br>");
+	}
+	for(var i=0; i<4;i++){
+		for(var j=0;j<i+1;j++) document.write("#");
+		document.write("u");
+		for(var j=0;j<6-(2*i); j++){ document.write("#")}
+		 if(i != 3)document.write("u");
+		document.write("<br>");
+	}*/
+/*	for(var i=0; i<5;i++){
+		for(var j=1;j<5-i;j++) document.write("#");
+		for(var j=0;j<2*i+1;j++){
+			if(j==0 || j==2*i)
+			document.write("u");
+			else document.write("#");
+		}
+		document.write("<br>");
+	}
+	for(var i=0;i<4;i++){
+		for(var j=0; j<i+1;j++) document.write("#");
+		for(var j=0;j<7-2*i;j++){
+			if( j==0 || j == 6-(2*i)) document.write("u");
+			else document.write("#");
+		}
+		document.write("<br>");
+	}*/
+	
+	//数组去重
+/*	function quchong(arr){
+		var flag=true;
+		var temp = [];
+		for(var i=0;i<arr.length;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(arr[i] == arr[j]){
+					flag=false;
+				}
+			}
+			if(flag) {
+				temp.push(arr[i]);
+			}else{
+				flag=true;
+			}
+		}
+		return temp;
+	}*/
+	
+	/*function quchong(arr){
+		for(var i=0;i<arr.length;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(arr[i] == arr[j]){
+					arr.splice(j,1); //splice 直接改变数组
+					j--;   //删除后 长度会变 所以j--;
+				}
+			}
+		}
+		return arr;
+	}*/
+	function quickSort(arr){   //快速排序
+		//先找出中间坐标 
+		if(arr.length <=1){
+			return arr;
+		}
+		var minIndex = parseInt(arr.length/2);
+		var val = arr[minIndex];
+		var right = [];
+		var left = [];
+		for(var i=0;i<arr.length;i++){
+			if(i == minIndex) continue;
+			if(val>arr[i]){
+				left.push(arr[i]);
+			}else{
+				right.push(arr[i]);
+			}
+		}
+		return quickSort(left).concat(val).concat(quickSort(right));
+	}
+	var arr=[3,4,1,1,44,5,5,5,1,1,1,0];
+	console.log(quickSort(arr));
+	/*var a = [...new Set(arr)];
+	console.log(a);*/
+	</script>
+</html>

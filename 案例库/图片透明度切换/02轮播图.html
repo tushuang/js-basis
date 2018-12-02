@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			*{
+				margin: 0;padding: 0;
+			}
+			#box{
+				width: 810px;
+				height: 310px;
+				overflow: hidden;
+				position: relative;
+				margin: auto;
+			}
+			ul.icon{
+				list-style: none;
+				width: 4050px;
+				overflow: hidden;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			ul.icon li {
+				float: left;
+			}
+			
+			ul.ball{
+				list-style: none;
+				overflow: hidden;
+				position: absolute;
+				right: 50px;
+				bottom: 20px;
+			}
+			ul.ball li {
+				float: left;
+				width: 15px;
+				height: 15px;
+				border-radius: 50%;
+				margin-right: 8px;
+				background: rgba(0,0,0,0.8);
+				cursor: pointer;
+			}
+			ul.ball li.active{
+				background: white;
+			}
+			#left{
+				background: url(btn.gif);
+				position: absolute;
+				width: 60px;
+				height: 60px;
+				left: 20px;
+				top: 150px;
+				cursor: pointer;
+			}
+			#right{
+				background: url(btn.gif) 0 -60px;
+				position: absolute;
+				width: 60px;
+				height: 60px;
+				right: 20px;
+				top: 150px;
+				cursor: pointer;
+			}
+		</style>
+		<script src="../comment.js"></script>
+		<script>
+			//图片自动播放效果 
+			
+			onload = function(){
+				var wrapper = document.getElementById("box");
+				var oul = wrapper.children[0];
+				var oli = wrapper.children[1].children;
+				var btnLeft = document.getElementById("left");
+				var btnRight = document.getElementById("right");
+				var index = 0;
+				
+				function srcollImg(){
+					index++;                                   //index的值为 1,2,3
+					
+					//右下角的颜色跟着改变
+					for( var i=0; i<oli.length;i++){
+						oli[i].className = "";
+					}
+					//当index 等于4的时候 直接变为0
+					oli[index>=4?0:index].className = "active";
+					
+					animate(oul,{left:-810*index},"",function(){   //通过改变oul定位的left值来实现切换效果
+						//当index的值为4的时候 切到了第五张 将第五张变为第一张
+						if(index >= 4){
+							oul.style.left = 0;
+							index = 0;  //同时index 值清0 从头播放
+						}
+					});
+				}
+				
+				var timer = setInterval(srcollImg,2000);//每隔两秒切换一次图片
+				
+				//当鼠标移到box上时 图片停止播放 移开继续
+				wrapper.onmouseover = function(){
+					//移除定时器
+					clearInterval(timer);
+				}
+				wrapper.onmouseout = function(){
+					//开启定时器
+					timer = setInterval(srcollImg,2000);
+				}
+				
+				
+				//给li加上点击效果 点击时跳转到指定的图片
+				for(var i=0;i<oli.length;i++){
+					oli[i].num = i;
+					//给每个oli绑定指定函数
+					oli[i].onclick = function(){
+						index = this.num-1;
+						console.log(this.num);
+						srcollImg();
+					}
+				}
+				
+				//给左右切换的按钮添加事件
+				btnLeft.onclick = function(){
+					if(index == 0){
+						index = 2;
+					}else index -= 2 ;         //
+					srcollImg();
+				}
+				btnRight.onclick = function(){
+					srcollImg();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul class="icon">
+				<li>
+					<img src="001.jpg">
+				</li>
+				<li>
+					<img src="002.jpg">
+				</li>
+				<li>
+					<img src="003.jpg">
+				</li>
+				<li>
+					<img src="004.jpg">
+				</li>
+				<li>
+					<img src="001.jpg">  <!--添加第五张图片 和第一张一样 当图片在最后一张时 先切到第五张 再快速切到第一张
+											由于第一张和第五张一样 所有很那分辨出 不是一张图片-->
+				</li>
+			</ul>
+			
+			<!--加上点击效果-->
+			<ul class="ball">
+				<li class="active"></li>  <!--因为index是从第二个开始计算 所以先给第一个加上样式-->
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			
+			<!--左右切换图片的点击按钮-->
+			<div id="left"></div>
+			<div id="right"></div>
+		</div>
+	</body>
+</html>

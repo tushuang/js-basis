@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>无标题文档</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			#box{
+				width:100px;
+				height:100px;
+				background:pink;
+				margin:auto;
+				position:absolute;
+				top:0px;
+				left:0px;
+				right:0px;
+				bottom:0px;
+			}
+			#wrapper{
+				position:fixed;
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				background:rgba(0,0,0,.2);
+			}
+			p{
+				background:black;
+				color:white;
+				text-align:center;
+			}
+			#icon{
+				background:white;
+				width:400px;
+				height:400px;
+				margin:auto;
+			}
+		</style>
+		<script>	
+		/*	onload = function(){
+				var obox = document.getElementById("box");
+				var title = document.getElementsByTagName("p")[0];
+				
+				title.onmousedown = function(e1){
+					e1 = e1 || event;
+					var _left = e1.offsetX;
+					var _top = e1.offsetY;
+					
+					document.onmousemove = function(e2){   //事件绑在document身上 盒子才会跟着动
+						e2 = e2 || event;
+						var _left2 = e2.clientX - _left;
+						var _top2 = e2.clientY - _top;
+						
+						obox.style.margin = "0";
+						obox.style.left = Math.max(0,Math.min(e2.clientX - obox.offsetWidth, _left2)) + "px"; //记得加上px
+						obox.style.top = Math.max(0,Math.min(window.innerHeight - obox.offsetHeight, _top2)) + "px"; 
+						//obox.style.top = Math.max(0,Math.min(e2.clientY - obox.offsetHeight, _top2)) + "px"; 
+						
+						//需要用屏幕的可视区范围减去盒子的宽高 clientX 是整个屏幕 用fix 
+					}
+				}
+				document.onmouseup = function(){   //在屏幕外松开鼠标也起作用
+					document.onmousemove = null;
+				}
+			}		*/
+			
+		/*	onload = function(){
+				var b = document.getElementById("box");
+				b.onmousedown = function(e1){
+					var e1 = e1 || event;
+					var _left = e1.offsetX;
+					var _top = e1.offsetY;
+					
+				//	console.log(_left,_top);
+					
+					document.onmousemove = function(e2){
+						e2 = e2 || event;
+						
+						var move_left = e2.clientX - _left;   //鼠标的可视范围减去鼠标在元素的当前范围
+						var move_top = e2.clientY - _top;
+						
+					//	console.log(move_left,move_top);
+						
+						b.style.left = Math.max(0,Math.min(window.innerWidth - b.offsetWidth,move_left))+ "px";   
+						b.style.top =  Math.max(0,Math.min(window.innerHeight - b.offsetHeight,move_top )) + "px";
+					}
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+				}
+			}*/
+			function getPagePosition(target){
+				var sumLeft = target.offsetLeft;
+				var sumTop = target.offsetTop;
+				while(target.offsetParent != null){    //获取有定位的父元素
+					sumLeft += target.offsetParent.offsetLeft; //自身相对父元素的定位 加上有定位的父元素相对于页面或者其他元素的定位
+					sumTop += target.offsetParent.offsetTop;  
+					
+					target = target.offsetParent;
+				}
+				return {
+					pagesX:sumLeft,  //之间返回一个对象
+					pagesY:sumTop
+				};
+			}
+			//封装一个拖拽函数
+			function draggable(ele,box,title){  //ele拖拽的元素 box 限制的宽度 title是标题
+				//getComputedStyle(ele).position = "absolute";
+				var target = title || ele;
+				target.onmousedown = function(e){
+					var e = e||event;
+					pos = {
+						x:e.offsetX,
+						y:e.offsetY
+					};
+					document.onmousemove = function(e){
+						var e = e || event;
+						ele.style.margin = 0;
+						//如果传入的父元素有定位的话 移动元素的left和top是相对于父元素的定位来显示的
+					/*	if(box){
+							if(!(getComputedStyle(box).position) && !(box.style.position)){
+								box.style.position = relative;
+								console.log("123");
+							}
+						}*/
+						var limitWidht = box?(box.offsetWidth - ele.offsetWidth):window.innerWidth - ele.offsetWidth;
+						var limitHeight = box?(box.offsetHeight - ele.offsetHeight):window.innerHeight - ele.offsetHeight;
+						if(!box){
+							ele.style.left = Math.max(0,Math.min(limitWidht, e.clientX - pos.x ))+"px";
+							ele.style.top = Math.max(0,Math.min(limitHeight, e.clientY - pos.y ))+"px";
+						}else{
+							ele.style.left = Math.max(0,Math.min(limitWidht, e.clientX - pos.x - getPagePosition(box).pagesX))+"px";
+							ele.style.top = Math.max(0,Math.min(limitHeight, e.clientY - pos.y-getPagePosition(box).pagesY ))+"px";
+						}
+					}
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+				}
+			}
+			onload = function(){
+				var obox = document.getElementById("box");
+				var wra = document.getElementById("wrapper");
+				var iCon = document.getElementById("icon");
+				draggable(obox);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<div id="box">
+				<p>标题</p>
+			</div>
+		</div>
+	</body>
+</html>

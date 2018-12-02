@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+</body>
+
+<script src="../js/framework.js"></script>
+<script>
+  
+  class Company{
+      //存有所有员工的信息
+      constructor(){
+        this.mes = new Map();
+      }
+      //当有人加入时 把信息加入Map集合
+      join(no,em){
+          this.mes.set(no,em);
+      };
+      //当有人离开时 删除信息
+      leave(){
+          this.mes.delete(no);
+      };
+      //发工资
+      play(){
+          for(var [no,em] of this.mes){  //em应该是一个对象
+              //console.log(em.save(1));
+              em.save(40000);    //发生改变时直接通知员工 
+          }
+      }
+  }
+
+  class emplayee{      //观察者模式 本来应该用emplayee来观察公司 变成公司发工资后通知员工
+      constructor(){
+          this.money = 0;
+          this.num = 1;
+      }
+      save(val){
+         this.money = val;
+      }
+  }
+
+  var JD = new Company();
+  var tutu = new emplayee();
+  JD.join(tutu.num, tutu);  //先加人公司
+  JD.play();  //再发工资
+</script>
+
+</html>

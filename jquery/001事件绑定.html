@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="jquery-1.9.0.js"></script>
+<script>
+   $(function(){
+        $.fn.extend({
+            __on: function(eventName,selector,callback){  //封装on方法
+
+                switch(typeof selector){
+                    case "string":{  //如果是字符串 则说明是事件委托
+                        $(this).bind(eventName,function(e){ //
+                           if( $(this).find(selector).get().indexOf(e.target) != -1 ){   //如果点击的元素在传入的调用元素内则 该回调函数指向点击的元素
+                               callback.call(e.target,e);
+                           }
+                        })
+                    };break;
+                    case "function":{
+                        $(this).bind(eventName,selector); //如果selector是函数 则直接调用 说明没有传选择器
+                    }
+                }
+            }
+        });
+
+        $("div").__on("click","button",function(e){  //写button是事件委托 不写是单纯的绑定
+            console.log(this);
+        });
+    });
+
+
+</script>
+<body>
+    <div>
+        <button>11</button>
+        <button>22</button>
+        <button>33</button>
+        <button>44</button>
+    </div>
+</body>
+</html>

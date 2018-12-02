@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<input type="checkbox" class="select-all"/>全选
+		<!-- <input type="checkbox" class="select-other"/>反选 -->
+		<div>
+			<input type="checkbox">
+			<input type="checkbox">
+			<input type="checkbox">
+			<input type="checkbox">
+			<input type="checkbox">
+		</div>
+		
+		<script src="jquery-1.9.0.js"></script>	
+		<script type="text/javascript">
+		//prop 设置布尔类型的属性
+		$("div input").click(function(){
+			//如果所有的框都被选中 则全选框被选中
+			var isAll = $("div input").is(function(){   //如果有一个被选中返回true
+							return !$(this).prop("checked");
+						});
+			if(!isAll){
+				$(".select-all").prop("checked",true);
+			}else{
+				$(".select-all").prop("checked",false);
+			}
+
+		})
+
+		$(".select-all").click(function(){
+			$("div input").prop("checked",$(this).prop("checked"));
+		})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/*	$(function(){
+				$("div input:checkbox").click(function(){
+					var isAllChecked = $("div input:checkbox").is(function(index){
+											return !$(this).prop("checked");
+										});
+					if(!isAllChecked) {
+						$(".select-all").prop("checked", true);
+					} else {
+						$(".select-all").prop("checked", false);
+					}
+				})
+				
+				$(".select-all").click(function(){
+					$("div input:checkbox").prop("checked", $(this).prop("checked"));
+				})
+			});*/
+
+		</script>
+	</body>
+</html

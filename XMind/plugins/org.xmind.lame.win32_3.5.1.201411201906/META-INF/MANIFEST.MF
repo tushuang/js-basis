@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-Vendor: %providerName
+Fragment-Host: org.xmind.core.audio
+Bundle-Version: 3.5.1.201411201906
+Eclipse-PlatformFilter: (osgi.os=win32)
+Bundle-Localization: fragment_lame_win32
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.xmind.lame.win32;singleton:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+
+

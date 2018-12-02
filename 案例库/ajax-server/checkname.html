@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script>
+			onload = function(){
+				var userInput = document.getElementById("username");
+				userInput.onblur = function(){
+					//向服务器发送一个ajax请求。
+					var req = new XMLHttpRequest(); //创建一个请求对象
+					//参数1  设定请求方式   参数2  请求地址    参数3   是否异步
+					req.open("get","http://10.9.189.112:9090/login?username="+userInput.value, true);
+					//onload事件，当请求成功返回时，执行该函数
+					req.onload = function(){
+						//通过responseText属性获取服务器返回结果
+						console.log( typeof req.responseText);
+						var res = req.responseText;
+						if(res == "true") {
+							alert("用户名已存在")
+						}
+					}
+					//发送
+					req.send();
+				}
+			}
+			
+		</script>
+	</head>
+
+	<body>
+		姓名:<input id="username" type="text" /><br>
+		密码:<input type="password"/><br>
+		<button onclick="check()">注册</button>
+		
+	</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

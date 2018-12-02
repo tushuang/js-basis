@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>放烟花效果（面向对象版）</title>
+		<style type="text/css">
+		html,body{overflow:hidden;}
+		body,div,p{margin:0;padding:0;}
+		body{background:#000;font:12px/1.5 arial;color:#7A7A7A;}
+		a{text-decoration:none;outline:none;}
+		#tips,#copyright{position:absolute;width:100%;height:50px;text-align:center;background:#171717;border:2px solid #484848;}
+		#tips{top:0;border-width:0 0 2px;}
+		#tips a{font:14px/30px arial;color:#FFF;background:#F06;display:inline-block;margin:10px 5px 0;padding:0 15px;border-radius:15px;}
+		#tips a.active{background:#FE0000;}
+		#copyright{bottom:0;line-height:50px;border-width:2px 0 0;}
+		#copyright a{color:#FFF;background:#7A7A7A;padding:2px 5px;border-radius:10px;}
+		#copyright a:hover{background:#F90;}
+		p{position:absolute;top:55px;width:100%;text-align:center;}
+		.fire {
+			width: 3px;
+			height: 50px;
+			background: white;
+			position: absolute;
+		} 
+		.spark {
+			position:absolute;
+			width: 6px;
+			height: 6px;
+		}
+		</style>
+<!--<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/animate.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="comment.js"></script>
+<script type="text/javascript">
+	
+	document.onclick = function(e){
+		var e = e||event;
+		//记录鼠标的位置
+		var pos = {
+			x:e.clientX,
+			y:e.clientY
+		}
+		console.log(pos);
+		//点击生成一个div
+		var fire = document.createElement("div");
+		fire.className = "fire";
+		fire.style.left = pos.x + "px";
+		fire.style.top = window.innerHeight + "px";
+		document.body.appendChild(fire);
+		animate(fire,{top:pos.y,height:3},"",function(){
+			exploed(pos.x,pos.y);  //爆炸函数
+			fire.remove();
+		});
+		
+	}
+	function exploed(x,y){
+		var num = randInt(30,60);
+		for(var i=0;i<num;i++){
+			var spark = document.createElement("div");  
+			var frag = document.createDocumentFragment();  //创建缓存区 性能优化
+			(function(_spark){
+				//加上样式
+				_spark.className = "spark";
+				//设置初始位置
+				_spark.style.left = x + "px";
+				_spark.style.top = y +"px";
+				console.log(_spark.style.left,_spark.style.top);
+				//随机颜色
+				_spark.style.background = randColor();
+				//加入body 
+				frag.appendChild(_spark);
+				//设定初始速度
+				_spark.speedX=randInt(-20,20);
+				_spark.speedY=randInt(-20,20);
+				_spark.timer = setInterval(function(){
+					_spark.style.left = _spark.offsetLeft + _spark.speedX + "px";
+					_spark.style.top = _spark.offsetTop + _spark.speedY + "px";
+					//向下的速度增大 模仿自由落体运动
+					_spark.speedY++;
+					if(_spark.offsetTop >= window.innerHeight){
+						clearInterval(_spark.timer);
+						_spark.remove();
+					}
+				},30);
+			})(spark);
+			document.body.appendChild(frag);
+		}
+	}
+	
+	
+/*	document.onclick = function(evt){
+		var e = evt || event;
+		
+		var fire = document.createElement("div");
+		fire.className = "fire";
+		fire.style.left = e.clientX + "px";
+		fire.style.top = window.innerHeight + "px";
+		document.body.appendChild(fire);
+		
+		animate(fire, {top : e.clientY, height: 3}, function(){
+			fire.remove();
+			expolord();
+		});
+		
+		//爆炸
+		function expolord(){
+			var count = randomInt(30,50);
+			var frag = document.createDocumentFragment();
+			for(var i =0; i<count; i++) {
+				var spark = document.createElement("div");
+				(function(_spark){
+					_spark.className = "spark";
+					
+					//随机颜色
+					_spark.style.backgroundColor = randomColor();
+					
+					//出生位置
+					_spark.style.left = e.clientX+"px";
+					_spark.style.top = e.clientY+"px";
+					
+					_spark.speedX = randomInt(-20, 20);
+					_spark.speedY = randomInt(-20, 20);
+					
+					frag.appendChild(_spark);
+					
+					
+					_spark.timer = setInterval(function(){
+						_spark.style.left = _spark.offsetLeft + _spark.speedX + "px";
+						_spark.style.top = _spark.offsetTop + _spark.speedY + "px";
+						_spark.speedY++;
+						
+						if(_spark.offsetTop >= window.innerHeight) {
+							_spark.remove();
+							clearInterval(_spark.timer);
+						}
+					},30)
+				})(spark);
+			}
+			
+			document.body.appendChild(frag);
+			
+		}
+		
+	}
+	*/
+	
+</script>
+</head>
+<body>
+<div id="tips"><a id="manual" href="javascript:;" class="active">手动放烟花</a><a id="auto" href="javascript:;" class="">自动放烟花</a><a id="stop" href="javascript:;" class="">停止放烟花</a></div>
+<p>由于浏览器渲染能力有限, 当浏览器为IE或选择自动放烟花时, 随机生成的烟花碎片范围自动调整至20-30</p>
+<div id="copyright">建议使用Firefox, Chrome浏览器预览效果. </div>
+
+</body></html>

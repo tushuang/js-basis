@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		<meta charset="UTF-8">
+		
+		<title>仿微博评论</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="comment.css">
+	</head>
+	<script>
+		onload = function(){
+			var btn = document.getElementsByClassName("plBtn")[0]; //获得按钮
+			var  inputText = document.getElementsByClassName("content")[0];
+			var  wrapper = document.getElementsByClassName("comment-show-con")[0];
+			var  owrapper = document.getElementsByClassName("comment-show")[0];
+			
+				var req = new XMLHttpRequest();  //创建一个请求对象
+				req.open("GET","http://10.9.189.112:9090/tweets",true);
+				req.onload = function(){  //等数据发送完毕再加载
+					console.log(req.responseText);
+					var res = JSON.parse(req.responseText); //将接口里的数据转化成数组  接口里的数据只会是字符串
+					res.forEach((item)=>{
+						btn.onclick = function(){   //每点击一次 出现一条信息
+							var newmeg = wrapper.cloneNode(true);  //有多少条评论就创建多少条信息
+							var text = newmeg.getElementsByClassName("my-pl-con")[0]; //获得评论的地方
+							text.innerText = item.msg; //数组里存的是对象 取出里面的属性msg
+							owrapper.appendChild(newmeg);
+						}
+					})
+				}
+				req.send();
+			
+			
+/*			//var  text = document.getElementsByClassName("my-pl-con");
+			var i=0;
+			//var remove = btn.parentElement.nextElementSibling.children[0].children[1].children[1].children[1].children[0];
+			btn.onclick = function(){
+				//i++;
+				var icon = inputText.value;
+				var comment = wrapper.cloneNode(true);
+				var text = this.parentElement.nextElementSibling.children[0].children[1].children[0];
+				//var  zan = document.getElementsByClassName("date-dz-z");
+				//var remove = btn.parentElement.nextElementSibling.children[0].children[1].children[1].children[1].children[0];
+				var zan  = this.parentElement.nextElementSibling.children[0].children[1].children[1].children[1].children[3].children[1];
+				zan.innerHTML = "666";
+				text.innerHTML = icon;
+				
+				owrapper.appendChild(comment);
+				//父元素.insertBefore(插入元素，参考元素)
+				//this.parentElement.nextElementSibling.parentNode.appendChild(comment,this.parentElement.nextElementSibling);
+				//this.parentElement.nextElementSibling.appendChild(comment);
+				
+				var remove = document.getElementsByClassName("removeBlock"); //获取删除按钮
+				for(var i=0;i<remove.length;i++){
+					remove[i].onclick = function(){
+						this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode.parentNode);
+					}
+				}
+				var zan = document.getElementsByClassName("date-dz-z"); //获取点赞的按钮
+				var count = 0;
+				for(var i=0;i<zan.length;i++){
+						zan[i].style.color = "#BBB";
+						//zan[i].children[1].innerHTML = "0";
+					zan[i].onclick = function(){
+						count++;  //使用count计数 
+						if(count%2 != 0){ //点击为计数时 变红加一
+							this.children[1].innerHTML = parseInt(this.children[1].innerText) + 1; //数字加一
+							this.style.color = "red";  
+						}else{//点击为偶数时  去掉红色样式 减1 
+							this.style.color = "#BBB";  
+							if(parseInt(this.children[1].innerText)!=0)
+							this.children[1].innerHTML = parseInt(this.children[1].innerText) - 1;  //数字减一
+						}
+					}
+				}
+			}*/
+		}
+	</script>
+	<body>
+		<div class="commentAll">
+			<!--评论区域 begin-->
+			<div class="reviewArea clearfix">
+				<div class="flex-text-wrap">
+					<pre class="pre">
+						<span></span><br>
+					</pre>
+					<textarea class="content comment-input" placeholder="Please enter a comment…" ></textarea>
+				</div>
+				<a href="javascript:;" class="plBtn">评论</a>
+			</div>
+			<!--评论区域 end-->
+			<!--回复区域 begin-->
+			<div class="comment-show">
+				<div class="comment-show-con clearfix">
+					<div class="comment-show-con-img pull-left"><img src="header-img-comment_03.png" alt=""></div>
+					<div class="comment-show-con-list pull-left clearfix">
+						<div class="pl-text clearfix">
+							<a href="#" class="comment-size-name">张三 : </a>
+							<span class="my-pl-con">&nbsp;来啊 造作啊!</span>
+						</div>
+						<div class="date-dz">
+							<span class="date-dz-left pull-left comment-time">2017-5-2 11:11:00</span>
+							<div class="date-dz-right pull-right comment-pl-block">
+								<a href="javascript:;" class="removeBlock">删除</a>
+								<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>
+								<span class="pull-left date-dz-line">|</span>
+								<a href="javascript:;" class="date-dz-z pull-left">
+									<i class="date-dz-z-click-red"></i>赞 
+									<i class="z-num">0</i>
+								</a>
+							</div>
+						</div>
+						<div class="hf-list-con"></div>
+					</div>
+				</div>
+			</div>
+			<!--回复区域 end-->
+		</div>
+	</body>
+</html>

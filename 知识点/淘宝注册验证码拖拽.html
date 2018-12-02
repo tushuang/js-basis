@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.verify {
+				position: relative;
+				width: 300px;
+				height: 40px;
+				line-height: 40px;
+				margin: 200px 400px;
+				background-color: #ccc;
+			}
+			.verify div {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 40px;
+			}
+			.verify .v-over {
+				width: 0;
+				background-color: green;
+			}
+			.verify .v-tip {
+				width: 100%;
+				text-align: center;
+				font-size: 14px;
+			}
+			.verify .v-move {
+				width: 38px;
+				height: 38px;
+				border: 1px solid #999;
+				color: #666;
+				font-size: 14px;
+				font-family: "Microsoft Yahei";
+				text-align: center;
+				background-color: #fff;
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="verify">
+			<div class="v-over"></div>
+			<div class="v-tip">请按住滑块，拖动到最右边</div>
+			<div class="v-move">&gt;&gt;</div>
+		</div>
+
+		<script type="text/javascript">
+			function section(val,min,max){   //限定数字的范围 如果在min max之间 返回val 
+				return Math.max(min,Math.min(max.val));
+			}
+			window.onload = function(){
+				var v_move = document.getElementsByClassName("v-move")[0];
+				var v_over = document.getElementsByClassName("v-over")[0];
+				var v_tip = document.getElementsByClassName("v-tip")[0];
+			
+				v_move.onmousedown = function(e){
+					var e = e || event;
+					var movePos = {x:e.offsetX,y:e.offsetY};
+					document.onmousemove = function(e){
+						var e = e || event;
+						var _left = e.clientX - v_move.parentNode.offsetLeft - movePos.x;
+						//滑动条移动的距离是鼠标在页面的坐标 - 滑动条父元素的定位 - movePos.x;
+						console.log(movePos.x);
+						v_move.style.left = Math.max(0,Math.min(v_move.parentNode.offsetWidth - v_move.offsetWidth, _left)) + "px";
+						v_over.style.width = v_move.style.left;
+						//v_over.style.width = _left + "px";
+						//最大值是外层父元素的宽减去滑动条自身的宽
+					}
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					if(parseInt(v_move.style.left) == v_move.parentNode.offsetWidth - v_move.offsetWidth){
+						v_over.style.backgroundColor = "orange";
+						v_tip.innerText = "验证通过";
+						v_move.onmousedown = null;
+						document.onmousemove  = null;
+					}else{
+						v_move.style.left = 0;
+						v_over.style.width = 0;
+					}
+				}
+				/*var v_move = document.getElementsByClassName("v-move")[0];
+				var v_over = document.getElementsByClassName("v-over")[0];
+				var v_tip = document.getElementsByClassName("v-tip")[0];
+				v_move.onmousedown = function(e) {
+					var e = e || event;
+					var mousePos = {
+						x : e.offsetX,
+						y : e.offsetY
+					}
+					
+					document.onmousemove = function(e){
+						var e = e || event;
+						var _left = (e.clientX-v_move.parentNode.offsetLeft) - mousePos.x;
+						v_over.style.width = _left+"px";
+						v_move.style.left = Math.min( v_move.parentNode.offsetWidth-v_move.offsetWidth ,Math.max(0, _left)) + "px";
+					}
+					
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					//是否滑动成功
+					if( v_move.offsetLeft == (v_move.parentNode.offsetWidth-v_move.offsetWidth)) {
+						v_over.style.backgroundColor = "orange";
+						v_tip.innerText = "验证通过";
+						v_move.onmousedown = null;
+						document.onmouseup = null;
+					} else {
+						v_over.style.width = 0;
+						v_move.style.left = 0;
+					}
+				}*/
+			}
+		</script>
+	</body>
+</html>

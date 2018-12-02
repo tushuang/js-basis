@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+	<style type="text/css">
+		    body{
+			    background-color:rgb(177, 208,224); font: normal 12px Trebuchet MS; color:#000;
+		    }
+		    .roundedCorners{ 
+			    width:220px; padding:10px;
+			    background-color:#DDEEF6; 
+			    box-shadow: 0px 0px 10px 0px #888888;
+			    border:1px solid #DDEEF6;
+			    border-radius:6px;
+			    margin: auto;
+		    }
+		    .roundedCorners-textbox{ 
+				border:1px solid #999; width:160px;
+		    }
+			.checkbox {
+				margin-left: 30px;
+				border:1px solid #999; width:20px;
+			}
+	</style>
+</head>
+<script>
+/*	function getCookie(key) {
+		//"username=yintao; password=nicai"
+		var cookiestr = document.cookie;
+		var list = cookiestr.split("; ");
+		for(var i=0; i<list.length; i++) {
+			var kv = list[i].split("=");
+			if(kv[0]==key) return kv[1];
+		}
+		
+		
+		var res = list.filter(function(item){
+			var kv = item.split("=");
+			return kv[0] == key; 
+		});
+		return res[0].split("=")[1];
+		
+	   return null;
+	}
+	
+	window.onload = function(){
+		
+		
+		var saveNP = document.getElementsByName("saveNP")[0];
+		
+		var submitbtn = document.getElementById("submitbtn");
+		
+
+		document.getElementById("username").value = getCookie("username");
+		document.getElementById("password").value = getCookie("password");
+		
+		
+		submitbtn.addEventListener("click", function(){
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			//判断是否勾选了10天免登录
+			if(saveNP.checked) {
+				var d = new Date();
+				d.setDate(d.getDate()+10);
+				//记录用户名和密码到cookie中
+				document.cookie = "username="+username+"; expires="+d;
+				document.cookie = "password="+password+"; expires="+d;
+			}
+		})
+	}*/
+	function getCookie(key){
+		
+		var cookiestr = document.cookie;
+		var str = cookiestr.split("; "); //将cookie分割 "username=yintao; password=nicai"
+		for(var i=0;i<str.length;i++){ // username=yintao
+			strcookie = str[i].split("=");
+			if(strcookie[0]==key) return strcookie[1];
+		}
+        return null;
+	}
+	window.onload = function(){
+		//再把记录的document。cookie的值取出来 存入输入框
+		document.getElementById("username").value = getCookie("username");
+		document.getElementById("password").value = getCookie("password");
+		
+		var day = document.getElementsByName("saveNP")[0];
+		var osubmit = document.getElementById("submitbtn");
+		osubmit.addEventListener("click",function(){
+			var d = new Date();
+			d.setDate(d.getDate()+10);
+			//点击后获得输入框里的值
+			if(day.checked){
+				var name = document.getElementById("username").value;
+				var pass_word = document.getElementById("password").value;
+				//把用户名和密码记录在cookie中
+				document.cookie ="username="+ name+";expires="+d;
+				document.cookie ="password="+ pass_word+";expires="+d;
+			}
+		})
+	}
+	
+</script>
+<body>
+	<form action="http://www.baidu.com" method="get">	
+		<div class="roundedCorners">
+			<label>账号</label>&nbsp;
+			<input id="username" type="text" class="roundedCorners-textbox" /><br /><br />
+			<label>密码</label>&nbsp;
+			<input id="password" type="text" class="roundedCorners-textbox" /><br /><br />	
+		    	<input name="saveNP" type="checkbox" class="checkbox" />
+				<label>10天内免登陆</label>
+		    	<br/><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="submitbtn" >确定</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" value="清空" />
+		</div>
+	</form>	
+</body>
+</html>

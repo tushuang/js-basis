@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			input{
+				border:none;
+			}
+			button{
+				border:none;
+			}
+			#con{
+				width:500px;
+				height:400px;
+				margin:auto;
+				background:#ccc;
+			}
+			.wrapper{
+				width:500px;
+				height:30px;
+			}
+			.head{
+				float:left;
+				width:80px;
+				height:30px;
+				background:#EEE;
+				border:1px #ECECEC solid;
+			}
+			.input_box{
+				float:left;
+				width:400px;
+				height:30px;
+				border:1px #ECECEC solid;
+			}
+			.btn{
+				width:50px;
+				height:25px;
+				border:1px #ECECEC solid;
+				background:blue;
+				margin-right:20px;
+				margin-top:20px;
+			}
+			.cover,table{
+				width:500px;
+				margin:auto;
+				
+			}
+			tr{
+				height:30px;
+			}
+			th,td{
+				border:1px #ccc solid;
+				border-right:0px;
+			}
+			th.last,td.last{
+				border-right:1px #ccc solid;
+			}
+		</style>
+		<script>
+			onload = function(){
+				var ocon = document.getElementById("con");
+				var obtn = ocon.getElementsByClassName("btn");  //获取按钮
+				var ohead = document.getElementsByClassName("head"); //获取表格前的span
+				var oinput_box = ocon.getElementsByClassName("input_box"); // 获取输入框
+				var otable = document.getElementsByTagName("table")[0];
+				var count = 0;
+				obtn[0].onclick = function(){   				//点击保存按钮 生成一条记录
+					var otr = document.createElement("tr");     //创建tr
+					otr.index = count++;
+					for(var i=0; i<oinput_box.length;i++){          // 先做判断 输入框是否有值
+						if(oinput_box[i].value != ""){  
+							for(var i=0; i<oinput_box.length+1;i++){
+								var otd = document.createElement("td");				// 每循环一次 获取一次td
+								if(i == oinput_box.length){
+									otd.innerHTML = "<button>修改</button> <button>删除</button> ";
+									otd.className = "last btn2";             //加上class名
+								}else{
+									otd.innerHTML = oinput_box[i].value;
+								}
+								otr.appendChild(otd);                     //并将td加入tr中
+							}
+						otable.appendChild(otr);
+						}
+					}
+					
+					var orm = document.getElementsByClassName("btn2");   
+					for(var i=0;i<orm.length;i++){
+						var remove = orm[i].getElementsByTagName("button")[1];  //获取所有的删除按钮
+						remove.onclick = function(){
+							this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+							//删除他的子节点 不能直接写tr
+						}
+					}
+					var ocover = document.getElementsByClassName("cover")[0];
+					var input_box2 = ocover.getElementsByClassName("input_box");
+					var save = ocover.getElementsByTagName("button");
+					for(var i=0;i<orm.length;i++){
+						var mod = orm[i].getElementsByTagName("button")[0];
+						mod.onclick = function(){
+							//先获取创建的ul列表中的值 赋给 新建的修改框
+							var otd = this.parentNode.parentNode.getElementsByTagName("td");
+							for(var i=0;i<otd.length-1;i++){
+								input_box2[i].value = otd[i].innerText;
+							}
+							save[0].onclick = function(){
+								for(var i=0;i<input_box2.length;i++){
+									otd[i].innerText = input_box2[i].value;
+									console.log(input_box2[i].value);
+								}
+							}
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="con">                                                      //表单
+			<div class="wrapper">
+				<span class="head">姓名：</span>
+				<input class="input_box" type="text" value="">
+			</div>
+			<div class="wrapper">
+				<span class="head">姓名：</span>
+				<input class="input_box" type="text" value="">
+			</div>
+			<div class="wrapper">
+				<span class="head">姓名：</span>
+				<input class="input_box" type="text" value="">
+			</div>
+			<div class="wrapper">
+				<button class="btn">保存</button>
+				<button class="btn">重置</button>
+			</div>
+		</div>
+		
+		<table cellspacing = "0">
+			<tr>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>住址</th>
+				<th class="last">操作</th>
+			</tr>
+		</table>
+		
+		<div class="cover">
+			<div class="layer">
+				<div class="wrapper">
+					<span class="head">姓名：</span>
+					<input class="input_box" type="text" value="">
+				</div>
+				<div class="wrapper">
+					<span class="head">姓名：</span>
+					<input class="input_box" type="text" value="">
+				</div>
+				<div class="wrapper">
+					<span class="head">姓名：</span>
+					<input class="input_box" type="text" value="">
+				</div>
+				<div class="wrapper">
+					<button class="btn">保存</button>
+					<button class="btn">重置</button>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

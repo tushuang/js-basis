@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+</head>
+
+<body>
+	<button id="btn" type="button">按钮</button>
+</body>
+	<script type="text/javascript">
+		"use strict";
+		//什么是作用域？？
+		//作用域是一个对象. Scope
+		
+		
+		
+		/* function m1(){
+			function m2(){  
+				console.log(this);
+			}
+			m2();
+		} */
+		
+		/* var obj = {id:3, age: 20};
+		
+		for(var attr in obj) {
+			console.log(attr, obj[attr]);
+		} */
+		
+		
+		/* var father = {
+			money: 999999
+		}
+		
+		
+		var obj = Object.create(father); */
+		
+		
+		var stu = {
+			name : '王尼玛',
+			age : 20,
+		}
+		
+		Object.defineProperty(stu, 'score', {
+			//writable: true,  //和下面的set get方法 不能同时存在
+			enumerable: true,  //表示该属性是否可以枚举（遍历）    
+			configurable: true,  //表示该属性是否可删除，以及是否可配置, 比如writeable能不能被修改 
+			set: function(val){  //用作事件监听
+				//当属性被赋值时，做一些拦截动作，例如将数据同步到view
+				console.log("有人在修改stu的score属性");
+				this.__score = val;   //实际修改和获取的值是__score   使用score会形成死循环  因为要修改就要获取 要获取也会调用修改
+			},
+			get: function(){
+				console.log("有人在获取stu的score属性");
+				//当这个函数被调用的时候,我就知道,score属性被获取了!!!!
+				//当属性被获取时，做一些拦截动作，例如权限检查之类的
+				return this.__score;
+			}
+		});
+		
+		
+		/*Object.defineProperty(stu, '__score', {
+			enumerable: false //不可枚举
+		});*/
+	</script>
+</html>

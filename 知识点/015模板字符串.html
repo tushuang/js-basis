@@ -1,0 +1,133 @@
+<!--<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script type="text/template">
+			var text = `<div>
+				<ul>
+					<li><%=person.name%></li>
+					<li><%=person.age%></li>
+					<li><%=person.address%></li>
+					<li><%=person.sex%></li>
+				</ul>
+			</div>`;
+			function format(){
+				
+			}
+			</div>
+		</script>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li>person.name</li>
+				<li>person.age</li>
+				<li>person.address</li>
+				<li>person.sex</li>
+			</ul>
+		</div>
+	</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>template</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.box {
+			margin: 0 auto;
+			width: 800px;
+		}
+
+		.box>ul>li {
+			width: 80px;
+			height: 40px;
+			background-color: pink;
+			float: left;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	
+</body>
+<script type="text/template" id="template">
+<ul>
+    <li><%=person.name%></li>
+    <li><%=person.age%></li>
+    <li><%=person.address%></li>
+    <li><%=person.sex%></li>
+</ul>
+</script>
+<script>
+/*	var tpl = document.getElementById('template').innerHTML;
+	console.log(tpl);
+	//template(tpl, {list: [{name: "yan"},{name: "haijing"}]});
+	function template(str,date){   //str字符串文本  date是数据字典
+		//定义一个正则表达式
+		var reg = /<%=((\w+)(\.\w+)*)%>/g;
+		return str.replace(reg,function(match,$1,$2,$3,$4){   //<%=person.name%> person.name person .name 13
+			var arr = $1.split(".");
+			for(var i=0;i<date.list.length;i++){
+				var obj = date.list[i];
+				var key = Object.keys(obj);
+				if(key[0] == arr[1])
+				return obj[Object.keys(obj)[0]];  //有四次返回值
+			}
+		});
+	}
+	var date = {list: [{name: "yan"},{age: "haijing"},{address:"Beijing"},{sex:"men"}]};  //对象中存了三个数组
+
+	var aaa = template(tpl,date);
+	
+	document.body.innerHTML += aaa;*/
+
+		//模板字符串
+		var template =
+			`<ul>
+                <% for(var i=0; i < data.names.length; i++) { %>
+                   <li><%= data.names[i] %></li>
+                <% } %>
+               </ul>`;
+
+		function test(temp) {
+			//正则处理字符串
+			temp = temp.replace(/<%=(.+?)%>/g, "`) \n print($1) \n print(`");
+			temp = temp.replace(/<%(.+?)%>/g, "`) \n $1 \n print(`");
+			temp = "print(`" + temp + "`)";
+			return temp;
+		}
+		var temps = test(template);
+		var funcStr =
+			`(function(data){
+        var strhtml = "";
+        function print(str){
+            strhtml += str;
+        }
+        ${temps} //把temp字符串放入该函数中，形成一个完整的函数
+        return strhtml;
+		})`;
+		var func = eval(funcStr);
+
+		//调用这个函数，得到最终的字符串模板
+		var obj = {
+			names: ["张三", "李四", "tony stark", "hulk"]
+		};
+		var res = func(obj);
+		document.body.innerHTML += res;
+	</script>
+
+</script>
+</html>

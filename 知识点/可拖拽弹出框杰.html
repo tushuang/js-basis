@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+	</head>
+	<style>
+		html,body{
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+		}
+		.cover{
+			position: fixed;
+			width:100%;
+			height: 100%;
+			background: #B6BBC0;
+			
+			padding: 0px;
+			margin: 0px;
+		}
+		.layer{
+			text-align:center;
+			position: absolute;
+			left: 0; top: 0; right: 0; bottom: 0;
+			margin: auto;	
+			width:500px;
+			height: 300px;
+			background: cornflowerblue;
+		}
+		.title{
+			text-align:center;
+			height: 30px;
+			background: #006666;
+			cursor: move;
+		}
+		.closeBtn{
+			position: absolute;
+			bottom: 5px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var cover=document.getElementsByClassName("cover")[0];
+			var box=document.getElementsByClassName("layer")[0];
+			var title=document.getElementsByClassName("title")[0];
+			var btn=document.getElementsByClassName("closeBtn")[0];
+			title.onmousedown=function (e1){
+				e1=e1||event;
+				var disx=e1.offsetX;  //记录下鼠标相对于元素的坐标
+				var disy=e1.offsetY;
+				console.log(disx);
+			document.onmousemove=function(e2){   //在body上移动的话 盒子也能跟着动
+				e2=e2||event;
+				var x=e2.clientX-disx;
+				var y=e2.clientY-disy;
+				console.log(x);
+				console.log(y);
+				box.style.margin = "0px";
+				box.style.top=Math.max(0,Math.min(window.innerHeight - box.offsetHeight,y))+"px";
+				box.style.left=Math.max(0,Math.min(window.innerWidth - box.offsetWidth,x))+"px";
+			}
+			}
+			document.onmouseup=function (){
+				documents.onmousemove=null;
+			}
+		}
+		function closeCover(){
+			var cover=document.getElementsByClassName("cover")[0];
+			cover.style.display = "none";                   
+			//不能使用this 因为 onclick="closeCover()" 相当于 onclick="window.closeCover()"
+		}
+	</script>
+	<body>
+		<div class="cover">
+			<div class="layer">
+				<div class="title">窗口标题</div>
+				<button class="closeBtn" onclick="closeCover()">关闭</button>
+			</div>			
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-1.9.0.js"></script>
+</head>
+<style>
+    div.wra>div{
+        background: pink;
+        width: 100px;
+        height: 50px;
+        position: absolute;
+    }
+</style>
+ <script>   
+    $(function(){
+        $("div.wra button").click(function(){
+            console.log("nihao");
+            $(this).innerHTML = "是不是傻";
+        })
+        $("ul li:odd").css("color","green");
+        $("div.wra ul li:even").css("color","red");
+    })
+</script>
+
+<body>
+    <div class="wra">
+        <div ani="ok">
+
+        </div>
+        <button index = "1">点我</button>
+        <ul>
+            <li>11</li>
+            <li>22</li>
+            <li>33</li>
+            <li>44</li>
+            <li>55</li>
+            <li>66</li>
+        </ul>
+    </div>
+</body>
+</html>

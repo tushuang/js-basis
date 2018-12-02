@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				list-style: none;
+			}
+			
+			#main {
+				width: 760px;
+				height: 300px;
+				position: relative;
+				margin: 50px auto;
+			}
+			
+			#main .pic {
+				width: 760px;
+				height: 300px;
+				
+				overflow: hidden;
+			}
+			#main .pic ul li {
+				width: 760px;
+				height: 300px;
+				position: relative;
+				
+			}
+			#main .pic ul li .img1 {
+				position: absolute;
+				top: 0;
+				left: -760px;
+			}
+			#main .pic ul li .img2 {
+				position: absolute;
+				top: 0;
+				left: -20px;
+				display: none;
+			}
+			#main .nav {
+				position: absolute;
+				right: 20px;
+				bottom: 20px;
+			}
+			#main .nav ul li {
+				width: 10px;
+				height: 10px;
+				border: 1px solid #fff;
+				float: left;
+				margin-left: 5px;
+			}
+			#main .nav ul li.select{
+				background: #fff;
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+		
+		<div id="main">
+			<div class="pic">
+				<ul>
+					<li style="background: url(img/bg1.jpg);">
+						<img class="img1" src="img/text1.png"/>
+						<img class="img2" src="img/con1.png"/>
+					</li>
+					<li style="background: url(img/bg2.jpg);">
+						<img class="img1" src="img/text2.png"/>
+						<img class="img2" src="img/con2.png"/>
+					</li>
+					<li style="background: url(img/bg3.jpg);">
+						<img class="img1" src="img/text3.png"/>
+						<img class="img2" src="img/con3.png"/>
+					</li>
+					<li style="background: url(img/bg4.jpg);">
+						<img class="img1" src="img/text4.png"/>
+						<img class="img2" src="img/con4.png"/>
+					</li>
+					<li style="background: url(img/bg5.jpg);">
+						<img class="img1" src="img/text5.png"/>
+						<img class="img2" src="img/con5.png"/>
+					</li>
+
+				</ul>
+			</div>
+			<div class="nav">
+				<ul>
+					<li class="select"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			
+			<a href="javascript:void(0);" class="btn prev"></a>
+			<a href="javascript:void(0);" class="btn next"></a>
+			
+		</div>
+		
+		
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript">
+		
+		//定时器  每过一段切换图片 给li换样式
+		var oli = $(".pic li");  //转化成数组
+		var count = 0;
+
+
+		//最开始先加载第一张图片 
+		function first(){
+			$(".pic li").eq(0).css("display","list-item");
+			$(".pic li").eq(0).find("img").eq(0).animate({left:0},500);
+			$(".pic li").eq(0).find("img").eq(1).css("display","block").animate({left:20},500);
+			count++;  //调用完第一张图片后 count++ 直接加载第二张图片 
+		}
+		first();
+		function change(){
+			index();
+			$(".pic li").eq(count).css("display","list-item");
+			$(".pic li").eq(count).find("img").eq(0).animate({left:0},1000); 
+			$(".pic li").eq(count).find("img").eq(1).css("display","block").animate({left:20},1000);
+			//样式还原
+			$(".pic li").eq(count).siblings().css("display","none");
+			$(".pic li").eq(count).siblings().find(".img1").css("left",-760);
+			$(".pic li").eq(count).siblings().find(".img2").css("display","block").css("left","-20");
+			count++;
+			if(count == 5) count =0;
+		}
+
+		function index(){  //给li加样式
+			$(".nav ul li").eq(count).addClass("select");
+			$(".nav ul li").eq(count).siblings().removeClass("select");
+		}
+		setInterval(change,1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+			
+		</script>
+		
+	</body>
+</html>

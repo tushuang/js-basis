@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>五星评分</title>
+	<style type="text/css">
+		#ul1{padding:0; margin:0; list-style:none;  width:300px; height:28px;}
+		#ul1 li{float:left; background:url(star.gif) no-repeat 0 0; width:27px; height:28px; }
+
+		.active{ }
+		.default{ }
+	</style>
+	<script type="text/javascript">
+		var arr=['差评','不推荐','一般','推荐','强力推荐'];
+
+		onload = function(){
+			var eva = document.getElementById("div");
+			var all = document.getElementById("ul1");
+			var stars = all.children;
+			console.log(stars);
+			for(var i=0;i<stars.length;i++){
+				stars[i].index = i;
+				
+				stars[i].onmouseover = function(){
+					for(var k=0;k<=this.index;k++){
+						stars[k].style.background = "url(star.gif) no-repeat 0 -28px";
+					}
+					for(var j=this.index + 1;j<stars.length;j++){
+						stars[j].style.background = "url(star.gif) no-repeat 0 0";
+					}
+					eva.innerText = arr[this.index];
+				}
+				
+				stars[i].onclick = function(){
+					for(var i=0;i<this.index;i++){
+					console.log(this.index)
+						stars[i].onmouseover = function(){
+									this.style.background = "url(star.gif) no-repeat 0 -28px";
+								}
+					}
+					for(var i=this.index;i<stars.length-1;i++){
+						console.log(stars[i+1]);
+						stars[i+1].style.background = "url(star.gif) no-repeat 0 0";
+						/*stars[i].onmouseover = function(){
+							stars[this.index+1].style.background = "url(star.gif) no-repeat 0 0";
+						}*/
+					}
+					eva.innerText = arr[this.index];
+				}
+			}
+		
+		}
+	</script>
+</head>
+
+<body>
+	<ul id="ul1" >
+		<li class="default"> </li>
+		<li class="default"> </li>
+		<li class="default"> </li>
+		<li class="default"> </li>
+		<li class="default"> </li>
+	</ul>
+	<div id="div"></div>
+</body>
+</html>

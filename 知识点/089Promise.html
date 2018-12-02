@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	
+</body>
+<script>
+	//Promise  异步编程的解决方案
+	//两个异步的方法，可以按顺序来
+	// box1.animate(function(){
+	// 	box1.animate(function(){
+	// 		box1.animate(function(){
+
+	// 		})
+	// 	});
+	// });
+	
+	//new Promise(ajax1).then(ajax2).then(ajax3);
+	
+	// function ajax1(resolve, reject){
+	// 	setTimeout(()=>{
+	// 		console.log(`ajax1 is over`);
+	// 		reject("ajax1出错了！！！！！！");
+	// 	}, Math.random()+1000);
+	// }
+
+	// function ajax2(){
+	// 	return new Promise(function(success, reject){
+	// 		setTimeout(()=>{
+	// 			console.log(`ajax2 is over`);
+	// 			success();
+	// 		}, Math.random()+1000);
+	// 	});
+	// }
+
+	// function ajax3(){
+	// 	setTimeout(()=>{
+	// 		console.log(`ajax3 is over`);
+	// 	}, Math.random()+1000);
+	// }
+
+	// new Promise(ajax1)
+	// 	.then(ajax2)
+	// 	.then(ajax3)
+	// 	.catch(function(msg){
+	// 		console.log(msg)
+	// 	})
+
+	function ajax1(resolve, reject){
+		setTimeout(()=>{
+			console.log(`ajax1 is over`);
+			resolve();
+		}, Math.random()+1000);
+	}
+	function ajax2(resolve, reject){
+		setTimeout(()=>{
+			console.log(`ajax2 is over`);
+			resolve();
+		}, Math.random()+1000);
+	}
+
+	// var p1 = new Promise(ajax1);
+	// var p2 = new Promise(ajax2);
+	// p1.then(p2);
+
+	
+	Promise.all(function(){
+		return [ new Promise(ajax1), new Promise(ajax2), new Promise(ajax3)];
+	}).then(ajax4);
+
+	Promise.race(function(){
+		return [p1,p2,p3];
+	}).then(ajax4);
+	
+
+
+</script>
+</html>

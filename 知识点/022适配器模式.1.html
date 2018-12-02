@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+</body>
+
+<script src="../js/framework.js"></script>
+<script>
+  class Ipad{
+      playgame(){
+
+      }
+  }
+  class Iphone extends Ipad{
+      playCall(){
+
+      }
+  }
+  //适配器
+  function adapter(target){
+      this.playgame = function(){
+          console.log(this); //this 
+        target.playgame?target.playgame():console.log("没有palygame这个属性");
+      }
+      this.palyCall = function(){
+        target.playCall?target.playCall():console.log("没有palyCall这个属性");
+      }
+  }
+
+  function test(target){
+      target.playgame();  //在这里调用 适配器里的方法
+      target.palyCall();
+  }
+  
+  var ipad = new Ipad();
+  var iphone = new Iphone();
+  test(new adapter(ipad));
+  //test(new adapter(iphone));
+  console.log(new adapter(ipad));  //adapter {playgame: ƒ, palyCall: ƒ}
+  new adapter(iphone);
+
+</script>
+
+</html>

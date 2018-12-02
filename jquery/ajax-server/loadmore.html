@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		html,body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,code,em,img,small,strong,sub,sup,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label{margin:auto;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+		h2{ text-align:center; padding:10px; font-size:20px;}
+		a{color:#007bc4/*#424242*/; text-decoration:none;}
+		a:hover{text-decoration:underline}
+		ol,ul{list-style:none}
+		table{border-collapse:collapse;border-spacing:0}
+		body{height:100%; font:12px sans-serif; color:#51555C; background:#2C2C2C }
+		#main_demo{width:910px; min-height:600px; margin:30px auto 0 auto; background:#fff; -moz-border-radius:12px;-khtml-border-radius: 12px;-webkit-border-radius: 12px; border-radius:12px;}
+		#results{
+			font: 12px Arial, Helvetica, sans-serif;
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#results .loading-indication{
+			background:#FFFFFF;			padding:10px;			position: absolute;
+		}
+		.paginate {
+			padding: 0px;			margin: 0px;			height: 30px;
+			display: block;			text-align: center;
+		}
+		.paginate li {
+			display: inline-block;			list-style: none;
+			padding: 0px;			margin-right: 1px;
+			width: 30px;			text-align: center;
+			background: #4CC2AF;			line-height: 25px;
+		}
+		.paginate .active {
+			display: inline-block;			list-style: none;
+			padding: 0px;			margin-right: 1px;
+			width: 30px;			text-align: center;
+			line-height: 25px;			background-color: #666666;
+		}
+		.paginate li a{
+			color:#FFFFFF;			text-decoration:none;
+		}
+		.page_result{
+			padding: 0px;
+		}
+		.page_result li{
+			background: #E4E4E4;			margin-bottom: 5px;
+			padding: 10px;			height: 20px;
+			font-size: 12px;			list-style: none;
+		}
+		.page_result .page_name {
+			font-size: 14px;			font-weight: bold;			margin-right: 5px;
+		}
+	</style>
+	<script>
+		//请求路径  http://255.255.255.255/AJAX/football?pageNo=1    
+		//该地址请求多条微博信息，分页获取，pageNo指定获取第几页的数据
+		window.onload = function() {
+			var pageNo = 1;
+			var loadmore = Base.getById("load_more_button");
+			loadmore.onclick = function() {
+				var request = new XMLHttpRequest();
+				request.open("get","http://192.168.87.79/AJAX/football?pageNo="+pageNo++, true);
+				request.onreadystatechange = function() {
+					if(request.readyState == 4) {
+						//eval 将json字符串,
+						var res = eval("("+request.responseText+")");
+						var tweetlist = res.data.tweetlist;
+						
+						var oUL = Base.getByClassName("page_result");
+						
+						for(var index in tweetlist) {
+							var tw = tweetlist[index];
+							var li = document.createElement("li");
+							li.id = "item_"+tw.id;
+							var span = document.createElement("span");
+							span.className = "message_left";
+							span.innerHTML = tw.content;
+							li.appendChild(span);
+							oUL.appendChild(li);
+						}
+					}
+				}
+				request.send();
+			}
+		}
+	</script>
+	<body>
+		<div id="main_demo">
+			<div id="results">
+				<ul class="page_result">
+					<li id="item_146">
+						<span class="message_left">bbbbbbbbbb</span>
+					</li>
+					<li id="item_145">
+						<span class="message_left">bbbbbbbbbb</span>
+					</li>
+					<li id="item_145">
+						<span class="message_left">bbbbbbbbbb</span>
+					</li>
+				</ul>
+				<div align="center">
+					<button class="load_more" id="load_more_button" style="display: inline-block;">load More</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

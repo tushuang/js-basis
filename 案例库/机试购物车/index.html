@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>购物车</title>
+		<link rel="stylesheet" href="css/comment.css">
+		<link rel="stylesheet" href="css/index.css">
+		<script src="js/index.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<ul class="title">
+				
+				<li><input type="checkbox" id="all-goods1" />全选</li>
+				<li class="margin-right">商品</li>
+				<li>单价</li>
+				<li class="num">数量</li>
+				<li class="all">小计</li>
+				<li class="li4">操作</li>
+			</ul>
+			<div id="list">
+				<div class="line">
+					<span class="left fl">
+						<input class="select fl" type="checkbox" >
+						<img class="fl" src="img/购物车_03.jpg" alt="">
+						<p class="goods">荣耀9i 4GB+64GB 幻夜黑 移动联通电<br>信4G全面屏手机 双卡双待</p>
+					</span>
+					<span class="right fr">
+						<p class="price fl">￥1399.00</p>
+						<span class="amount fl">
+							<span class="amount-left">-</span>	
+							<em class="number">1</em>
+							<span class="amount-right">+</span>
+						</span>
+						<p class="price-all fl">￥1399.00</p>
+						<p class="delete fl">删除</p>
+					</span>
+					
+				</div>
+				<div class="line line2">
+					<span class="left fl">
+						<input class="select fl" type="checkbox" >
+						<img class="fl" src="img/购物车_03.jpg" alt="">
+						<p class="goods">荣耀9i 4GB+64GB 幻夜黑 移动联通电<br>信4G全面屏手机 双卡双待</p>
+					</span>
+					<span class="right fr">
+						<p class="price fl">￥1399.00</p>
+						<span class="amount fl">
+						<span class="amount-left">-</span><em class="number">1</em>
+						<span class="amount-right">+</span>
+						</span>
+						<p class="price-all fl">￥1399.00</p>
+						<p class="delete fl">删除</p>
+					</span>
+				</div>
+			</div>
+			<div class="bottom">
+				<ul >
+					<li>
+						<input type="checkbox" id="all-goods2" />&nbsp;全选
+					</li>
+					<li id="delate">
+						删除选中的商品
+					</li>
+					<li>
+						已选择 <em id="quality">0</em>  件商品
+					</li>
+					<li>
+						总价：<em class="all-price">￥0</em>
+					</li>
+					<li>
+						<span class="btn">去结算</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

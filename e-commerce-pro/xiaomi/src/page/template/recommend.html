@@ -1,0 +1,21 @@
+<script type="text/html" id="recommendlist">
+<% for(var i=0;i<list.length;i++)  {%>
+    <a href="../../page/goodsinfo.html">
+<li class="goodcommon">
+    <div class="recommendgood" style="background:url(<%=list[i].image%>)center 20px no-repeat;background-size: 60%;">
+        <div class="recommendgood-title">
+            <%=list[i].name%>
+        </div>
+        <div class="recommendprice">
+            <span>
+                <%=list[i].price%>
+            </span>
+            <div>
+                    <%=list[i].comments%>人好评
+            </div>
+        </div>
+    </div>
+</li>
+</a>
+<% } %>
+</script>

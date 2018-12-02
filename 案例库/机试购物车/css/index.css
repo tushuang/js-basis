@@ -1,0 +1,148 @@
+.wrapper{
+	width: 995px;
+	height: 475px;
+	margin: auto;
+}
+.title{
+	width: 995px;
+	height: 40px;
+	list-style: none;
+	background: #f3f3f3;
+	line-height: 40px;
+	padding-left: 5px;
+}
+.title li{
+	float: left;
+	font-size: 14px;
+	color: #666666;
+	margin-right: 75px;
+}
+.title li.margin-right{
+	margin-right: 450px;
+}
+.title li.li4{
+	margin-right:0px;
+}
+.title li.num{
+	margin-right:105px;
+}
+.title li.all{
+	margin-right:40px;
+}
+.line{
+	margin-top: 7px;
+	border-top: #f1f1f1 solid 1px;
+	border-bottom: #f1f1f1 solid 1px;
+	width: 994px;
+	height: 140px;
+}
+.line .left{
+	margin-top:15px ;
+	width: 348px;
+}
+.line .right{
+	margin-top: 15px;
+	width: 393px;
+}
+.select{
+	margin: 5px 20px 0 7px;
+}
+.left img{
+	margin-right:10px ;
+}
+.left .goods{
+	font-size: 13px;
+	line-height: 20px;
+}
+.right .amount{
+	width: 79px;
+	height: 20px;
+	text-align: center;
+	border: 1px #cacbcb solid;
+	margin-right: 39px;
+	margin-left:39px ;
+}
+.right .price{
+	font-size: 14px;
+}
+.amount-left,.amount-right{
+	display: inline-block;
+	width: 15px;
+	height: 20px;
+	float: left;
+	border-right: 1px #cacbcb solid ;
+	color: #666666;
+	cursor: pointer;
+}
+.amount-right{
+	border-left: 1px #cacbcb solid;
+	border-right: 0px;
+	float: right;
+}
+.right .price-all{
+	font-weight: bold;
+	font-size: 15px;
+}
+.right .delete{
+	font-size: 14px;
+	color: #956666;
+	margin-left: 31px;
+	cursor: pointer;
+}
+.line:hover{
+	background: #fff4e8;
+}
+.line2{
+	margin-top: 36px;
+}
+#list{
+	border-left: 1px #f1f1f1 solid;
+	border-right: 1px #f1f1f1 solid;
+}
+.bottom{
+	width: 994px;
+	height: 52px;
+	line-height: 52px;
+	margin-top: 20px;
+}
+.bottom ul{
+	list-style: none;
+	width: 994px;
+	height: 52px;
+	border: 1px #F1F1F1 solid;
+}
+.bottom ul li{
+	float: left;
+	color: #666666;
+	font-size: 14px;
+}
+.bottom ul li:nth-child(1){
+	margin: 0 10px 0 10px;
+}
+.bottom ul li:nth-child(2){
+	margin-right: 456px;
+}
+.bottom ul li:nth-child(3){
+	margin-right: 23px;
+}
+.bottom ul li:nth-child(4) em{
+	font-size: 15px;
+}
+.bottom ul li:nth-child(5){
+	width: 96px;
+	height: 52px;
+	font-size: 14px;
+	color: white;
+	background: #e64346;
+	text-align: center;
+	margin-right: 0;
+	float: right;
+}
+.bottom em{
+	color: #E64346;
+	font-style: normal;
+	font-weight: bold;
+}
+em{
+	font-style: normal;
+}

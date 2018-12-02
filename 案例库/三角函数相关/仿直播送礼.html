@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 1000px;
+            height: 600px;
+            background: #000000;
+            border: 5px solid red;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box div {
+            position: absolute;
+            right: 50px;
+            bottom: -50px;
+            border-radius: 50%;
+        }
+    </style>
+	<script src="../comment.js"></script>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+	var area = document.getElementById("box");
+	area.addEventListener("click",function(){   //给box添加点击事件
+		var odiv = document.createElement("div");
+		odiv.style.width = odiv.style.height = Math.random()*30 +20 +"px";
+		odiv.style.background = randColor();
+		//运动轨迹 正弦运动
+		var num = randInt(1,100);
+		animate(odiv,{opacity:20},1000);
+		track(odiv,num);
+		area.appendChild(odiv);
+	})
+	function track(ele,num){
+		var degree = 0;
+		ele.timer = setInterval(function(){  
+			var y = Math.PI/180*degree;//求出弧度
+			//var num = randInt(10,50);
+			var x = Math.sin(y)*num;
+			ele.style.left =  -x+940 + "px";
+			ele.style.top = window.innerHeight-20 -degree + "px";  //使小球从底边冒出
+			degree+= randInt(1,10);
+			if(parseInt(ele.style.top)+ele.offsetHeight<=0){
+				clearInterval(ele.timer);
+			}
+			console.log("guan");
+		},randInt(10,40));
+	}
+	
+ /*   function star(id) {
+        this.box = document.getElementById(id);
+    }
+    star.prototype.setStar = function () {
+        var stars = document.createElement('div');
+        var size = Math.floor(Math.random() * 31 + 20);
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        stars.style.cssText = 'width:' + size + 'px;height:' + size + 'px;background:rgb(' + r + ',' + g + ',' + b + ')';
+        stars.A = Math.floor(Math.random() * 50);
+        stars.sb = Math.floor(Math.random() * 5 + 1);
+        stars.b = -50;
+        stars.o = 500;
+        stars.timer = setInterval(function () {
+            stars.b += stars.sb;
+            stars.o -= stars.sb;
+            if(stars.b>500){
+                clearInterval(stars.timer)
+                stars.remove();
+            }
+            var x = Math.sin(stars.b*Math.PI/180)*stars.A;
+            stars.style.right = (x+50) + 'px';
+            stars.style.bottom = stars.b + 'px';
+            stars.style.opacity = stars.o/500;
+        }, 10)
+
+        this.box.appendChild(stars)
+    }
+
+    var s = new star('box');
+    document.onclick = function(){
+        s.setStar();
+    }*/
+	function randColor(){
+		var r= randInt(0,255);
+		var g= randInt(0,255);
+		var b= randInt(0,255);
+		return "rgb("+r+","+g+","+b+")";
+	}
+	function randInt(min,max){  //随机数
+		return parseInt((Math.random()*(max-min))+min);
+	}
+</script>
+
+</html>

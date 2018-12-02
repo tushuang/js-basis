@@ -1,0 +1,158 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>无标题文档</title>
+<style>
+*{ padding:0 margin:0}
+#menu1 {
+	position: relative;
+}
+#menu1  div{ display:none;width:300px; height:300px; background:yellow;
+	position: absolute; left: 100px; top: 0px;
+}
+</style>
+<script type="text/javascript">
+/*
+window.onload=function(){
+	var oBtn=document.getElementById('a');
+	var oUl=document.getElementById('ul');
+	var aLi=oUl.getElementsByTagName('li');
+	var oDiv=document.getElementById('div');
+	var aDiv=oDiv.getElementsByTagName('div');
+		
+	oBtn.onmouseover=function(){
+		oUl.style.display='block'
+	}
+	oUl.onmouseout=function(){
+		oUl.style.display='none'
+	}
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index=i
+		aDiv[i].index=i
+		aLi[i].onmouseover=function(){
+			tabShow(this.index,aDiv,oUl)	
+		}
+		aDiv[i].onmouseover=function(){
+			tabShow(this.index,aDiv,oUl)
+		}
+		aDiv[i].onmouseout=aLi[i].onmouseout=function(){
+			tabDis(aDiv,oUl)
+		}	
+	}	
+}
+	function tabShow(index,aDiv,oUl){
+		for(i=0;i<aDiv.length;i++){
+			aDiv[i].style.display='none'
+		}
+	    aDiv[index].style.display='block'
+		oUl.style.display='block'
+	}
+	
+	
+	function tabDis(aDiv,oUl){
+		for(i=0;i<aDiv.length;i++){
+			aDiv[i].style.display='none'
+		}
+		oUl.style.display='none'
+	}
+*/
+/*	onload = function(){
+		var all = document.getElementById("all");
+		var menu = document.getElementById("menu");
+		var menu_items = menu.children;
+		
+		all.onmouseover = function(){
+			menu.style.display = "block";
+		}
+		all.onmouseout = function(){
+			menu.style.display = "none";
+		}
+		for(var i=0; i<menu_items.length; i++){
+			menu_items[i].onmouseover = function(){
+				console.log("xxx");
+				this.children[0].style.display = "block";
+			}
+		}
+		
+	}*/
+	
+	onload = function(){
+		var menu = document.getElementById("all");
+		var menu1 = document.getElementById("menu");
+		var menuli = menu1.children;
+		var menu2 = document.getElementById("menu1");
+		
+		menu.onmouseover = function(){
+			menu1.style.display = "block";
+		}
+		menu.onmouseout = function(){
+			menu1.style.display = "none";
+			menu2.style.display = "none";
+		}
+		
+		menu1.onmouseover = function(){
+			menu1.style.display = "block";
+			menu2.style.display = "block";
+		}
+		menu1.onmouseout = function(){
+			menu1.style.display = "none";
+		}
+		
+		for(var i=0;i<menuli.length;i++){
+			menuli[i].index = i;
+			menuli[i].onmouseover = function(){
+				menu2.children[this.index].style.display = "block";
+				menu2.children[this.index].onmouseover = function(){
+					menu1.style.display = "block";
+					this.style.display="block";
+				}
+				menu2.children[this.index].onmouseout = function(){
+					menu1.style.display = "none";
+					this.style.display="none";
+				}
+			}
+			menuli[i].onmouseout = function(){
+				menu2.children[this.index].style.display = "none";
+			}
+		}
+/*		for(var i=0;i<menuli.length;i++){
+			menuli[i].onmouseover = function(){
+				this.children[0].style.display = "block";
+			}
+			menuli[i].onmouseout = function(){
+				this.children[0].style.display = "none";
+			}
+		}*/
+	}
+	
+</script>
+</head>
+
+<body>
+	<div href="#" id="all" style="display:block; width:100px; background:red;">全部商品</div>
+		<ul id="menu" style=" width:100px; height:300px; padding:0; margin:0; background:green;float:left;display:none">
+			<li>一级菜单A</li>
+			<li>一级菜单B</li>
+			<li>一级菜单C</li>
+		</ul>
+		<div id="menu1">
+			<div>二级AAAA</div>
+			<div>二级BBBB</div>
+			<div>二级CCCC</div>
+		</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

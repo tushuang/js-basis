@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<div id="backtop" >
+		回到顶部
+		</div>
+		<p id="abc" class="abc">
+			<div id="123">
+			aaaaaaaaaaa
+			</div>
+		</p>
+		<p id="abc1" class="abc">abbbbbbbbbbbbb</p>
+		<p id="abc2" class="abc">ccccccccccccccc</p>
+		<p id="abc3" class="abc">dddddddddddddd</p>
+	</body>
+	<script>	
+		//var Cname = document.getElementsByClassName("abc");
+/*		if(!(document.getElementsByClassName)){                       //ie不识别getElementsByClassName 
+			document.getElementsByClassName = function (classname){   //给getElemngtsByClassName定义一个函数
+				var temp = [];                                  
+				var list = document.getElementsByTagName("p");        //先获取所有的标签名
+				for(var i = 0;i<list.length;i++){                      //再取出标签名的className属性
+					if(list[i].className == classname){                //如果和传入的classname相等 则放入空数组中
+						temp.push(list[i]);
+					}
+				}
+				return temp;                                             //最后返回数字
+			}
+			document.getElementsByClassName("abc");                      //调用函数
+		}*/
+	/*	var btns = document.getElementsByClassName("abc");
+			for(var i=0;i<btns.length;i++){
+			//console.log(i);
+			(function(){
+				var j = i;
+				btns[i].onclick = function(){ 
+				//btns[j].parentNode.removeChild(btns[j]);
+				console.log(btns[j]);
+				console.log(j);
+				btns[j].innerHTML = "";
+				}
+			})();
+				
+			}*/
+	</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />  
+		<title>数组排序</title>
+		<style>
+		</style>
+		<script>
+			//把函数写在原形里
+			Person.prototype.sprots = function(){
+				
+			};
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+				console.log(1);
+			}
+			
+			PersonMessages.prototype = new Person(); //继承函数 当写new Person()的时候就会调用该函数一次
+			PersonMessages.prototype.num = function(){
+				
+			};  //把函数写在原形里 实现共享 每个通过该对象创建的实例对象的函数都是一样的
+			
+			function PersonMessages (){
+				//属性值用apply来继承 
+				//Person.apply(this,arguments);  //使用apply 就不必写参数 直接通过arguments伪数组传递 
+				this.address = arguments[2];
+				console.log(2);
+			}
+			
+			
+			var tutu = new PersonMessages("tutu",18,"beijing");  //只会输出2
+			//console.log(tutu);
+			
+			function obj(name){
+				//函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined。
+				if(!new.target){
+				//if(name){  //判断有没有name
+					var a1 = new Object();
+					a1.name = name;
+					return a1; //手动return对象的name一样 不能通过prototype赋值
+				}
+			}
+			obj.prototype.name = "name2";
+			var a = obj("name1");//普通函数调用
+			var b = new obj();  //构造函数调用
+			console.log(a,b.name);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

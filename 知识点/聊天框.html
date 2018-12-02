@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>聊天对话框</title>
+<style type="text/css">
+*{font-size: 14px; padding:0; margin:0;}
+.main{
+	position: relative;
+	margin: 20px auto;
+	border: 1px solid steelblue;
+	width: 430px;
+	height: 400px;
+}
+.msgInput{
+	display: block;
+	width: 406px;
+	height: 60px;
+	margin: 10px auto;
+	
+}
+.sendbtn{
+	position: absolute;
+	width: 100px;
+	height: 29px;
+	bottom: 5px;
+	right: 10px;
+}
+.content{
+	list-style: none;
+	width: 410px;
+	height: 280px;
+	margin: 5px auto;
+	border: 1px dotted #D1D3D6;
+	overflow-y: scroll;
+}
+.msgContent{
+	width:auto;
+	max-width: 250px;
+	height: auto;
+	word-break: break-all;
+	margin: 5px;
+	padding: 3px;
+	border-radius: 5px;
+}
+
+.content .left{
+	float: left;
+	text-align: left;
+	background-color: lightgrey;
+}
+.content .right{
+	float: right;
+	text-align: right;
+	background-color: yellowgreen;
+}
+
+
+</style>
+<script type="text/javascript">
+	onload = function(){
+		var btn = document.getElementById("sendbtn");
+		var oul = document.getElementById("content");
+		var content = document.getElementById("msg_input"); 	//获取输入框
+		btn.onclick = function(){
+			var oli  = document.createElement("li");
+			var odiv = document.createElement("div");
+			odiv.style = "clear:both";
+			oli.className = "msgContent right";                      //给li加样式向right浮动
+			oli.innerHTML = content.value;                           //把内容框的值赋给li里面
+			oul.appendChild(odiv);     
+			oul.appendChild(oli);
+			oli.scrollIntoView();                            //让滚动条 滚到可以看见的地方
+			content.value = "";
+		}
+		content.onkeydown = function(event){
+			//event.keyCode || event.which; 兼容模式
+			if( (event.keyCode == 13||event.keyCode == 10) && event.ctrlKey == true){ //发送必须是Ctrl+enter
+				btn.onclick();
+			}
+		}
+	}
+</script>
+
+</head>
+
+<body>
+	<div id="main" class="main">
+		<ul id="content" class="content">
+			<li class="msgContent left">hello?</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">hello</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">hi</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">hehe</li>
+			<div style="clear:both"></div>
+			<li class="msgContent left">goodbye</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">。。。。</li>
+			<div style="clear:both"></div>
+			<li class="msgContent right">sdfasdsadfassdfsdfsdfdsfsdfsdfsdfdfasdffasdfasfdasd fasd fasd fasdfasdfasdf</li>
+			
+		</ul>
+		<textarea id="msg_input" class="msgInput"></textarea>
+		<button id="sendbtn" class="sendbtn">发送</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+	</body>
+	<script>	
+	var frag = document.createDocumentFragment();  //创建缓冲区 不是document元素 但是可以当做document元素使用
+	for(var i=0;i<1000;i++){
+		var p = document.createElement("p");
+		p.innerHTML = i;
+		//document.body.appendChild(p);
+		frag.appendChild(p);    //先把p标签加入缓冲区 减少页面的重绘次数 提高性能
+	}
+	document.body.appendChild(frag);  //再把缓冲区的内容一次性加入body
+	</script>
+</html>

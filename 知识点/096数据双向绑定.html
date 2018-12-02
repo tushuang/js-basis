@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MVVM</title>
+</head>
+<body>
+	<div qf-app>
+		<input type="text" value="" qf-model="myname" />
+		<input type="text" value="" qf-model="yourname" />
+		<input type="text" value="" qf-model="hername" />
+		<p>{{myname}}</p>
+		<p>{{myname}}</p>
+		<p>{{myname}}</p>
+		<p>{{yourname}}</p>
+		<p>{{yourname}}</p>
+		<p>{{hername}}</p>
+		<p>{{hername}}</p>
+		<p>{{hername}}</p>
+	</div>
+</body>
+<!--<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="../js/framework.js"></script>
+<script>
+	//数据的双选绑定
+	//使用观察者模式来写  input输入框是被观察者 发生变化时 需要通知指定的所有p标签  
+	//所以需要记录被观察者
+	/*var inp = $("input").ele;
+	var text = $("p").ele;
+	console.log(inp);
+	for(let i=0;i<inp.length;i++){
+		inp[i].addEventListener("input",function(){
+			switch(i){
+				case 0:{
+					text[0].innerText = text[1].innerText = text[2].innerText = inp[i].value;
+				};break;
+				case 1:{
+					text[3].innerText = text[4].innerText = inp[i].value;
+				};break;
+				case 2:{
+					text[5].innerText = text[6].innerText = text[7].innerText = inp[i].value;
+				}
+			}
+		})
+	}*/
+	
+
+	//先要分清所有的p标签
+
+
+	var inp = $("input").ele;
+	var text = $("p").ele;
+	var temp = {};
+	temp.val = "";
+/*	for(let k in text){
+		if(text[k].innerText.match(attr) != null){
+
+		}
+	}*/
+	for(let i=0;i<inp.length;i++){
+		inp[i].addEventListener("input",function(){
+			console.log("1");
+			temp.val = inp[i].value;  //要有修改的这个动作才会调用
+			var attr = inp[i].getAttribute("qf-model");
+			Object.defineProperty(temp,"val",{
+				get(){
+					console.log("有人在试图得到这个属性");
+					return temp._val;
+				},
+				set(val){
+					temp._val = val;
+					console.log("有人在试图修改这个属性");
+				}
+			})
+			for(let k in text){
+			//	if(text[k].innerText.match(attr) != null){
+					//console.log(text[k]);
+					text[k].innerText = temp.val;
+				//	inp[i].value = "1";
+		//		}
+			}
+		})
+	}
+
+
+
+
+
+
+
+
+/*	let $app = $("div[qf-app]");
+	
+	let VM = {};
+	
+	let inputs = $app.find("input[qf-model]");
+	
+	inputs.each(function(){
+		//获取输入框的model名称
+		let model = $(this).attr("qf-model");
+		//根据model找到对应的views
+		let views = $app.find(":contains('{{"+ model +"}}')");
+		
+		
+		Object.defineProperty(VM, model, {
+			get : function(){
+				return VM["_"+model];
+			},
+			set : function(val){
+				this["_"+model] = val;
+				//更新我们对应的视图
+				views.each(function(){
+					$(this).html(val);
+				})
+			}
+		})
+		
+		$(this).on("input", function(){
+			VM[model] = this.value;
+		})
+		
+	})*/
+	
+</script>
+</html>
